@@ -1,42 +1,42 @@
-const mongoose , {Schema} = require('mongoose');
+const { Schema } = require("mongoose");
+const mongoose = require("mongoose");
 
-const UserSchema = new Schema(
-    {
-        username:{
-            type:String,
-            required:true
-        },
-        name:{
-            type:String,
-            required:true
-        },
-        profileUrl:{
-            type:String,
-            required:true
-        },
-        password:{
-            type:String,
-            required:true
-        },
-        dateJoined:{
-            type:Date,
-            default:Date.now()
-        },
-        contributions:{
-            type:Schema.Types.ObjectId,
-            default:{
-                audio:[],
-                playlists:[]
-            }
-        },
-        saved:{
-            type:Schema.Types.ObjectId,
-            default:{
-                audio:[],
-                playlists:[]
-            }
-        }
-    }
-    
-)
-module.exports=mongoose.model('user',UserSchema);
+const UserSchema = new Schema({
+    username: {
+        type: String,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    profileUrl: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    dateJoined: {
+        type: Date,
+        default: Date.now(),
+    },
+    contribAudio: {
+        type: Schema.Types.Array,
+        default: [],
+    },
+    contribPlayList: {
+        type: Schema.Types.Array,
+        default: [],
+    },
+    savedAudio: {
+        type: Schema.Types.Array,
+        default: [],
+    },
+    savedPlayList: {
+        type: Schema.Types.Array,
+        default: [],
+    },
+});
+module.exports = mongoose.model("user", UserSchema);
