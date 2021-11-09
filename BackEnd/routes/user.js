@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const fetchUser = require("./auth");
 const bcrypt = require("bcrypt");
 const audio = require("../models/Audio");
+const playlist = require("../models/Playlist");
 
 const secret = "94n88N&*&ad4f#45d4N*u;muf$os#fds$%asdf$i";
 
@@ -97,12 +98,13 @@ router.post("/login", async (req, resp) => {
 
 //getuser
 router.post("/getuser", fetchUser, async (req, res) => {
-    const userData = await user.findById(req.body.id);
+    var userData = await user.findById(req.body.id);
+    userData.password = null;
     res.send(userData);
 });
 
 //add Song
-router.post("/saveAudio/:id", fetchUser, async (req, resp) => {
+router.post("/audio/:id", fetchUser, async (req, resp) => {
     try {
         var curUser = await user.findById(req.body.id);
         var savedAudio = curUser.savedAudio;
@@ -127,8 +129,7 @@ router.post("/saveAudio/:id", fetchUser, async (req, resp) => {
 
 
 //removesong
-//add Song
-router.post("/removeAudio/:id", fetchUser, async (req, resp) => {
+router.delete("/audio/:id", fetchUser, async (req, resp) => {
     try {
         var curUser = await user.findById(req.body.id);
         var savedAudio = curUser.savedAudio;
@@ -147,6 +148,54 @@ router.post("/removeAudio/:id", fetchUser, async (req, resp) => {
         data = await audio.findByIdAndUpdate(req.params.id, { plays: song.plays - 1 });
 
         resp.send({ status: "Sond removed" });
+    } catch (error) {
+        console.log(err);
+        resp.status(500).send({
+            error: "Some server error occured try after some time",
+        });
+    }
+});
+
+//add playlist
+router.post("/playlist/:id", fetchUser, async (req, resp) => {
+    try {
+        var curUser = await user.findById(req.body.id);
+        var savedPlayList = curUser.savedPlayList;
+        savedPlayList.push(req.params.id);
+
+        var data = await user.findByIdAndUpdate(req.body.id, {
+            savedPlayList: savedPlayList,
+        });
+
+        var list = await playlist.findById(req.params.id);
+		console.log(list);
+        data = await playlist.findByIdAndUpdate(req.params.id, { followers: list.followers + 1 });
+
+        resp.send({ status: "playlist Added" });
+    } catch (error) {
+        console.log(err);
+        resp.status(500).send({
+            error: "Some server error occured try after some time",
+        });
+    }
+});
+
+//remove playlist
+router.delete("/playlist/:id", fetchUser, async (req, resp) => {
+    try {
+        var curUser = await user.findById(req.body.id);
+        var savedPlayList = curUser.savedPlayList;
+        savedPlayList = savedPlayList.filter((elem)=>{return elem != req.params.id});
+
+        var data = await user.findByIdAndUpdate(req.body.id, {
+            savedPlayList: savedPlayList,
+        });
+
+        var list = await playlist.findById(req.params.id);
+		console.log(list);
+        data = await playlist.findByIdAndUpdate(req.params.id, { followers: list.followers - 1 });
+
+        resp.send({ status: "playlist Removed" });
     } catch (error) {
         console.log(err);
         resp.status(500).send({

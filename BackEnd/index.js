@@ -23,6 +23,7 @@ app.get("/",(req, resp)=>{
 
 app.use("/api/user", require("./routes/user"));
 app.use("/api/audio", require("./routes/audio"));
+app.use("/api/playlist", require("./routes/playlist"));
 
 app.listen(5000, ()=>{
     console.log("Listening to port 5000")
