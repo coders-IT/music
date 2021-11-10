@@ -1,91 +1,87 @@
-const express = require("express");
-const playlist = require("../models/Playlist");
-const user = require("../models/user");
-const fetchUser = require("./auth");
+const express = require('express');
+const { route } = require('../middleware/auth');
 const router = express.Router();
+const auth = require('../middleware/auth');
+const User = require('../models/User');
+const Playlist = require('../models/Playlist');
 
-router.post("/create", fetchUser, async (req, resp) => {
-    try {
-        var data = await user.findById(req.body.id);
-
-        const newPlaylist = new playlist({
-            name: req.body.name,
-            createdBy: data.name,
-        });
-
-        newPlaylist.save();
-
-        console.log(data);
-
-        var contributed = data.contribPlayList;
-
-        contributed.push(newPlaylist.id);
-
-        data = await user.findByIdAndUpdate(req.body.id, {
-            contribPlayList: contributed,
-        });
-
-        resp.status(200).send({ id: newPlaylist.id });
-    } catch (error) {
-        console.log(error);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
+router.get('/allplaylists',async (req,res)=>{
+    try{
+        let doc = await Playlist.find({});
+        res.status(200).json({"success":doc});
+    }catch(error){
+        res.status(500).json({"error":error});
     }
-});
+})
 
-router.put("/:id", async (req, resp) => {
-    try {
-        const songID = req.query.song;
-
-        var list = await playlist.findById(req.params.id);
-        var songs = list.songs;
-        songs.push(songID);
-
-        list = await playlist.findByIdAndUpdate(req.params.id, {
-            songs: songs,
-        });
-        resp.send({ status: "updated" });
-    } catch (error) {
-        console.log(error);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
+router.get('/:id',async (req,res)=>{
+    try{
+        let doc = await Playlist.findById(req.params.id);
+        res.status(200).json({"success":doc});
+    }catch(error){
+        res.status(500).json({"error":error});
     }
-});
+})
 
-router.delete("/:id", async (req, resp) => {
-    try {
-        const songID = req.query.song;
+router.use(auth);
 
-        var list = await playlist.findById(req.params.id);
-        var songs = list.songs;
-        songs = songs.filter((elem) => {
-            return elem != songID;
-        });
-
-        list = await playlist.findByIdAndUpdate(req.params.id, {
-            songs: songs,
-        });
-        resp.send({ status: "updated" });
-    } catch (error) {
-        console.log(error);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
+router.post('/create',async (req,res)=>{
+    try{
+        let playlist = new Playlist({
+            name:req.body.name,
+            createdBy:req.username,
+            songs:req.body.songs
+        })
+        await playlist.save();
+        
+        let doc = await User.findOne({username:req.username});
+        doc.contribPlayList.push(playlist._id);
+        await User.findOneAndUpdate({username:req.username},doc);
+        
+        res.status(200).json({"success":"Successfully created new playlist."});
+    }catch(error){
+        res.status(500).json({"error":error});
     }
-});
+})
 
-router.get("/:id", async (req, resp) => {
-    try {
-        const list = await playlist.findById(req.params.id);
-        resp.send({ list });
-    } catch (error) {
-        console.log(error);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
+
+router.post('/edit/:id',async (req,res)=>{
+    try{
+        let doc = await Playlist.findById(req.params.id);
+        if(doc.createdBy !== req.username){
+            res.status(400).json({"error":"You don't have correct access rights."});
+            return;
+        }
+        doc.songs = req.body.songs;
+        await Playlist.findByIdAndUpdate(req.params.id,doc);
+        res.status(200).json({"success":"Playlist successfully edited."});
+    }catch(error){
+        res.status(500).json({"error":error});
     }
-});
+})
+
+router.delete('/:id',async (req,res)=>{
+    try{
+        let doc = await Playlist.findById(req.params.id);
+        if(doc.createdBy !== req.username){
+            res.status(400).json({"error":"You don't have correct access rights."});
+            return;
+        }
+
+        let user = await User.findOne({username:req.username});
+        let i = user.contribPlayList.indexOf(req.params.id);
+        if(i<0){
+            res.status(404).json({"error":"Not found."});
+            return;
+        }
+        user.contribPlayList.splice(i,1);
+        await User.findOneAndUpdate({username:req.username},user);
+
+        await Playlist.findByIdAndDelete(req.params.id);
+        res.status(200).json({"success":"Playlist successfully deleted."});
+    }catch(error){
+        res.status(500).json({"error":error});
+    }
+})
 
 module.exports = router;

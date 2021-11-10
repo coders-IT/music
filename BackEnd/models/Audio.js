@@ -1,5 +1,6 @@
+
+const mongoose = require('mongoose'); 
 const {Schema} = require('mongoose');
-const mongoose = require('mongoose');
 
 const PlaylistSchema = new Schema(
     {
@@ -7,7 +8,7 @@ const PlaylistSchema = new Schema(
             type:String,
             required:true
         },
-        url:{
+        audio:{
             type:String,
             required:true
         },

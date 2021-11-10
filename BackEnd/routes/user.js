@@ -1,13 +1,11 @@
-const express = require("express");
-const user = require("../models/user");
+const express = require('express');
 const router = express.Router();
-const jwt = require("jsonwebtoken");
-const fetchUser = require("./auth");
-const bcrypt = require("bcrypt");
-const audio = require("../models/Audio");
-const playlist = require("../models/Playlist");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
+const User = require('../models/User');
 
-const secret = "94n88N&*&ad4f#45d4N*u;muf$os#fds$%asdf$i";
+const key = "hask98#eu1uie872j@kd";
 
 const isValid = (name) => {
     var n = name.length;
@@ -23,188 +21,133 @@ const isValid = (name) => {
     return true;
 };
 
-// creating user
-router.post("/create", async (req, resp) => {
-    try {
-        if (!isValid(req.body.username)) {
-            resp.send({ error: "Please take valid User name" });
+router.put('/signup',async (req,res)=>{
+    try{
+        let username = req.body.username;
+        let password = req.body.password;
+        let name = req.body.name;
+        let profilePic = req.body.profilePic;
+
+        let doc = await User.findOne({username:username});
+    
+        if(doc) res.status(400).json({"error":"Username unavailable. Try another one."});
+        if(!isValid(username) || username.length<5)  res.status(400).json({"error":"Username can only container alphanumeric characters and '_'. It should be atleast 5 characters long."})
+        if(password.length<5)   res.status(400).json({"error":"Password too short. Use minimum length of 5 characters"});
+    
+        const salt = bcrypt.genSaltSync(10);
+        const encPass = bcrypt.hashSync(password,salt); 
+        let user = new User({
+            username:username,
+            name:name,
+            profilePic:profilePic,
+            password:encPass
+        })
+        await user.save();
+        const userId = {
+            id : username
+        }
+        const token = jwt.sign(userId, key);
+        res.status(200).json({"success":"Successfully created account.",data:token});
+    }catch(error){
+        console.log(error)
+        res.status(500).json({error});
+    }
+});
+
+router.post('/login',async (req,res)=>{
+    try{
+        let username = req.body.username;
+        let password = req.body.password;
+        let doc = await User.findOne({username:username});
+        if(!doc)    res.status(400).json({"error":"Username not registered."});
+        if(!bcrypt.compareSync(password,doc.password))  res.status(400).json({"error":"Incorrect password."});
+        const userId = {
+            id : username
+        }
+        const token = jwt.sign(userId, key);
+        res.status(200).json({"success":"Successfully logged in.",data:token});
+    }catch(error){
+        res.status(500).json({"error":error});
+    }
+})
+
+router.get('/:username',async (req,res)=>{
+    try{
+        let doc = await User.findOne({username:req.params.username});
+        let user = {
+            name : doc.name,
+            username : doc.username,
+            profilePic : doc.profilePic,
+            dateJoined : doc.dateJoined,
+            contribAudio : doc.contribAudio,
+            contribPlayList : doc.contribPlayList
+        }
+        res.status(200).json({"success":"Successfully fetched user",data:user});
+    }catch(error){
+        res.status(500).json({"error":error});
+    }
+})
+
+router.use(auth);
+
+router.post('/savesong/:id',async (req,res)=>{
+    try{
+        let doc = await User.findOne({username:req.username});
+        doc.savedAudio.push(req.params.id);
+        await User.findOneAndUpdate({username:req.username},doc);
+        res.status(200).json({"success":"Successfully added to saved songs."});
+    }catch(error){
+        res.status(500).json({"error":error});
+    }
+})
+
+router.post('/saveplaylist/:id',async (req,res)=>{
+    try{
+        let doc = await User.findOne({username:req.username});
+        console.log(doc,req.username)
+        doc.savedPlayList.push(req.params.id);
+        await User.findOneAndUpdate({username:req.username},doc)
+        res.status(200).json({"success":"Successfully added to saved playlists."});
+    }catch(error){
+        console.log(error)
+        res.status(500).json({"error":error});
+    }
+})
+
+router.post('/unsavesong/:id',async (req,res)=>{
+    try{
+        let doc = await User.findOne({username:req.username});
+        let arr = doc.savedAudio;
+        let i = arr.indexOf(req.params.id);
+        if(i<0){
+            res.status(404).json({"error":"Not found."});
             return;
         }
+        arr.splice(i,1);
+        doc.savedAudio = arr;
+        await User.findOneAndUpdate({username:req.username},doc)
+        res.status(200).json({"success":"Successfully removed from saved songs."});
+    }catch(error){
+        res.status(500).json({"error":error});
+    }
+})
 
-        var oldData = await user.findOne({ username: req.body.username });
-
-        if (oldData != null) {
-            resp.send({ error: "User exists try another Name" });
+router.post('/unsaveplaylist/:id',async (req,res)=>{
+    try{
+        let doc = await User.findOne({username:req.username});
+        let arr = doc.savedPlayList;
+        let i = arr.indexOf(req.params.id);
+        if(i<0){
+            res.status(404).json({"error":"Not found."});
             return;
         }
-
-        const passEnc = await bcrypt.hash(req.body.password, 10);
-        const newUser = new user({
-            name: req.body.name,
-            username: req.body.username,
-            password: passEnc,
-            profileUrl: req.body.profileUrl,
-        });
-
-        console.log(passEnc);
-
-        newUser.save();
-
-        var jwtTokken = jwt.sign(
-            {
-                id: newUser.id,
-            },
-            secret
-        );
-
-        resp.send({ tokken: jwtTokken });
-    } catch (err) {
-        console.log(err);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
+        arr.splice(i,1);
+        doc.savedPlayList = arr;
+        await User.findOneAndUpdate({username:req.username},doc)
+        res.status(200).json({"success":"Successfully removed from saved playlists."});
+    }catch(error){
+        res.status(500).json({"error":error});
     }
-});
-
-//login user
-router.post("/login", async (req, resp) => {
-    try {
-        const oldData = await user.findOne({ username: req.body.username });
-        const passResult = await bcrypt.compare(
-            req.body.password,
-            oldData.password
-        );
-
-        if (passResult == false || oldData == null) {
-            resp.send({ error: "Invalid user Details" });
-            return;
-        }
-
-        var jwtTokken = jwt.sign(
-            {
-                id: oldData.id,
-            },
-            secret
-        );
-
-        resp.send({ tokken: jwtTokken });
-    } catch (err) {
-        console.log(err);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
-    }
-});
-
-//getuser
-router.post("/getuser", fetchUser, async (req, res) => {
-    var userData = await user.findById(req.body.id);
-    userData.password = null;
-    res.send(userData);
-});
-
-//add Song
-router.post("/audio/:id", fetchUser, async (req, resp) => {
-    try {
-        var curUser = await user.findById(req.body.id);
-        var savedAudio = curUser.savedAudio;
-        savedAudio.push(req.params.id);
-
-        var data = await user.findByIdAndUpdate(req.body.id, {
-            savedAudio: savedAudio,
-        });
-
-        var song = await audio.findById(req.params.id);
-		console.log(song);
-        data = await audio.findByIdAndUpdate(req.params.id, { plays: song.plays + 1 });
-
-        resp.send({ status: "Sond Added" });
-    } catch (error) {
-        console.log(err);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
-    }
-});
-
-
-//removesong
-router.delete("/audio/:id", fetchUser, async (req, resp) => {
-    try {
-        var curUser = await user.findById(req.body.id);
-        var savedAudio = curUser.savedAudio;
-		
-		
-        savedAudio = savedAudio.filter(elem => {
-			return elem != req.params.id
-		});
-
-        var data = await user.findByIdAndUpdate(req.body.id, {
-            savedAudio: savedAudio,
-        });
-
-        var song = await audio.findById(req.params.id);
-		console.log(song);
-        data = await audio.findByIdAndUpdate(req.params.id, { plays: song.plays - 1 });
-
-        resp.send({ status: "Sond removed" });
-    } catch (error) {
-        console.log(err);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
-    }
-});
-
-//add playlist
-router.post("/playlist/:id", fetchUser, async (req, resp) => {
-    try {
-        var curUser = await user.findById(req.body.id);
-        var savedPlayList = curUser.savedPlayList;
-        savedPlayList.push(req.params.id);
-
-        var data = await user.findByIdAndUpdate(req.body.id, {
-            savedPlayList: savedPlayList,
-        });
-
-        var list = await playlist.findById(req.params.id);
-		console.log(list);
-        data = await playlist.findByIdAndUpdate(req.params.id, { followers: list.followers + 1 });
-
-        resp.send({ status: "playlist Added" });
-    } catch (error) {
-        console.log(err);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
-    }
-});
-
-//remove playlist
-router.delete("/playlist/:id", fetchUser, async (req, resp) => {
-    try {
-        var curUser = await user.findById(req.body.id);
-        var savedPlayList = curUser.savedPlayList;
-        savedPlayList = savedPlayList.filter((elem)=>{return elem != req.params.id});
-
-        var data = await user.findByIdAndUpdate(req.body.id, {
-            savedPlayList: savedPlayList,
-        });
-
-        var list = await playlist.findById(req.params.id);
-		console.log(list);
-        data = await playlist.findByIdAndUpdate(req.params.id, { followers: list.followers - 1 });
-
-        resp.send({ status: "playlist Removed" });
-    } catch (error) {
-        console.log(err);
-        resp.status(500).send({
-            error: "Some server error occured try after some time",
-        });
-    }
-});
-
-
-//to do playlist -> contribution during song upload done
+})
 
 module.exports = router;
