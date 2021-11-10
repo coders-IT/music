@@ -1,6 +1,7 @@
 const mongoose = require('mongoose'); 
 const {Schema} = require('mongoose');
 
+
 const PlaylistSchema = new Schema(
     {
         name:{
@@ -19,10 +20,10 @@ const PlaylistSchema = new Schema(
             type:Date,
             default:Date.now()
         },
-        songs:[{
-            type:Schema.Types.ObjectId,
+        songs:{
+            type:Schema.Types.Array,
             ref:'audio'
-        }],
+        },
         followers:{
             type:Number,
             default:0
