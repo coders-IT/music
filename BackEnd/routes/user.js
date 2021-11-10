@@ -47,7 +47,7 @@ router.put('/signup',async (req,res)=>{
             id : username
         }
         const token = jwt.sign(userId, key);
-        res.status(200).json({token});
+        res.status(200).json({"success":"Successfully created account.",data:token});
     }catch(error){
         console.log(error)
         res.status(500).json({error});
@@ -65,7 +65,24 @@ router.post('/login',async (req,res)=>{
             id : username
         }
         const token = jwt.sign(userId, key);
-        res.status(200).json({token});
+        res.status(200).json({"success":"Successfully logged in.",data:token});
+    }catch(error){
+        res.status(500).json({"error":error});
+    }
+})
+
+router.get('/:username',async (req,res)=>{
+    try{
+        let doc = await User.findOne({username:req.params.username});
+        let user = {
+            name : doc.name,
+            username : doc.username,
+            profilePic : doc.profilePic,
+            dateJoined : doc.dateJoined,
+            contribAudio : doc.contribAudio,
+            contribPlayList : doc.contribPlayList
+        }
+        res.status(200).json({"success":"Successfully fetched user",data:user});
     }catch(error){
         res.status(500).json({"error":error});
     }

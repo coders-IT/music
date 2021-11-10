@@ -7,7 +7,7 @@ const Audio = require('../models/Audio');
 router.get('/allsongs',async (req,res)=>{
     try{
         let doc = await Audio.find({});
-        res.status(200).json({"Success":doc});
+        res.status(200).json({"success":"Successfully fetched all songs.",data:doc});
     }catch(error){
         res.status(500).json({error})
     }
@@ -17,7 +17,7 @@ router.get('/:id',async (req,res)=>{
     try{
         let doc = await Audio.findById(req.params.id);
         if(!doc)    res.status(404).json({"error":"Not found"});
-        res.status(200).json({"Success":doc});
+        res.status(200).json({"success":"Successfully fetched song.",data:doc});
     }catch(error){
         res.status(500).json({error})
     }
@@ -39,7 +39,7 @@ router.post('/add',async (req,res)=>{
         doc.contribAudio.push(song._id);
         await User.findOneAndUpdate({username:req.username},doc);
         
-        res.status(200).json({"Success":"Successfully added new song.","id":song._id});
+        res.status(200).json({"success":"Successfully added new song.",data:song._id});
     }catch(error){
         console.log({error})
         res.status(500).json({error});
@@ -60,7 +60,7 @@ router.delete('/:id',async (req,res)=>{
         await User.findOneAndUpdate({username:req.username},user);
         
         await Audio.findByIdAndDelete(req.params.id);
-        res.status(200).json({"Success":"Song successfully deleted."});
+        res.status(200).json({"success":"Song successfully deleted."});
     }catch(error){
         res.status(500).json({error});
     }
