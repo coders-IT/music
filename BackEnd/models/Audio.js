@@ -28,6 +28,14 @@ const PlaylistSchema = new Schema(
         plays:{
             type:Number,
             default:0
+        },
+        singer:{
+            type:String,
+            required:true
+        },
+        tags:{
+            type=Schema.Types.Array,
+            required:true
         }
     }
 )

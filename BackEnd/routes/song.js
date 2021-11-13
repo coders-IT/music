@@ -6,7 +6,7 @@ const Audio = require('../models/Audio');
 
 router.get('/allsongs',async (req,res)=>{
     try{
-        let doc = await Audio.find({});
+        let doc = await Audio.find({}).limit(100);
         res.status(200).json({"success":"Successfully fetched all songs.",data:doc});
     }catch(error){
         res.status(500).json({error})
@@ -25,13 +25,15 @@ router.get('/:id',async (req,res)=>{
 
 router.use(auth);
 
-router.post('/add',async (req,res)=>{
+router.post('/',async (req,res)=>{
     try{
         let song = new Audio({
             name:req.body.name,
             uploadedBy:req.username,
             audio:req.body.audio,
-            clip:req.body.clip
+            clip:req.body.clip,
+            singer:req.body.singer,
+            tags:req.body.tags
         })
         await song.save();
 

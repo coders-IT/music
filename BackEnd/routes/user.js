@@ -21,7 +21,7 @@ const isValid = (name) => {
     return true;
 };
 
-router.put('/signup',async (req,res)=>{
+router.post('/signup',async (req,res)=>{
     try{
         let username = req.body.username;
         let password = req.body.password;
@@ -30,9 +30,18 @@ router.put('/signup',async (req,res)=>{
 
         let doc = await User.findOne({username:username});
     
-        if(doc) res.status(400).json({"error":"Username unavailable. Try another one."});
-        if(!isValid(username) || username.length<5)  res.status(400).json({"error":"Username can only container alphanumeric characters and '_'. It should be atleast 5 characters long."})
-        if(password.length<5)   res.status(400).json({"error":"Password too short. Use minimum length of 5 characters"});
+        if(doc) {
+            res.status(400).json({"error":"Username unavailable. Try another one."});
+            return;
+        }
+        if(!isValid(username) || username.length<5)  {
+            res.status(400).json({"error":"Username can only container alphanumeric characters and '_'. It should be atleast 5 characters long."})
+            return;
+        }
+        if(password.length<5) {
+            res.status(400).json({"error":"Password too short. Use minimum length of 5 characters"});
+            return;
+        }
     
         const salt = bcrypt.genSaltSync(10);
         const encPass = bcrypt.hashSync(password,salt); 
@@ -59,8 +68,14 @@ router.post('/login',async (req,res)=>{
         let username = req.body.username;
         let password = req.body.password;
         let doc = await User.findOne({username:username});
-        if(!doc)    res.status(400).json({"error":"Username not registered."});
-        if(!bcrypt.compareSync(password,doc.password))  res.status(400).json({"error":"Incorrect password."});
+        if(!doc){
+            res.status(400).json({"error":"Username not registered."});
+            return;
+        }
+        if(!bcrypt.compareSync(password,doc.password)){
+            res.status(400).json({"error":"Incorrect password."});
+            return;
+        }
         const userId = {
             id : username
         }
@@ -71,9 +86,10 @@ router.post('/login',async (req,res)=>{
     }
 })
 
-router.get('/:username',async (req,res)=>{
+router.use(auth);
+router.get('/getUser',async (req,res)=>{
     try{
-        let doc = await User.findOne({username:req.params.username});
+        let doc = await User.findOne({username:req.username});
         let user = {
             name : doc.name,
             username : doc.username,
@@ -88,7 +104,6 @@ router.get('/:username',async (req,res)=>{
     }
 })
 
-router.use(auth);
 
 router.post('/savesong/:id',async (req,res)=>{
     try{

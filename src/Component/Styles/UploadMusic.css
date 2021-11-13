@@ -1,0 +1,52 @@
+#musicUploadForm{
+    width: 60vw;
+    display: flex;
+    background-color: darkslategray;
+    color: white;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.musicCoverCont{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.musicCoverImage{
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#labelmusicFile{
+    border: 2px solid white;
+    padding: 10px;
+    cursor: pointer;
+    width: 300px;
+}
+
+.othersongdetail{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
+}
+
+#musicCover{
+    border-radius: 100%;
+}
+
+.detail{
+    width:300px;
+    padding: 10px;
+    font-size: 17px;
+    border: 0px;
+}
+
+.detail:focus{
+    outline: none;
+}

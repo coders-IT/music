@@ -7,7 +7,7 @@ const Playlist = require('../models/Playlist');
 
 router.get('/allplaylists',async (req,res)=>{
     try{
-        let doc = await Playlist.find({});
+        let doc = await Playlist.find({}).limit(10);
         res.status(200).json({"success":doc});
     }catch(error){
         res.status(500).json({"error":error});

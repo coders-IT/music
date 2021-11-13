@@ -1,0 +1,91 @@
+.signupCont{
+    width: 70vw;
+    height: 70vh;
+    background-color:darkslategrey;
+    position: absolute;
+    top: 15vh;
+    left: 15vw;
+    box-shadow: 5px 5px 10px black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+
+.signUpclose{
+    line-height: 30px;
+    text-align: center;
+    font-size: 40px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.signuptext{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 40%;
+    flex-wrap: wrap;
+    height: 50%;
+}
+
+.signuptext input{
+    width: 200px;
+    height: 20px;
+    padding: 10px;
+    color: white;
+    background-color: transparent;
+    font-size: 17px;
+    border: none;
+    border-bottom: 3px solid rgb(71, 116, 116);
+    /* border-top: 3px solid rgb(71, 116, 116); */
+}
+
+.signuptext input:focus{
+    outline: none;
+    
+    border-bottom: 3px solid rgb(33, 56, 56);
+    /* border-top: 3px solid rgb(33, 56, 56); */
+}
+
+.signuptext .fas{
+    margin-right: 20px;
+    color:crimson;
+    font-size: 20px;
+}
+
+.signupphoto{
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+}
+
+.signupphoto img{
+    cursor: pointer;
+    /* box-shadow: 2px 2px 5px black; */
+    border-radius: 5px;
+}
+
+.signupphoto input{
+    width: 175px;
+    padding: 10px;
+    border: none;
+    font-size: 17px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 5px;
+
+}
+
+#linktoSignIn{
+    width: 100%;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
