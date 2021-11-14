@@ -2,6 +2,7 @@ import { useContext } from "react";
 import "./App.css";
 import Alert from "./Component/Alert";
 import MusicCard from "./Component/MusicCard";
+import PlayListCard from "./Component/PlayListCard";
 import Signin from "./Component/Signin";
 import Signup from "./Component/Signup";
 import UploadMusic from "./Component/UploadMusic";
@@ -12,7 +13,12 @@ function App() {
     const context = useContext(BaseContext);
     return (
         <>
-            <MusicCard name="Jag Ghumya" src={src} likes="2M" like={true} playing={true} />
+            {/* <MusicCard name="Jag Ghumya" src={src} likes="2M" like={true} playing={true} />
+            <UploadMusic/> */}
+
+            {/* <PlayListCard src={src} follower={345} name="Deepak Kumar" creator="Deepak"/> */}
+            
+
         </>
     );
 }

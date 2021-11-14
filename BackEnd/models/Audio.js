@@ -34,7 +34,7 @@ const PlaylistSchema = new Schema(
             required:true
         },
         tags:{
-            type=Schema.Types.Array,
+            type:Schema.Types.Array,
             required:true
         }
     }

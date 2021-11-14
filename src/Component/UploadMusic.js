@@ -43,10 +43,10 @@ export default function UploadMusic() {
             singer:document.getElementById("singer").value,
             tags:document.getElementById("tags").value.split(",")
         }
-
+        console.log(data);
         const resp = await context.callApi("/api/song","POST",data);
         context.setAlert(true);
-        context.alertBody(resp.success);
+        context.setalertBody(resp.success);
     }
 
     return (
