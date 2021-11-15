@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BaseContext from "./BaseContext";
 import {ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage';
 import storage from "./FirebaseInit";
@@ -7,6 +7,15 @@ const ContextState = (props) => {
     
     const [alertBody, setalertBody] = useState("No Error");
     const [alert, setAlert] = useState(false);
+    const [user, setuser] = useState(null);
+    const [loginShow, setloginShow] = useState(false);
+    const [signUpShow, setsignUpShow] = useState(false);
+
+
+    useEffect(()=>{
+        if(user) console.log(user.profilePic,user);
+    },[user]);
+
 
     const callApi = async (endpoint, type, data) => {
         const url = `http://localhost:5000${endpoint}`;
@@ -40,7 +49,7 @@ const ContextState = (props) => {
     };
 
     return (
-        <BaseContext.Provider value={{ callApi, upload, alertBody, setalertBody, alert, setAlert }}>
+        <BaseContext.Provider value={{ callApi, upload, alertBody, setalertBody, alert, setAlert, user, setuser, loginShow, setloginShow, signUpShow, setsignUpShow }}>
             {props.children}
         </BaseContext.Provider>
     );

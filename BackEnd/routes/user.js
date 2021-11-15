@@ -87,18 +87,12 @@ router.post('/login',async (req,res)=>{
 })
 
 router.use(auth);
-router.get('/getUser',async (req,res)=>{
+
+router.post('/getUser',async (req,res)=>{
     try{
         let doc = await User.findOne({username:req.username});
-        let user = {
-            name : doc.name,
-            username : doc.username,
-            profilePic : doc.profilePic,
-            dateJoined : doc.dateJoined,
-            contribAudio : doc.contribAudio,
-            contribPlayList : doc.contribPlayList
-        }
-        res.status(200).json({"success":"Successfully fetched user",data:user});
+        doc.password = null;
+        res.status(200).json({"success":"Successfully fetched user",data:doc});
     }catch(error){
         res.status(500).json({"error":error});
     }

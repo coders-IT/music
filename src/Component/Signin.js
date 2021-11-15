@@ -27,11 +27,24 @@ export default function Signin() {
         }
 
         localStorage.setItem("jwtTokken", resp.data);
+        window.location.href = "http://localhost:3000/";
     };
+    const hideMe = ()=>{
+        context.setloginShow(false);
+    }
+
+    const toSignUp= ()=>{
+        context.setsignUpShow(true);
+        context.setloginShow(false);
+    }
+
+
+    if(context.loginShow === false) return(<></>);
 
     return (
+        <div class="divsigninCont">
         <form className="signinCont" onSubmit={signinme}>
-            <i class="fas fa-times signinclose"></i>
+            <i class="fas fa-times signinclose" onClick={hideMe}></i>
 
             <div className="signintext">
                 <div>
@@ -57,7 +70,8 @@ export default function Signin() {
                 <input type="submit" value="Log In" />
             </div>
 
-            <div id="linkSignUp">Don't have, Create One</div>
+            <div id="linkSignUp" onClick={toSignUp}>Don't have, Create One</div>
         </form>
+        </div>
     );
 }

@@ -2,7 +2,7 @@ import "./Styles/Player.css";
 
 import React from "react";
 
-export default function Player() {
+export default function Player(props) {
     var playPause, audio, timerDot, curTimeAudio, songtimeslider, volumeSlider, curVolume, volumeDot, curTimeShow, fullTimeShow, volumeLogo;
 
     setTimeout(() => {
@@ -73,6 +73,13 @@ export default function Player() {
         }
     };
 
+    const muteHandle = ()=>{
+        volumeLogo.setAttribute("class", "fas fa-volume-mute");
+        volumeDot.style.left = 0+ "px";
+        curVolume.style.width = 0 + "px";
+        audio.volume = 0;
+    }
+
     return (
         <div className="playerCont">
             <audio src="https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/Jag%20Ghoomeya%20128%20Kbps.mp3?alt=media&token=ae95cea5-7e1b-4f27-87e3-f6c85846c2ab" id="song" onTimeUpdate={timeUpdate}></audio>
@@ -87,7 +94,7 @@ export default function Player() {
                     <div className="playersongName">Deepak Kumar</div>
                     <div className="playersinger">Deepak</div>
                 </div>
-                <i className="fas fa-heart" id="playerliked"></i>
+                <i className={`${props.liked == false?"far":"fas"} fa-heart`} id="playerliked"></i>
             </div>
             <div className="sliderCont">
                 <div className="volumeCont flex">
@@ -109,7 +116,7 @@ export default function Player() {
                 </div>
             </div>
             <div className="flex">
-                <i className="fas fa-volume-up" id="volumeLogo"></i>
+                <i className="fas fa-volume-up" id="volumeLogo" onClick={muteHandle}></i>
                 <div className="volumeSlider" id="volumeSlider" onClick={volumeSliderHandle}>
                     <div className="dot" id="volumeDot"></div>
                     <div id="curVolume"></div>

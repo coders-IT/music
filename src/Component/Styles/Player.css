@@ -84,6 +84,10 @@
     display: none;
 }
 
+#volumeSlider .dot{
+    left: calc(100% - 7.5px);
+}
+
 #songtimeslider:hover .dot, #volumeSlider:hover .dot{
     display: block;
 }
@@ -101,4 +105,8 @@
     font-size: 23px;
     line-height: 30px;
     text-align: center;
+}
+
+.fas,.far{
+    cursor: pointer;
 }

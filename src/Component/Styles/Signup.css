@@ -1,3 +1,15 @@
+.divsignupcont{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(0, 0, 0, 0.377);
+}
+
 .signupCont{
     width: 70vw;
     height: 70vh;

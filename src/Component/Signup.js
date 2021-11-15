@@ -17,6 +17,10 @@ export default function Signup() {
         fileReader.readAsDataURL(x.target.files[0]);
     };
 
+    const toLogin = ()=>{
+        context.setsignUpShow(false);
+        context.setloginShow(true);
+    }
     
 
     const signUpMe = async (e) => {
@@ -59,13 +63,18 @@ export default function Signup() {
         window.location.href = "http://localhost:3000/";
     };
 
+    const hideMe = ()=>{
+        context.setsignUpShow(false);
+    }
+
+    if(context.signUpShow == false) return(<></>);
+
     return (
-        <>
-            <Alert/>
+        <div class="divsignupcont">
 
         <form className="signupCont" onSubmit={signUpMe}>
             <div id="linktoSignIn"></div>
-            <i class="fas fa-times signUpclose"></i>
+            <i class="fas fa-times signUpclose" onClick={hideMe}></i>
 
             <div className="signuptext">
                 <div>
@@ -125,8 +134,8 @@ export default function Signup() {
                 />
                 <input type="submit" value="Create" />
             </div>
-            <div id="linktoSignIn">Already Have, Click Here</div>
+            <div id="linktoSignIn" onClick={toLogin}>Already Have, Click Here</div>
         </form>
-        </>
+        </div>
     );
 }
