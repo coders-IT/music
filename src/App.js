@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import "./App.css";
 import Alert from "./Component/Alert";
+import Homepage from "./Component/Homepage";
 import MusicCard from "./Component/MusicCard";
+import Player from "./Component/Player";
 import PlayListCard from "./Component/PlayListCard";
 import Signin from "./Component/Signin";
 import Signup from "./Component/Signup";
@@ -15,7 +17,7 @@ function App() {
         <>
             {/* <MusicCard name="Jag Ghumya" src={src} likes="2M" like={true} playing={true} />
             <UploadMusic/> */}
-
+            <Homepage/>
             {/* <PlayListCard src={src} follower={345} name="Deepak Kumar" creator="Deepak"/> */}
             
 

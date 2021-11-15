@@ -15,8 +15,7 @@
 }
 
 .body{
-    height: 75vh;
-    
+    height: calc(100vh - 180px);
 }
 
 .player{
@@ -75,9 +74,4 @@
     height: 50px;
     border-radius: 50px;
     align-self: center;
-}
-
-.player{
-    height: 130px;
-    border-top: 2px solid black;
 }

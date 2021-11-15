@@ -1,5 +1,6 @@
 import "./Styles/Homepage.css";
 import React from "react";
+import Player from "./Player";
 
 export default function Homepage() {
     return (
@@ -27,7 +28,9 @@ export default function Homepage() {
 
             <div class="body"></div>
 
-            <div class="player"></div>
+            <div class="player">
+                <Player/>
+            </div>
         </div>
     );
 }

@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Permanent+Marker&display=swap');
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playerCont{
+    height: 100px;
+    width: calc(100vw - 40px);
+    padding: 0px 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: darkmagenta;
+}
+
+.playersongDetail{
+    margin-left: 20px;
+}
+.playersinger{
+    font-size: 13px;
+}
+
+#playerliked{
+    font-size: 30px;
+}
+
+.sliderCont{
+    width: 60vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.songtimerslider{
+    width: 35vw;
+    position: relative;
+    height: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+.completeTime{
+    margin-left: 20px;
+}
+.initTime{
+    margin-right: 20px;
+}
+
+.volumeCont{
+    width: 35vw;
+    font-size: 25px;
+}
+.volumeCont .fas{
+    margin: 10px;
+}
+
+#playPause{
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.volumeSlider{
+    width: 100px;
+    position: relative;
+    height: 5px;
+    background-color: white;
+    border-radius: 5px;
+    margin-left : 20px;
+}
+
+.dot{
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 10px;
+    position: absolute;
+    top: -2.5px;
+    display: none;
+}
+
+#songtimeslider:hover .dot, #volumeSlider:hover .dot{
+    display: block;
+}
+
+#curVolume, #curTimeAudio{
+    height: 5px;
+    background-color: red;
+    z-index: 2;
+    border-radius: 5px;
+}
+
+#volumeLogo{
+    width: 30px;
+    height: 30px;
+    font-size: 23px;
+    line-height: 30px;
+    text-align: center;
+}
