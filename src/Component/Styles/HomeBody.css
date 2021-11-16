@@ -1,0 +1,27 @@
+.homebody{
+    height: calc(100vh - 180px);
+    background-color: aliceblue;
+    width: 100vw;
+}
+
+.recent{
+    width: 100vw;
+    height: calc(100% - 200px);
+    background-color: dodgerblue;
+    padding: 20px 0px;
+}
+
+.playlist{
+    width:calc(100vw - 40px);
+    width: 100vw;
+    height: 150px;
+    white-space: nowrap;
+    padding: 20px;
+    background-color: blanchedalmond;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.playlist::-webkit-scrollbar{
+    display: none;
+}

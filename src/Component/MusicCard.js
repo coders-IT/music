@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router";
+import BaseContext from "../Context/BaseContext";
 import "./Styles/MusicCard.css";
 
 export default function MusicCard(props) {
-
+    const history = useHistory();
+    const context = useContext(BaseContext);
     const shrink = (text)=>{
         if(window.innerWidth <= 400){
             if(text.length < 15)return text;
@@ -13,13 +16,18 @@ export default function MusicCard(props) {
         }
     }
 
+    const playSong = ()=>{
+        context.setcurMusic(props.id);
+    }
+
+
     if (props.liked) {
         return (
-            <div class="musicCardCont">
+            <div class="musicCardCont" onClick={playSong}>
                 <div class="songDetail">
-                    {props.playing?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
+                    {props.playing == false?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
                     <img src={props.src} class="songImg"/>
-                    <span>{shrink(props.name)}<br/><span class="singerName">Deepak Kumar</span></span>
+                    <span>{shrink(props.name)}<br/><span class="singerName">{shrink(props.singer)}</span></span>
                 </div>
                 <div class="songLike">
                     {props.likes}
@@ -29,11 +37,11 @@ export default function MusicCard(props) {
         );
     } else {
         return (
-            <div class="musicCardCont">
+            <div class="musicCardCont"  onClick={playSong}>
                 <div class="songDetail">
-                    {props.playing?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
+                    {props.playing == false?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
                     <img src={props.src} class="songImg" align="middle"/>
-                    <span>{shrink(props.name)}<br/><span class="singerName">Deepak Kumar</span></span>
+                    <span>{shrink(props.name)}<br/><span class="singerName">{shrink(props.singer)}</span></span>
                 </div>
                 <div class="songLike">
                     {props.likes}

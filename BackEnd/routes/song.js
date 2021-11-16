@@ -4,7 +4,7 @@ const auth = require('../middleware/auth');
 const User = require('../models/User');
 const Audio = require('../models/Audio');
 
-router.get('/allsongs',async (req,res)=>{
+router.get('/songs',async (req,res)=>{
     try{
         let doc = await Audio.find({}).limit(100);
         res.status(200).json({"success":"Successfully fetched all songs.",data:doc});

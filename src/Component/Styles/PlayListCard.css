@@ -1,14 +1,18 @@
 .playListCardCont{
     position: relative;
-    width: 200px;
+    width: 150px;
     cursor: pointer;
-    height: 200px;
+    height: 150px;
     overflow: hidden;
+    font-size: 13px;
+    display: inline-block;
+    margin-right: 30px;
+    border-radius: 5px;
 }
 
 .albumcover{
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -20,8 +24,8 @@
     right: 0px;
     background-color: rgba(0, 0, 0, 0.685);
     color: white;
-    padding: 10px;
-    padding-left: 20px;
+    padding: 5px;
+    padding-left: 10px;
     border-bottom-left-radius: 10px;
     opacity: 0;
     box-shadow: -3px 3px 50px black;
@@ -39,7 +43,7 @@
 }
 
 .playListCreator{
-    font-size: 13px;
+    font-size: 10px;
 }
 
 .playListCardCont:hover .details{

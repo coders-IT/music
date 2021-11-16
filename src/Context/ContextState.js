@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import BaseContext from "./BaseContext";
-import {ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "./FirebaseInit";
 
 const ContextState = (props) => {
-    
     const [alertBody, setalertBody] = useState("No Error");
     const [alert, setAlert] = useState(false);
     const [user, setuser] = useState(null);
     const [loginShow, setloginShow] = useState(false);
     const [signUpShow, setsignUpShow] = useState(false);
-
-
-    useEffect(()=>{
-        if(user) console.log(user.profilePic,user);
-    },[user]);
-
+    const [uploadMusicShow, setuploadMusicShow] = useState(false);
+    const [recentMusic, setrecentMusic] = useState([]);
+    const [curMusic, setcurMusic] = useState(null)
+    useEffect(() => {
+        if (user) console.log(user.profilePic, user);
+    }, [user]);
 
     const callApi = async (endpoint, type, data) => {
         const url = `http://localhost:5000${endpoint}`;
@@ -27,7 +26,6 @@ const ContextState = (props) => {
             },
             body: JSON.stringify(data),
         });
-
 
         const parsed = await resp.json();
         return parsed;
@@ -49,7 +47,28 @@ const ContextState = (props) => {
     };
 
     return (
-        <BaseContext.Provider value={{ callApi, upload, alertBody, setalertBody, alert, setAlert, user, setuser, loginShow, setloginShow, signUpShow, setsignUpShow }}>
+        <BaseContext.Provider
+            value={{
+                callApi,
+                upload,
+                alertBody,
+                setalertBody,
+                alert,
+                setAlert,
+                user,
+                setuser,
+                loginShow,
+                setloginShow,
+                signUpShow,
+                setsignUpShow,
+                uploadMusicShow,
+                setuploadMusicShow,
+                recentMusic,
+                setrecentMusic,
+                curMusic, 
+                setcurMusic,
+            }}
+        >
             {props.children}
         </BaseContext.Provider>
     );

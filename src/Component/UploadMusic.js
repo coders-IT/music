@@ -26,7 +26,7 @@ export default function UploadMusic() {
         setmusic(e.target.files[0].name);
     };
 
-
+    
     const uploadMusic = async (e)=>{
         e.preventDefault();
         console.log("Uploading image");
@@ -47,10 +47,19 @@ export default function UploadMusic() {
         const resp = await context.callApi("/api/song","POST",data);
         context.setAlert(true);
         context.setalertBody(resp.success);
+        context.setuploadMusicShow(false);
     }
 
+    const hideUpload = ()=>{
+        context.setuploadMusicShow(false);
+    }
+
+    if(context.uploadMusicShow == false)return(<></>);
+
     return (
+        <div class="uploadmusiccont">
         <form id="musicUploadForm" onSubmit={uploadMusic}>
+            <i class="fas fa-times signinclose" onClick={hideUpload}></i>
             <div className="musicCoverCont">
                <div class="musicCoverImage">
                 <label htmlFor="musicUploadCover">
@@ -85,5 +94,6 @@ export default function UploadMusic() {
             </div>
             <input type="submit" value="Upload" className="music-upload"/>
         </form>
+        </div>
     );
 }
