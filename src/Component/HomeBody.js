@@ -75,7 +75,8 @@ export default function HomeBody() {
             
             <div class="recent">
                 {
-                    context.recentMusic.map((elem)=>{
+                    context.recentMusic.map((elem, ind)=>{
+                        elem["index"] = ind;
                         return (<MusicCard name={elem.name} id={elem} src={elem.clip} likes={elem.plays} like={true} playing={false} singer={elem.singer}/>)
                     })
                 }

@@ -16,8 +16,17 @@ export default function MusicCard(props) {
         }
     }
 
-    const playSong = ()=>{
+    const playSong = async ()=>{
         context.setcurMusic(props.id);
+        const audio = document.getElementById("audio");
+        
+        console.log(audio)
+        if(audio != null) audio.currentTime = 0;
+        await audio.load();
+        const out = audio.play();
+        const playPause = document.getElementById("playPause");
+        playPause.classList.remove("fa-play");
+        playPause.classList.add("fa-pause");
     }
 
 
@@ -25,7 +34,7 @@ export default function MusicCard(props) {
         return (
             <div class="musicCardCont" onClick={playSong}>
                 <div class="songDetail">
-                    {props.playing == false?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
+                    {context.curMusic._id !== props.id._id?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
                     <img src={props.src} class="songImg"/>
                     <span>{shrink(props.name)}<br/><span class="singerName">{shrink(props.singer)}</span></span>
                 </div>
@@ -37,9 +46,9 @@ export default function MusicCard(props) {
         );
     } else {
         return (
-            <div class="musicCardCont"  onClick={playSong}>
+            <div class="musicCardCont"  onClick={playSong} style={context.curMusic._id === props.id._id?{color:"#005180"}:{}}>
                 <div class="songDetail">
-                    {props.playing == false?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
+                    {context.curMusic._id !== props.id._id?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
                     <img src={props.src} class="songImg" align="middle"/>
                     <span>{shrink(props.name)}<br/><span class="singerName">{shrink(props.singer)}</span></span>
                 </div>

@@ -37,8 +37,10 @@ function App() {
             const url = "http://localhost:5000/api/song/songs";
             const data = await fetch(url);
             const resp = await data.json();
+            console.log(resp.data[0], resp.data,"dfasdjfdskl");
             context.setrecentMusic(resp.data);
-            console.log(resp.data);
+            context.setcurQueue(resp.data);
+            context.setcurMusic(resp.data[0]?resp.data[0]:{});
         }
         fetchSong();
         fetchUser();

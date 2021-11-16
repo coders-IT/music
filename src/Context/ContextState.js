@@ -11,10 +11,12 @@ const ContextState = (props) => {
     const [signUpShow, setsignUpShow] = useState(false);
     const [uploadMusicShow, setuploadMusicShow] = useState(false);
     const [recentMusic, setrecentMusic] = useState([]);
-    const [curMusic, setcurMusic] = useState(null)
+    const [curMusic, setcurMusic] = useState({});
+    const [curQueue, setcurQueue] = useState([]);
+
     useEffect(() => {
-        if (user) console.log(user.profilePic, user);
-    }, [user]);
+        console.log(curMusic);
+    }, [curMusic]);
 
     const callApi = async (endpoint, type, data) => {
         const url = `http://localhost:5000${endpoint}`;
@@ -67,6 +69,8 @@ const ContextState = (props) => {
                 setrecentMusic,
                 curMusic, 
                 setcurMusic,
+                curQueue, 
+                setcurQueue,
             }}
         >
             {props.children}

@@ -1,10 +1,11 @@
 import "./Styles/Player.css";
 
-import React from "react";
+import React, { useContext } from "react";
+import BaseContext from "../Context/BaseContext";
 
 export default function Player(props) {
     var playPause, audio, timerDot, curTimeAudio, songtimeslider, volumeSlider, curVolume, volumeDot, curTimeShow, fullTimeShow, volumeLogo;
-
+    const context = useContext(BaseContext);
     setTimeout(() => {
         playPause = document.getElementById("playPause");
         audio = document.querySelector("audio");
@@ -19,6 +20,17 @@ export default function Player(props) {
         volumeLogo = document.getElementById("volumeLogo");
     }, 0);
 
+
+    const shrink = (text)=>{
+        if(!text) return "";
+        if(window.innerWidth <= 400){
+            if(text.length < 15)return text;
+            return text.substr(0,15)+"..";
+        }else{
+            if(text.length < 20)return text;
+            return text.substr(0,20)+"...";
+        }
+    }
 
     const getTime = (x) => {
         var min = parseInt(x / 60);
@@ -51,14 +63,36 @@ export default function Player(props) {
         }
     };
 
+    const lastSong = async ()=>{
+        if(context.curMusic.index == 0)return;
+        else {
+            context.setcurMusic(context.curQueue[context.curMusic.index - 1]);
+            audio.currentTime = 0;
+            await audio.load();
+            audio.play();
+        }
+    }
 
+    const nextSong = async ()=>{
+        if(context.curMusic.index == context.curQueue.length - 1)return;
+        else {
+            context.setcurMusic(context.curQueue[context.curMusic.index + 1]);
+            audio.currentTime = 0;
+            await audio.load();
+            audio.play();
+        }
+    }
     const timeUpdate = () => {
+        if(!audio) return;
         const dist =
             (audio.currentTime / audio.duration) * window.innerWidth * 0.35;
         curTimeAudio.style.width = dist + "px";
         timerDot.style.left = dist - 5 + "px";
         curTimeShow.innerHTML = getTime(audio.currentTime);
         fullTimeShow.innerHTML = getTime(audio.duration);
+        if(audio.currentTime === audio.duration) {
+            nextSong();
+        }
     };
 
     const playHandle = (e) => {
@@ -82,25 +116,25 @@ export default function Player(props) {
 
     return (
         <div className="playerCont">
-            <audio src="https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/Jag%20Ghoomeya%20128%20Kbps.mp3?alt=media&token=ae95cea5-7e1b-4f27-87e3-f6c85846c2ab" id="song" onTimeUpdate={timeUpdate}></audio>
+            <audio src={context.curMusic.audio} id="audio" onTimeUpdate={timeUpdate} muted={false}></audio>
             <div className="songDetails flex">
                 <img
-                    src="https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/cover.jpg?alt=media&token=d4caef00-6f0c-4310-9949-59a2c1bd403a"
+                    src={context.curMusic.clip}
                     alt=""
                     width="70px"
                     height="70px"
                 />
                 <div className="playersongDetail">
-                    <div className="playersongName">Deepak Kumar</div>
-                    <div className="playersinger">Deepak</div>
+                    <div className="playersongName">{shrink(context.curMusic.name)}</div>
+                    <div className="playersinger">{shrink(context.curMusic.singer)}</div>
                 </div>
                 <i className={`${props.liked == false?"far":"fas"} fa-heart`} id="playerliked"></i>
             </div>
             <div className="sliderCont">
                 <div className="volumeCont flex">
-                    <i className="fas fa-step-backward action"></i>
+                    <i className="fas fa-step-backward action" onClick={lastSong}></i>
                     <i className="fas fa-play" id="playPause" onClick={playHandle}></i>
-                    <i className="fas fa-step-forward action"></i>
+                    <i className="fas fa-step-forward action" onClick={nextSong}></i>
                 </div>
                 <div className="timerCont flex">
                     <div className="initTime" id="curTimeShow">
