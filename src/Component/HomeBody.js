@@ -6,6 +6,19 @@ import PlayListCard from "./PlayListCard";
 
 export default function HomeBody() {
     const context = useContext(BaseContext);
+
+    const isLiked =(x)=>{
+        console.log(x);
+        if(context.user === null) return false;
+        else{
+            if(context.user.savedAudio.indexOf(x) != -1){
+                console.log("liked song ", x);
+                return true;
+            }
+            return false;
+        }
+    }
+
     const src =
         "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/cover.jpg?alt=media&token=d4caef00-6f0c-4310-9949-59a2c1bd403a";
     return (
@@ -75,9 +88,10 @@ export default function HomeBody() {
             
             <div class="recent">
                 {
-                    context.recentMusic.map((elem, ind)=>{
+                    context.curQueue.map((elem, ind)=>{
                         elem["index"] = ind;
-                        return (<MusicCard name={elem.name} id={elem} src={elem.clip} likes={elem.plays} like={true} playing={false} singer={elem.singer}/>)
+                        elem["liked"] = isLiked(elem._id);
+                        return (<MusicCard name={elem.name} id={elem} src={elem.clip} likes={elem.plays} liked={elem.liked} playing={false} singer={elem.singer}/>)
                     })
                 }
 

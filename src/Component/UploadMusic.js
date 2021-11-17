@@ -29,12 +29,14 @@ export default function UploadMusic() {
     
     const uploadMusic = async (e)=>{
         e.preventDefault();
+        const uploadbtn = document.getElementById("uploadbtn");
+        uploadbtn.value="Uploading..."
         console.log("Uploading image");
         const img = await context.upload("image/jpg", "musicUploadCover")
         console.log("Uploading Music", img);
         const musicUrl = await context.upload("audio/mp3", "musicFile");
         console.log("Uploaded",music);
-
+        uploadbtn.value="Uploaded"
         let data = {
             name:music,
             token:localStorage.getItem("jwtTokken"),
@@ -48,6 +50,9 @@ export default function UploadMusic() {
         context.setAlert(true);
         context.setalertBody(resp.success);
         context.setuploadMusicShow(false);
+        uploadbtn.value="Upload";
+        setmusic("");
+
     }
 
     const hideUpload = ()=>{
@@ -92,7 +97,7 @@ export default function UploadMusic() {
                 <input type="text" id="tags" class="detail" placeholder="Enter Tags(Coma Seprated)"/>
 
             </div>
-            <input type="submit" value="Upload" className="music-upload"/>
+            <input type="submit" id="uploadbtn" value="Upload" className="music-upload"/>
         </form>
         </div>
     );

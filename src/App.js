@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Alert from "./Component/Alert";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import FullScreenPlayer from "./Component/FullScreenPlayer";
 import Homepage from "./Component/Homepage";
 import MusicCard from "./Component/MusicCard";
 import Player from "./Component/Player";
@@ -33,17 +34,18 @@ function App() {
             }
         };
 
-        const fetchSong = async ()=>{
+        const fetchSong = async () => {
             const url = "http://localhost:5000/api/song/songs";
             const data = await fetch(url);
             const resp = await data.json();
-            console.log(resp.data[0], resp.data,"dfasdjfdskl");
+            console.log(resp.data[0], resp.data, "dfasdjfdskl");
+
             context.setrecentMusic(resp.data);
             context.setcurQueue(resp.data);
-            context.setcurMusic(resp.data[0]?resp.data[0]:{});
-        }
-        fetchSong();
+            context.setcurMusic(resp.data[0] ? resp.data[0] : {});
+        };
         fetchUser();
+        fetchSong();
     }, []);
 
     //if want to uncomment uncomment all the components inside a single comment block
@@ -53,7 +55,21 @@ function App() {
             <Alert />
             <Signin />
             <Signup />
-            <Homepage />
+            <Switch>
+                <Route exact path="/">
+                    <Homepage show="body"/>
+                </Route>
+
+                <Route exact path="/create">
+                    <Homepage show="create"/>
+                </Route>
+
+                <Route exact path="/audio">
+                    <FullScreenPlayer />
+                </Route>
+            </Switch>
+
+            {/* <FullScreenPlayer/> */}
             {/* <MusicCard name="Jag Ghumya" src={src} likes="2M" like={true} playing={true} /> */}
             {/* <UploadMusic/> */}
             {/* <Signin/> */}

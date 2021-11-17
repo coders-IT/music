@@ -30,7 +30,7 @@ export default function MusicCard(props) {
     }
 
 
-    if (props.liked) {
+    if (props.liked == false) {
         return (
             <div class="musicCardCont" onClick={playSong}>
                 <div class="songDetail">

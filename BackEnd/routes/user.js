@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
 const User = require('../models/User');
+const audio = require('../models/Audio');
+
 
 const key = "hask98#eu1uie872j@kd";
 
@@ -104,6 +106,11 @@ router.post('/savesong/:id',async (req,res)=>{
         let doc = await User.findOne({username:req.username});
         doc.savedAudio.push(req.params.id);
         await User.findOneAndUpdate({username:req.username},doc);
+
+        var song = await audio.findById(req.params.id);
+		console.log(song);
+        data = await audio.findByIdAndUpdate(req.params.id, { plays: song.plays + 1 });
+
         res.status(200).json({"success":"Successfully added to saved songs."});
     }catch(error){
         res.status(500).json({"error":error});
@@ -135,6 +142,10 @@ router.post('/unsavesong/:id',async (req,res)=>{
         arr.splice(i,1);
         doc.savedAudio = arr;
         await User.findOneAndUpdate({username:req.username},doc)
+        var song = await audio.findById(req.params.id);
+		console.log(song);
+        data = await audio.findByIdAndUpdate(req.params.id, { plays: song.plays - 1 });
+
         res.status(200).json({"success":"Successfully removed from saved songs."});
     }catch(error){
         res.status(500).json({"error":error});

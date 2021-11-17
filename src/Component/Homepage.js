@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 import {BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import HomeBody from "./HomeBody";
 
-export default function Homepage() {
+export default function Homepage(props) {
     const context = useContext(BaseContext);
     var history = useHistory();
 
@@ -57,10 +57,7 @@ export default function Homepage() {
             </div>
 
             <div class="body">
-                <Switch>
-                    <Route exact path="/"><HomeBody/></Route>
-                    <Route exact path="/create"><Creator/></Route>
-                </Switch>
+                {props.show == "body"?<HomeBody/>:<Creator/>}
             </div>
 
             <div class="player">

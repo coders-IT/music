@@ -1,0 +1,30 @@
+.fullPlayerHeader{
+    height: 70px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+}
+
+.fullPlayerImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+.fullHeadRight{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.fullHeadRight .fas{
+    margin-right: 30px;
+    font-size: 35px;
+}
+.middle{
+    height: calc(100vh - 170px);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

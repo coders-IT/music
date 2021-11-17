@@ -13,10 +13,11 @@ const ContextState = (props) => {
     const [recentMusic, setrecentMusic] = useState([]);
     const [curMusic, setcurMusic] = useState({});
     const [curQueue, setcurQueue] = useState([]);
+    const [curSongTime, setcurSongTime] = useState(0);
 
-    useEffect(() => {
+    useEffect(()=>{
         console.log(curMusic);
-    }, [curMusic]);
+    },[curMusic]);
 
     const callApi = async (endpoint, type, data) => {
         const url = `http://localhost:5000${endpoint}`;
@@ -71,6 +72,8 @@ const ContextState = (props) => {
                 setcurMusic,
                 curQueue, 
                 setcurQueue,
+                curSongTime, 
+                setcurSongTime
             }}
         >
             {props.children}

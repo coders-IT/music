@@ -2,10 +2,22 @@ import "./Styles/Player.css";
 
 import React, { useContext } from "react";
 import BaseContext from "../Context/BaseContext";
+import { useHistory } from "react-router";
 
 export default function Player(props) {
-    var playPause, audio, timerDot, curTimeAudio, songtimeslider, volumeSlider, curVolume, volumeDot, curTimeShow, fullTimeShow, volumeLogo;
+    var playPause,
+        audio,
+        timerDot,
+        curTimeAudio,
+        songtimeslider,
+        volumeSlider,
+        curVolume,
+        volumeDot,
+        curTimeShow,
+        fullTimeShow,
+        volumeLogo;
     const context = useContext(BaseContext);
+    const histroy = useHistory();
     setTimeout(() => {
         playPause = document.getElementById("playPause");
         audio = document.querySelector("audio");
@@ -20,17 +32,16 @@ export default function Player(props) {
         volumeLogo = document.getElementById("volumeLogo");
     }, 0);
 
-
-    const shrink = (text)=>{
-        if(!text) return "";
-        if(window.innerWidth <= 400){
-            if(text.length < 15)return text;
-            return text.substr(0,15)+"..";
-        }else{
-            if(text.length < 20)return text;
-            return text.substr(0,20)+"...";
+    const shrink = (text) => {
+        if (!text) return "";
+        if (window.innerWidth <= 400) {
+            if (text.length < 15) return text;
+            return text.substr(0, 15) + "..";
+        } else {
+            if (text.length < 20) return text;
+            return text.substr(0, 20) + "...";
         }
-    }
+    };
 
     const getTime = (x) => {
         var min = parseInt(x / 60);
@@ -43,8 +54,7 @@ export default function Player(props) {
         if (pos < 0 || pos > window.innerWidth * 0.35) return;
         curTimeAudio.style.width = pos + "px";
         timerDot.style.left = pos - 5 + "px";
-        audio.currentTime =
-            audio.duration * (pos / (window.innerWidth * 0.35));
+        audio.currentTime = audio.duration * (pos / (window.innerWidth * 0.35));
     };
 
     const volumeSliderHandle = (e) => {
@@ -63,34 +73,41 @@ export default function Player(props) {
         }
     };
 
-    const lastSong = async ()=>{
-        if(context.curMusic.index == 0)return;
+    const lastSong = async () => {
+        if (context.curMusic.index == 0) return;
         else {
+            if (!context.curMusic.index) {
+                return;
+            }
             context.setcurMusic(context.curQueue[context.curMusic.index - 1]);
             audio.currentTime = 0;
             await audio.load();
             audio.play();
         }
-    }
+    };
 
-    const nextSong = async ()=>{
-        if(context.curMusic.index == context.curQueue.length - 1)return;
+    const nextSong = async () => {
+        if (context.curMusic.index == context.curQueue.length - 1) return;
         else {
+            if (!context.curMusic.index) {
+                return;
+            }
+            console.log(context.curQueue, context.curMusic.index + 1);
             context.setcurMusic(context.curQueue[context.curMusic.index + 1]);
             audio.currentTime = 0;
             await audio.load();
             audio.play();
         }
-    }
+    };
     const timeUpdate = () => {
-        if(!audio) return;
+        if (!audio) return;
         const dist =
             (audio.currentTime / audio.duration) * window.innerWidth * 0.35;
         curTimeAudio.style.width = dist + "px";
         timerDot.style.left = dist - 5 + "px";
         curTimeShow.innerHTML = getTime(audio.currentTime);
         fullTimeShow.innerHTML = getTime(audio.duration);
-        if(audio.currentTime === audio.duration) {
+        if (audio.currentTime === audio.duration) {
             nextSong();
         }
     };
@@ -107,16 +124,70 @@ export default function Player(props) {
         }
     };
 
-    const muteHandle = ()=>{
+    const muteHandle = () => {
         volumeLogo.setAttribute("class", "fas fa-volume-mute");
-        volumeDot.style.left = 0+ "px";
+        volumeDot.style.left = 0 + "px";
         curVolume.style.width = 0 + "px";
         audio.volume = 0;
+    };
+
+    const maxMusic = ()=>{
+        context.setcurSongTime(audio.currentTime);
+        histroy.push(`/audio?id=${context.curMusic._id}`);
+
     }
+
+    const likeHandle = async () => {
+        if (context.user === null) return;
+        else {
+            if (context.curMusic.liked == false) {
+                console.log("liking the song");
+                var data = {
+                    token: localStorage.getItem("jwtTokken"),
+                };
+
+                data = await context.callApi(
+                    "/api/user/savesong/" + context.curMusic._id,
+                    "POST",
+                    data
+                );
+
+                var tempQue = context.curQueue;
+                tempQue[context.curMusic.index].plays += 1;
+                tempQue[context.curMusic.index].liked = true;
+                context.setcurQueue(tempQue);
+                context.setcurMusic(tempQue[context.curMusic.index]);
+                console.log(data);
+            } else {
+                console.log("liking the song");
+                var data = {
+                    token: localStorage.getItem("jwtTokken"),
+                };
+
+                data = await context.callApi(
+                    "/api/user/unsavesong/" + context.curMusic._id,
+                    "POST",
+                    data
+                );
+                console.log(data);
+                console.log(context.curMusic.index);
+                var tempQue = context.curQueue;
+                tempQue[context.curMusic.index].plays -= 1;
+                tempQue[context.curMusic.index].liked = false;
+                context.setcurMusic(tempQue[context.curMusic.index]);
+                context.setcurQueue(tempQue);
+            }
+        }
+    };
 
     return (
         <div className="playerCont">
-            <audio src={context.curMusic.audio} id="audio" onTimeUpdate={timeUpdate} muted={false}></audio>
+            <audio
+                src={context.curMusic.audio}
+                id="audio"
+                onTimeUpdate={timeUpdate}
+                muted={false}
+            ></audio>
             <div className="songDetails flex">
                 <img
                     src={context.curMusic.clip}
@@ -125,22 +196,48 @@ export default function Player(props) {
                     height="70px"
                 />
                 <div className="playersongDetail">
-                    <div className="playersongName">{shrink(context.curMusic.name)}</div>
-                    <div className="playersinger">{shrink(context.curMusic.singer)}</div>
+                    <div className="playersongName">
+                        {shrink(context.curMusic.name)}
+                    </div>
+                    <div className="playersinger">
+                        {shrink(context.curMusic.singer)}
+                    </div>
                 </div>
-                <i className={`${props.liked == false?"far":"fas"} fa-heart`} id="playerliked"></i>
+                <i
+                    className={`${
+                        context.curMusic.liked == false ? "far" : "fas"
+                    } fa-heart`}
+                    id="playerliked"
+                    onClick={likeHandle}
+                ></i>
             </div>
             <div className="sliderCont">
                 <div className="volumeCont flex">
-                    <i className="fas fa-step-backward action" onClick={lastSong}></i>
-                    <i className="fas fa-play" id="playPause" onClick={playHandle}></i>
-                    <i className="fas fa-step-forward action" onClick={nextSong}></i>
+                    <i class="fas fa-random"></i>
+                    <i
+                        className="fas fa-step-backward action"
+                        onClick={lastSong}
+                    ></i>
+                    <i
+                        className="fas fa-play"
+                        id="playPause"
+                        onClick={playHandle}
+                    ></i>
+                    <i
+                        className="fas fa-step-forward action"
+                        onClick={nextSong}
+                    ></i>
+                    <i class="fas fa-angle-up" onClick={maxMusic}></i>
                 </div>
                 <div className="timerCont flex">
                     <div className="initTime" id="curTimeShow">
                         00:00
                     </div>
-                    <div className="songtimerslider" id="songtimeslider" onClick={songTimeSliderHandler}>
+                    <div
+                        className="songtimerslider"
+                        id="songtimeslider"
+                        onClick={songTimeSliderHandler}
+                    >
                         <div className="dot" id="timerDot"></div>
                         <div id="curTimeAudio"></div>
                     </div>
@@ -150,8 +247,16 @@ export default function Player(props) {
                 </div>
             </div>
             <div className="flex">
-                <i className="fas fa-volume-up" id="volumeLogo" onClick={muteHandle}></i>
-                <div className="volumeSlider" id="volumeSlider" onClick={volumeSliderHandle}>
+                <i
+                    className="fas fa-volume-up"
+                    id="volumeLogo"
+                    onClick={muteHandle}
+                ></i>
+                <div
+                    className="volumeSlider"
+                    id="volumeSlider"
+                    onClick={volumeSliderHandle}
+                >
                     <div className="dot" id="volumeDot"></div>
                     <div id="curVolume"></div>
                 </div>

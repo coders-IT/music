@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: space-evenly;
     background-color: rgba(0, 0, 0, 0.377);
+    z-index: 1;
 }
 
 .signinCont{

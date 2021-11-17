@@ -6,9 +6,11 @@
 
 .recent{
     width: 100vw;
-    height: calc(100% - 200px);
+    height: calc(100% - 230px);
     background-color: dodgerblue;
     padding: 20px 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .playlist{
@@ -22,6 +24,6 @@
     overflow-y: hidden;
 }
 
-.playlist::-webkit-scrollbar{
+.playlist::-webkit-scrollbar, .recent::-webkit-scrollbar{
     display: none;
 }

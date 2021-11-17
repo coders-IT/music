@@ -16,7 +16,10 @@ router.get('/songs',async (req,res)=>{
 router.get('/:id',async (req,res)=>{
     try{
         let doc = await Audio.findById(req.params.id);
-        if(!doc)    res.status(404).json({"error":"Not found"});
+        if(!doc)  {
+            res.status(404).json({"error":"Not found"});
+            return;
+        }
         res.status(200).json({"success":"Successfully fetched song.",data:doc});
     }catch(error){
         res.status(500).json({error})
