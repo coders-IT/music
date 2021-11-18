@@ -11,13 +11,16 @@ import Signin from "./Component/Signin";
 import Signup from "./Component/Signup";
 import UploadMusic from "./Component/UploadMusic";
 import BaseContext from "./Context/BaseContext";
+import AddtoList from "./Component/AddtoList";
 
 function App() {
     const src =
         "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/cover.jpg?alt=media&token=6c6d399b-ce7f-4a4d-89ce-8e395a7efd47";
+
+    //if want to uncomment uncomment all the components inside a single comment block
     const context = useContext(BaseContext);
 
-    useEffect(() => {
+    useEffect(()=>{
         const fetchUser = async () => {
             const token = localStorage.getItem("jwtTokken");
             if (token) {
@@ -33,42 +36,34 @@ function App() {
                 context.setuser(resp.data);
             }
         };
-
-        const fetchSong = async () => {
-            const url = "http://localhost:5000/api/song/songs";
-            const data = await fetch(url);
-            const resp = await data.json();
-            console.log(resp.data[0], resp.data, "dfasdjfdskl");
-
-            context.setrecentMusic(resp.data);
-            context.setcurQueue(resp.data);
-            context.setcurMusic(resp.data[0] ? resp.data[0] : {});
-        };
         fetchUser();
-        fetchSong();
-    }, []);
+    },[]);
 
-    //if want to uncomment uncomment all the components inside a single comment block
 
     return (
         <BrowserRouter>
+{/* 
+            <audio
+                src={context.curMusic.audio}
+                id="audio"
+                // onTimeUpdate={timeUpdate}
+                muted={false}
+            ></audio>
             <Alert />
             <Signin />
             <Signup />
+            <UploadMusic/>
+
             <Switch>
                 <Route exact path="/">
-                    <Homepage show="body"/>
+                    <Homepage/>
                 </Route>
-
-                <Route exact path="/create">
-                    <Homepage show="create"/>
-                </Route>
-
                 <Route exact path="/audio">
                     <FullScreenPlayer />
                 </Route>
             </Switch>
-
+            <Player/> */}
+            <AddtoList/>
             {/* <FullScreenPlayer/> */}
             {/* <MusicCard name="Jag Ghumya" src={src} likes="2M" like={true} playing={true} /> */}
             {/* <UploadMusic/> */}

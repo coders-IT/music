@@ -8,8 +8,8 @@
 
 .playerCont{
     height: 100px;
-    width: calc(100vw - 40px);
-    padding: 0px 20px;
+    width: calc(100vw - 30px);
+    padding: 0px 15px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -25,6 +25,9 @@
 
 #playerliked{
     font-size: 30px;
+}
+.songDetails{
+    width: 23vw;
 }
 
 .sliderCont{

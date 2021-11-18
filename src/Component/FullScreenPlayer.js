@@ -2,6 +2,7 @@ import "./Styles/FullScreenPlayer.css";
 import React, { useContext, useEffect } from "react";
 import Player from "./Player";
 import BaseContext from "../Context/BaseContext";
+import { useHistory } from "react-router";
 
 export default function FullScreenPlayer() {
     const context = useContext(BaseContext);
@@ -14,20 +15,27 @@ export default function FullScreenPlayer() {
                 const data = await fetch(`http://localhost:5000/api/song/${parsed}`);
                 const resp = await data.json();
                 console.log("dhfadsjkfhadsjkfhadsjkfhkdsjfhdkjh",resp);
-                context.setcurMusic(resp.data);
+                if(resp.data)context.setcurMusic(resp.data);
+                else context.setcurMusic({});
             }
-            document.getElementById("audio").play();
-            document.getElementById("audio").currentTime = context.curSongTime;
+            // document.getElementById("audio").play();
+            // document.getElementById("audio").currentTime = context.curSongTime;
+            
         }
         checkSong();
     }, []);
+    const history = useHistory();
+    const minimizeFull = ()=>{
+        context.setchangeURL(false);
+        history.push("/");
+    }
 
     const defaultPic =
         "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/defaultUser.jpg?alt=media&token=b805932f-d9bd-432f-95c8-b1ff00de708a";
     return (
         <div>
             <div class="fullPlayerHeader">
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left" onClick={minimizeFull}></i>
                 <div class="fullHeadRight">
                     <i class="fas fa-plus-circle"></i>
                     <img
@@ -48,7 +56,7 @@ export default function FullScreenPlayer() {
                 />
             </div>
 
-            <Player />
+            {/* <Player /> */}
         </div>
     );
 }

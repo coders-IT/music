@@ -4,6 +4,9 @@ const {Schema} = require('mongoose');
 
 const PlaylistSchema = new Schema(
     {
+        clip:{
+            type:String
+        },
         name:{
             type:String,
         },
@@ -19,10 +22,6 @@ const PlaylistSchema = new Schema(
         dateLastModified:{
             type:Date,
             default:Date.now()
-        },
-        songs:{
-            type:Schema.Types.Array,
-            ref:'audio'
         },
         followers:{
             type:Number,

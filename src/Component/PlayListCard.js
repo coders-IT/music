@@ -5,7 +5,6 @@ export default function PlayListCard(props) {
     console.log("src",props.src)
     return (
         <div class="playListCardCont" style={{backgroundImage:`url(${props.src})`, backgroundSize:"cover", backgroundPosition:"center"}}>
-            <div class="followers">Follwers {props.follower}</div>
             {/* <img src={props.src} class="albumcover" alt="album cover"/> */}
             <div class="details">
                 <div class="playListName">{props.name}</div>

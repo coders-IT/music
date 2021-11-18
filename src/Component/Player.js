@@ -1,10 +1,11 @@
 import "./Styles/Player.css";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import BaseContext from "../Context/BaseContext";
 import { useHistory } from "react-router";
 
 export default function Player(props) {
+    // const [playClass, setplayClass] = useState()
     var playPause,
         audio,
         timerDot,
@@ -30,22 +31,22 @@ export default function Player(props) {
         curTimeShow = document.getElementById("curTimeShow");
         fullTimeShow = document.getElementById("fullTimeShow");
         volumeLogo = document.getElementById("volumeLogo");
+        audio.ontimeupdate = timeUpdate;
     }, 0);
 
     const shrink = (text) => {
         if (!text) return "";
-        if (window.innerWidth <= 400) {
-            if (text.length < 15) return text;
-            return text.substr(0, 15) + "..";
-        } else {
-            if (text.length < 20) return text;
-            return text.substr(0, 20) + "...";
-        }
+        
+        if (text.length < 15) return text;
+        return text.substr(0, 15) + "..";
+        
     };
 
     const getTime = (x) => {
         var min = parseInt(x / 60);
+        if(!min) min = 0;
         var sec = parseInt(x % 60);
+        if(!sec) sec = 0;
         return `${min > 9 ? "" : "0"}${min}:${sec > 9 ? "" : "0"}${sec}`;
     };
 
@@ -80,6 +81,7 @@ export default function Player(props) {
                 return;
             }
             context.setcurMusic(context.curQueue[context.curMusic.index - 1]);
+            if(context.changeURL)histroy.push(`/audio?id=${context.curQueue[context.curMusic.index - 1]._id}`);
             audio.currentTime = 0;
             await audio.load();
             audio.play();
@@ -89,11 +91,13 @@ export default function Player(props) {
     const nextSong = async () => {
         if (context.curMusic.index == context.curQueue.length - 1) return;
         else {
-            if (!context.curMusic.index) {
+            if (context.curMusic.index != 0 && !context.curMusic.index) {
                 return;
             }
             console.log(context.curQueue, context.curMusic.index + 1);
             context.setcurMusic(context.curQueue[context.curMusic.index + 1]);
+            if(context.changeURL)histroy.push(`/audio?id=${context.curQueue[context.curMusic.index + 1]._id}`);
+
             audio.currentTime = 0;
             await audio.load();
             audio.play();
@@ -132,7 +136,7 @@ export default function Player(props) {
     };
 
     const maxMusic = ()=>{
-        context.setcurSongTime(audio.currentTime);
+        context.setchangeURL(true);
         histroy.push(`/audio?id=${context.curMusic._id}`);
 
     }
@@ -182,12 +186,6 @@ export default function Player(props) {
 
     return (
         <div className="playerCont">
-            <audio
-                src={context.curMusic.audio}
-                id="audio"
-                onTimeUpdate={timeUpdate}
-                muted={false}
-            ></audio>
             <div className="songDetails flex">
                 <img
                     src={context.curMusic.clip}

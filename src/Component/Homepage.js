@@ -1,8 +1,7 @@
 import "./Styles/Homepage.css";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Player from "./Player";
 import BaseContext from "../Context/BaseContext";
-import Creator from "./Creator";
 import { useHistory } from "react-router";
 import {BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import HomeBody from "./HomeBody";
@@ -21,11 +20,31 @@ export default function Homepage(props) {
         }
     };
     const gotoadd=()=>{
-        history.push("create")
+        context.setuploadMusicShow(true);
     }
     const gotohome = ()=>{
         history.push("/");
     }
+
+
+    useEffect(() => {
+
+
+        const fetchSong = async () => {
+            const url = "http://localhost:5000/api/song/songs";
+            const data = await fetch(url);
+            const resp = await data.json();
+            console.log(resp.data[0], resp.data, "dfasdjfdskl");
+
+            context.setrecentMusic(resp.data);
+            context.setcurQueue(resp.data);
+            if(resp.data[0]) resp.data[0]["index"] = 0;
+            context.setcurMusic(resp.data[0] ? resp.data[0] : {});
+        };
+        // fetchUser();
+        if(context.curQueue.length === 0)fetchSong();
+    }, []);
+
 
     const defaultPic =
         "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/defaultUser.jpg?alt=media&token=b805932f-d9bd-432f-95c8-b1ff00de708a";
@@ -57,12 +76,12 @@ export default function Homepage(props) {
             </div>
 
             <div class="body">
-                {props.show == "body"?<HomeBody/>:<Creator/>}
+                <HomeBody/>
             </div>
 
-            <div class="player">
+            {/* <div class="player">
                 <Player liked={false} />
-            </div>
+            </div> */}
         </div>
     );
 }

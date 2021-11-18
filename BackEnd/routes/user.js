@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
 const User = require('../models/User');
 const audio = require('../models/Audio');
-
+const Playlist = require('../models/Playlist');
 
 const key = "hask98#eu1uie872j@kd";
 
@@ -121,7 +121,8 @@ router.post('/saveplaylist/:id',async (req,res)=>{
     try{
         let doc = await User.findOne({username:req.username});
         console.log(doc,req.username)
-        doc.savedPlayList.push(req.params.id);
+        const playlist = await Playlist.findById(req.params.id);
+        doc.savedPlayList.push(playlist);
         await User.findOneAndUpdate({username:req.username},doc)
         res.status(200).json({"success":"Successfully added to saved playlists."});
     }catch(error){
