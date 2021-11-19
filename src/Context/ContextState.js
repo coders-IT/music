@@ -15,7 +15,8 @@ const ContextState = (props) => {
     const [curQueue, setcurQueue] = useState([]);
     const [changeURL, setchangeURL] = useState(false);
     const [showAddto, setshowAddto] = useState(false);
-    const [createListShow, setcreateListShow] = useState(false)
+    const [createListShow, setcreateListShow] = useState(false);
+    const [curPlaylist, setcurPlaylist] = useState({});
 
     useEffect(() => {
         console.log(curMusic);
@@ -76,10 +77,12 @@ const ContextState = (props) => {
                 setcurQueue,
                 changeURL,
                 setchangeURL,
-                showAddto, 
+                showAddto,
                 setshowAddto,
-                createListShow, 
-                setcreateListShow
+                createListShow,
+                setcreateListShow,
+                curPlaylist,
+                setcurPlaylist,
             }}
         >
             {props.children}

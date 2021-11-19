@@ -13,6 +13,7 @@ import UploadMusic from "./Component/UploadMusic";
 import BaseContext from "./Context/BaseContext";
 import Addto from "./Component/Addto";
 import CreateNewPlaylist from "./Component/CreateNewPlaylist";
+import Playlist from "./Component/Playlist";
 
 function App() {
     const src =
@@ -63,6 +64,9 @@ function App() {
                 </Route>
                 <Route exact path="/audio">
                     <FullScreenPlayer />
+                </Route>
+                <Route exact path="/playlist">
+                    <Playlist/>
                 </Route>
             </Switch>
             <Player/>

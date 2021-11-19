@@ -69,8 +69,7 @@ router.get("/song/:id", async(req,resp)=>{
 router.get("/:id", async(req,resp)=>{
     try {
         
-        var list = await Playlist.findOne({"playlist" : req.params.id});
-        
+        var list = await Playlist.findById(req.params.id);
         resp.send({"data":list});
 
     } catch (error) {

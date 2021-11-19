@@ -33,7 +33,7 @@ export default function HomeBody() {
                     </center>
                 ) : (
                     context.user.savedPlayList.map((elem, ind) => {
-                        // elem["index"] = ind;
+                        console.log(elem, "svaed plalist");
                         console.log("elem", elem);
                         return (
                             <PlayListCard

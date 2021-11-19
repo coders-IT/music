@@ -1,0 +1,50 @@
+.listcont{
+    height: calc(100vh - 100px);
+}
+
+.listHeader{
+    height: 200px;
+    background-color: aqua;
+    display: flex;
+    padding: 0px 90px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playlistHeaderImg{
+    width: 180px;
+    height: 180px;
+    border-radius: 180px;
+}
+
+.playlistbtn{
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+    line-height: 70px;
+    text-align: center;
+    border-radius: 70px;
+    margin-left: 30px;
+}
+
+.listheaderimg{
+    font-size: 40px;
+    display: flex;
+    height: fit-content;
+    align-items:end;
+}
+
+/* .listDetails{
+    margin-right: 80px;
+} */
+.listname{
+    font-size: 30px;
+}
+
+.curlistSongs{
+    width: 100%;
+    height: calc(100% - 240px);
+    overflow-y: scroll;
+    background-color: antiquewhite;
+    padding: 20px 0px;
+}
