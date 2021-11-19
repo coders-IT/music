@@ -24,12 +24,46 @@ export default function HomeBody() {
     return (
         <div class="homebody">
             <div class="playlist ">
-                {(!context.user) || context.user.savedPlayList.length === 0 ? (
-                    <h1>No Playlist Saved/Created</h1>
+                {!context.user ||
+                context.user.savedPlayList.length +
+                    context.user.contribPlayList.length ===
+                    0 ? (
+                    <center>
+                        <h1>No Playlist Saved/Created</h1>
+                    </center>
                 ) : (
-                    context.user.savedPlayList.map((elem, ind)=>{
-                        elem["index"] = ind;
-                        <PlayListCard key={elem._id} name={elem.name} creator={elem.createdBy} id={elem}/>
+                    context.user.savedPlayList.map((elem, ind) => {
+                        // elem["index"] = ind;
+                        console.log("elem", elem);
+                        return (
+                            <PlayListCard
+                                key={elem._id}
+                                name={elem.name}
+                                creator={elem.createdBy}
+                                id={elem}
+                                src={elem.clip}
+                            />
+                        );
+                    })
+                )}
+                {!context.user ||
+                context.user.savedPlayList.length +
+                    context.user.contribPlayList.length ===
+                    0 ? (
+                    <></>
+                ) : (
+                    context.user.contribPlayList.map((elem, ind) => {
+                        // elem["index"] = ind;
+                        console.log("elem", elem);
+                        return (
+                            <PlayListCard
+                                key={elem._id}
+                                name={elem.name}
+                                creator={elem.createdBy}
+                                id={elem}
+                                src={elem.clip}
+                            />
+                        );
                     })
                 )}
             </div>

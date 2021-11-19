@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from "react";
 import Player from "./Player";
 import BaseContext from "../Context/BaseContext";
 import { useHistory } from "react-router";
+import Addto from "./Addto";
 
 export default function FullScreenPlayer() {
     const context = useContext(BaseContext);
@@ -30,14 +31,19 @@ export default function FullScreenPlayer() {
         history.push("/");
     }
 
+    const showaddto = ()=>{
+        context.setshowAddto(true);
+    }
+
     const defaultPic =
         "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/defaultUser.jpg?alt=media&token=b805932f-d9bd-432f-95c8-b1ff00de708a";
     return (
         <div>
+            <Addto/>
             <div class="fullPlayerHeader">
                 <i class="fas fa-chevron-left" onClick={minimizeFull}></i>
                 <div class="fullHeadRight">
-                    <i class="fas fa-plus-circle"></i>
+                    <i class="fas fa-plus-circle" onClick={showaddto}></i>
                     <img
                         src={`${
                             context.user ? context.user.profilePic : defaultPic

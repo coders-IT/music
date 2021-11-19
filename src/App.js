@@ -11,7 +11,8 @@ import Signin from "./Component/Signin";
 import Signup from "./Component/Signup";
 import UploadMusic from "./Component/UploadMusic";
 import BaseContext from "./Context/BaseContext";
-import AddtoList from "./Component/AddtoList";
+import Addto from "./Component/Addto";
+import CreateNewPlaylist from "./Component/CreateNewPlaylist";
 
 function App() {
     const src =
@@ -42,17 +43,19 @@ function App() {
 
     return (
         <BrowserRouter>
-{/* 
+
             <audio
                 src={context.curMusic.audio}
                 id="audio"
                 // onTimeUpdate={timeUpdate}
                 muted={false}
             ></audio>
+            {/* <Addto/> */}
             <Alert />
             <Signin />
             <Signup />
             <UploadMusic/>
+            <CreateNewPlaylist/>
 
             <Switch>
                 <Route exact path="/">
@@ -62,8 +65,8 @@ function App() {
                     <FullScreenPlayer />
                 </Route>
             </Switch>
-            <Player/> */}
-            <AddtoList/>
+            <Player/>
+            {/* <AddtoList/> */}
             {/* <FullScreenPlayer/> */}
             {/* <MusicCard name="Jag Ghumya" src={src} likes="2M" like={true} playing={true} /> */}
             {/* <UploadMusic/> */}
