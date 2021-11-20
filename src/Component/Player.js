@@ -85,6 +85,9 @@ export default function Player(props) {
             audio.currentTime = 0;
             await audio.load();
             audio.play();
+            const playPause = document.getElementById("playPause");
+            playPause.classList.remove("fa-play");
+            playPause.classList.add("fa-pause");
         }
     };
 
@@ -101,6 +104,9 @@ export default function Player(props) {
             audio.currentTime = 0;
             await audio.load();
             audio.play();
+            const playPause = document.getElementById("playPause");
+            playPause.classList.remove("fa-play");
+            playPause.classList.add("fa-pause");
         }
     };
     const timeUpdate = () => {
@@ -136,13 +142,19 @@ export default function Player(props) {
     };
 
     const maxMusic = ()=>{
+        console.log(Object.keys(context.curMusic).length);
+        if(Object.keys(context.curMusic).length === 0) return;
+
         context.setchangeURL(true);
         histroy.push(`/audio?id=${context.curMusic._id}`);
 
     }
 
     const likeHandle = async () => {
-        if (context.user === null) return;
+        if (context.user === null) {
+            context.setloginShow(true);
+            return;
+        }
         else {
             if (context.curMusic.liked == false) {
                 console.log("liking the song");

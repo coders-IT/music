@@ -19,9 +19,37 @@ const ContextState = (props) => {
     const [curPlaylist, setcurPlaylist] = useState({});
     const [searchResult, setsearchResult] = useState({});
     const [searchResultshow, setsearchResultshow] = useState(false);
+    const [recentSong, setrecentSong] = useState([]);
+
     useEffect(() => {
-        console.log(curMusic);
+        var ind = recentMusic.indexOf(curMusic);
+        var arr = recentMusic;
+        if(ind !== -1){
+            arr = arr.filter((elem) => {return elem !== curMusic});
+        }
+        arr = [curMusic].concat(arr);
+        while(arr.length > 50) arr.pop();
+        setrecentMusic(arr);
+        
+        const update = async ()=>{
+            console.log("recent update array arr", arr);
+            var data = {
+                "token" : localStorage.getItem("jwtTokken"),
+                "recent" : arr
+            }
+    
+            const resp = await callApi("/api/user/update", "POST", data);
+            console.log(resp);
+        }
+        update();
+
     }, [curMusic]);
+
+    useEffect(()=>{
+        console.log(recentMusic);
+    }, [recentMusic]);
+
+    
 
     const callApi = async (endpoint, type, data) => {
         const url = `http://localhost:5000${endpoint}`;
@@ -88,6 +116,7 @@ const ContextState = (props) => {
                 setsearchResult,
                 searchResultshow,
                 setsearchResultshow,
+                recentSong, setrecentSong
             }}
         >
             {props.children}

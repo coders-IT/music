@@ -39,6 +39,10 @@ const UserSchema = new Schema(
             type: Schema.Types.Array,
             default: [],
         },
+        recent: {
+            type: Schema.Types.Array,
+            default: [],
+        },
     }
 )
 module.exports=mongoose.model('user',UserSchema);

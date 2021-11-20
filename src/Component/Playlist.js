@@ -52,6 +52,9 @@ export default function Playlist() {
         context.setcurMusic(arr[0]);
         await document.getElementById("audio").load();
         document.getElementById("audio").play();
+        const playPause = document.getElementById("playPause");
+        playPause.classList.remove("fa-play");
+        playPause.classList.add("fa-pause");
     }
 
     return (

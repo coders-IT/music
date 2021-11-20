@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const User = require('../models/User');
 const Audio = require('../models/Audio');
+const Playlist = require("../models/Playlist");
 
 router.get('/songs',async (req,res)=>{
     try{
@@ -42,8 +43,8 @@ router.post('/',async (req,res)=>{
 
         let doc = await User.findOne({username:req.username});
         doc.contribAudio.push(song._id);
-        await User.findOneAndUpdate({username:req.username},doc);
-        
+        await User.findOneAndUpdate({username:req.username},doc);    
+
         res.status(200).json({"success":"Successfully added new song.",data:song._id});
     }catch(error){
         console.log({error})

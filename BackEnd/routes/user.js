@@ -58,6 +58,7 @@ router.post("/signup", async (req, res) => {
             name: name,
             profilePic: profilePic,
             password: encPass,
+            recent:[]
         });
         await user.save();
         const userId = {
@@ -108,7 +109,7 @@ router.post("/search", async (req, resp) => {
         tag = tag.charAt(0).toUpperCase() + tag.slice(1);
         console.log(search);
         const Musicdata = await Audio.find({
-            $or: [{ name: search }, { tags: { $in: tag } }],
+            $or: [{ name: search }, { tags: { $in: tag } }, {singer : search}],
         });
         const playlistdata = await Playlist.find({
             $or: [{ name: search }, { createdBy: search }],
@@ -130,6 +131,19 @@ router.post("/getUser", async (req, res) => {
             success: "Successfully fetched user",
             data: doc,
         });
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+});
+
+router.post("/update", async (req, res) => {
+    try {
+        let doc = await User.findOne({ username: req.username });
+        console.log(req.body.recent);
+        doc.recent = req.body.recent;
+        await User.findOneAndUpdate({ username: req.username }, doc);
+
+        res.status(200).json({ success: "Successfully Updated recent songs." });
     } catch (error) {
         res.status(500).json({ error: error });
     }

@@ -32,6 +32,10 @@ export default function FullScreenPlayer() {
     }
 
     const showaddto = ()=>{
+        if(context.user === null) {
+            context.setloginShow(true);
+            return;
+        }
         context.setshowAddto(true);
     }
 

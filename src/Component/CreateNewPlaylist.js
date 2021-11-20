@@ -11,6 +11,8 @@ export default function CreateNewPlaylist() {
     );
 
     const listCoverChg = (x) => {
+        if (x.target.files.length === 0) return;
+
         console.log(x.target.files[0]);
         const img = document.getElementById("listcover");
         const fileReader = new FileReader();
@@ -21,48 +23,66 @@ export default function CreateNewPlaylist() {
         fileReader.readAsDataURL(x.target.files[0]);
     };
 
-    const closeme = ()=>{
+    const closeme = () => {
         context.setcreateListShow(false);
-    }
+    };
 
-    const addSong = async (d)=>{
+    const addSong = async (d) => {
         var data = {
-            "token":localStorage.getItem("jwtTokken"),
-            "songs":JSON.stringify(context.curMusic)
-        }
-        console.log("/api/playlist/",d.id, context.curMusic);
-        data = await context.callApi("/api/playlist/"+d.id,"PUT", data);
+            token: localStorage.getItem("jwtTokken"),
+            songs: JSON.stringify(context.curMusic),
+        };
+        console.log("/api/playlist/", d.id, context.curMusic);
+        data = await context.callApi("/api/playlist/" + d.id, "PUT", data);
         console.log(data);
         context.setshowAddto(false);
-    }
+    };
 
-    const createList = async (e)=>{
+    const createList = async (e) => {
         e.preventDefault();
+        console.log("you clicked");
         const uploadbtn = document.getElementById("uploadbtn");
-        uploadbtn.value="Uploading..."
-        var img = "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/emptyAlbum.jpg?alt=media&token=6a4b6f16-4cae-4fe8-81d5-3210c0c16afe";
-        console.log("Uploading image");
-        if(document.getElementById("listUploadCover").files.length > 0) img = await context.upload("image/jpg", "listUploadCover")
-        uploadbtn.value="Uploaded"
-        let data = {
-            name:document.getElementById("nameList").value,
-            token:localStorage.getItem("jwtTokken"),
-            clip:img,
+        var img =
+            "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/emptyAlbum.jpg?alt=media&token=6a4b6f16-4cae-4fe8-81d5-3210c0c16afe";
+        var fileInput = document.getElementById("listUploadCover");
+
+        if (fileInput.files.length > 0) {
+            if (
+                fileInput.files[0].name.endsWith(".jpg") ||
+                fileInput.files[0].name.endsWith(".jpeg") ||
+                fileInput.files[0].name.endsWith(".png")
+            );
+            else {
+                context.setAlert(true);
+                context.setalertBody(
+                    "Cover image foramt should be in jpg, png or jpeg"
+                );
+                return;
+            }
+            uploadbtn.setAttribute("disabled", true);
+            console.log("Uploading image");
+            uploadbtn.value = "Uploading...";
+            img = await context.upload("image/jpg", "listUploadCover");
         }
+        uploadbtn.value = "Uploaded";
+        let data = {
+            name: document.getElementById("nameList").value,
+            token: localStorage.getItem("jwtTokken"),
+            clip: img,
+        };
         console.log(data);
-        const resp = await context.callApi("/api/playlist","POST",data);
+        const resp = await context.callApi("/api/playlist", "POST", data);
         context.setAlert(true);
         context.setalertBody(resp.success);
-        uploadbtn.value="Upload";
+        uploadbtn.value = "Upload";
         console.log(resp);
 
         context.setcreateListShow(false);
         await addSong(resp.data);
+        uploadbtn.removeAttribute("disabled");
+    };
 
-    }
-
-
-    if(context.createListShow === false) return (<></>);
+    if (context.createListShow === false) return <></>;
 
     return (
         <div class="uploadmusiccont createlist">
@@ -85,12 +105,12 @@ export default function CreateNewPlaylist() {
                         style={{ display: "none" }}
                         onChange={listCoverChg}
                     />
-                        <input
-                            type="text"
-                            id="nameList"
-                            class="detail"
-                            placeholder="Enter Name"
-                        />
+                    <input
+                        type="text"
+                        id="nameList"
+                        class="detail"
+                        placeholder="Enter Name"
+                    />
                 </div>
                 <input
                     type="submit"
