@@ -27,6 +27,7 @@ export default function MusicCard(props) {
         const playPause = document.getElementById("playPause");
         playPause.classList.remove("fa-play");
         playPause.classList.add("fa-pause");
+        context.setsearchResultshow(false);
     }
 
 

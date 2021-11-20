@@ -27,6 +27,28 @@ export default function Homepage(props) {
     }
 
 
+    const searchSong = async (e)=>{
+        e.preventDefault();
+        var keyword = document.getElementById("homesearch").value.trim();
+        if(keyword.length < 3) {
+            context.setalertBody("Search Keyword must be atleast 3 char");
+            context.setAlert(true);
+            return;
+        }
+        
+        var data = {
+            "search" : keyword
+        }
+
+        data = await context.callApi("/api/user/search", "POST", data);
+        console.log(data);
+        context.setsearchResult(data);
+        context.setsearchResultshow(true);
+        
+    }
+
+
+
     useEffect(() => {
 
 
@@ -58,7 +80,7 @@ export default function Homepage(props) {
                         <span class="add" onClick={gotoadd}>Add</span>
                     </div>
                 </div>
-                <div class="homenavright">
+                <form class="homenavright" onSubmit={searchSong}>
                     <input
                         type="text"
                         id="homesearch"
@@ -72,7 +94,7 @@ export default function Homepage(props) {
                         onClick={loginHandle}
                         style={{ cursor: "pointer" }}
                     />
-                </div>
+                </form>
             </div>
 
             <div class="body">

@@ -17,7 +17,8 @@ const ContextState = (props) => {
     const [showAddto, setshowAddto] = useState(false);
     const [createListShow, setcreateListShow] = useState(false);
     const [curPlaylist, setcurPlaylist] = useState({});
-
+    const [searchResult, setsearchResult] = useState({});
+    const [searchResultshow, setsearchResultshow] = useState(false);
     useEffect(() => {
         console.log(curMusic);
     }, [curMusic]);
@@ -83,6 +84,10 @@ const ContextState = (props) => {
                 setcreateListShow,
                 curPlaylist,
                 setcurPlaylist,
+                searchResult,
+                setsearchResult,
+                searchResultshow,
+                setsearchResultshow,
             }}
         >
             {props.children}

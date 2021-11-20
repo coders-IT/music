@@ -40,8 +40,9 @@ export default function CreateNewPlaylist() {
         e.preventDefault();
         const uploadbtn = document.getElementById("uploadbtn");
         uploadbtn.value="Uploading..."
+        var img = "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/emptyAlbum.jpg?alt=media&token=6a4b6f16-4cae-4fe8-81d5-3210c0c16afe";
         console.log("Uploading image");
-        const img = await context.upload("image/jpg", "listUploadCover")
+        if(document.getElementById("listUploadCover").files.length > 0) img = await context.upload("image/jpg", "listUploadCover")
         uploadbtn.value="Uploaded"
         let data = {
             name:document.getElementById("nameList").value,

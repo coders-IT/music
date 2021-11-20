@@ -14,6 +14,7 @@ import BaseContext from "./Context/BaseContext";
 import Addto from "./Component/Addto";
 import CreateNewPlaylist from "./Component/CreateNewPlaylist";
 import Playlist from "./Component/Playlist";
+import SearchResult from "./Component/SearchResult";
 
 function App() {
     const src =
@@ -52,6 +53,7 @@ function App() {
                 muted={false}
             ></audio>
             {/* <Addto/> */}
+            <SearchResult/>
             <Alert />
             <Signin />
             <Signup />

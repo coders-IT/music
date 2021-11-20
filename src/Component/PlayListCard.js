@@ -25,7 +25,9 @@ export default function PlayListCard(props) {
     }
     const histroy = useHistory();
     const open = ()=>{
+        context.setsearchResultshow(false);
         histroy.push("/playlist?id="+props.id.id);
+        
     }
 
     

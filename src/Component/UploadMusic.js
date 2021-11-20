@@ -31,8 +31,11 @@ export default function UploadMusic() {
         e.preventDefault();
         const uploadbtn = document.getElementById("uploadbtn");
         uploadbtn.value="Uploading..."
+        
         console.log("Uploading image");
-        const img = await context.upload("image/jpg", "musicUploadCover")
+        
+        var img = "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/blankCover.png?alt=media&token=5e8ade58-8ce6-4d50-a69e-9eb27634d636";
+        if(document.getElementById("musicUploadCover").files.length > 0)img = await context.upload("image/jpg", "musicUploadCover")
         console.log("Uploading Music", img);
         const musicUrl = await context.upload("audio/mp3", "musicFile");
         console.log("Uploaded",music);
