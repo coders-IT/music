@@ -34,6 +34,22 @@
 .nav{
     width: 15vw;
 }
+
+.headsearch{
+    
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 22px;
+    /* height: 40px; */
+    border: 2px solid white;
+    border-radius: 40px;
+    color: white;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
 .nav span{
     height: 40px;
     border: 2px solid white;
@@ -41,6 +57,7 @@
     font-size: 13px;
     margin-left: 10px;
     cursor: pointer;
+    color: white;
     border-radius: 40px;
 }
 
@@ -53,7 +70,7 @@
     padding: 0px 10px;
     width: 250px;
     align-self: center;
-    margin-right: 30px;
+    margin-right: 10px;
     border: none;
     height: 40px;
 }
@@ -75,3 +92,150 @@
     border-radius: 50px;
     align-self: center;
 }
+
+@media screen and (max-width:1200px) {
+
+    #homesearch{
+        width: 250px;
+    }
+    .homenavright{
+        padding: 0px 10px;
+        justify-content: flex-end;
+        width: 40vw;
+    }
+    .title{
+        margin-left: 20px;
+        width: 50vw;
+    }
+}
+
+
+
+@media screen and (max-width:1000px) {
+    
+    .headsearch{
+        font-size: 16px;
+    }
+    #homesearch{
+        width: 250px;
+    }
+    .homenavright{
+        padding: 0px 10px;
+        justify-content: flex-end;
+        width: 40vw;
+    }
+    .title{
+        margin-left: 20px;
+        width: 60vw;
+        font-size: 16px;
+    }
+}
+
+
+
+@media screen and (max-width:900px) {
+    .headsearch{
+        font-size: 16px;
+    }
+    #homesearch{
+        width: 250px;
+    }
+    .homenavright{
+        padding: 0px 10px;
+        justify-content: flex-end;
+        width: 40vw;
+    }
+    .title{
+        margin-left: 20px;
+    }
+    #homesearch{
+        width: 200px;
+    }
+}
+
+
+
+@media screen and (max-width:700px) {
+    
+    .headsearch{
+        font-size: 16px;
+    }
+    #homesearch{
+        width: 250px;
+    }
+    .homenavright{
+        padding: 0px 10px;
+        justify-content: space-between;
+        width: 70vw;
+    }
+    .title{
+        margin-left: 20px;
+    }
+    #homesearch{
+        width: 200px;
+    }
+}
+
+
+@media screen and (max-width:600px) {
+    .nav{
+        display: none;
+    }
+    .title{
+        display: none;
+    }
+    .headsearch{
+        font-size: 16px;
+    }
+    #homesearch{
+        width: 250px;
+    }
+    .homenavright{
+        padding: 0px 10px;
+        justify-content: space-between;
+        width: 100vw;
+    }
+    .homenavleft{
+        display: none;
+    }  
+}
+
+
+@media screen and (max-width:500px) {
+    .nav{
+        display: none;
+    }
+    .title{
+        display: none;
+    }
+    .headsearch{
+        font-size: 13px;
+    }
+    #homesearch{
+        width: 200px;
+    }
+    .homenavright{
+        padding: 0px 10px;
+    }
+    
+}
+
+@media screen and (max-width:400px) {
+    .nav{
+        display: none;
+    }
+    .title{
+        display: none;
+    }
+    .headsearch{
+        font-size: 13px;
+    }
+    #homesearch{
+        width: 150px;
+    }
+    .homenavright{
+        padding: 0px 10px;
+    }
+    
+}
+

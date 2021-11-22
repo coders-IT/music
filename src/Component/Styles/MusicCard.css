@@ -49,6 +49,32 @@
     }
 }
 
+@media screen and (max-width : 1300px){
+    .musicCardCont{
+        font-size: 18px;
+    }
+
+}
+
+@media screen and (max-width : 1000px){
+    .musicCardCont{
+        width: 70vw;
+        font-size: 17px;
+    }
+    .fa-heart{
+        margin-left: 8px;
+    }
+    .songStatus{
+        margin-right: 10px;
+    }
+    .songDetail{
+        margin-left: 10px;
+    }
+    .songDetail img{
+        margin-right: 10px;
+    }
+}
+
 
 
 @media screen and (max-width : 600px){
@@ -76,7 +102,7 @@
 @media screen and (max-width : 400px){
     .musicCardCont{
         width: 100vw;
-        font-size: 16px;
+        font-size: 13px;
     }
     .fa-heart{
         margin-left: 8px;

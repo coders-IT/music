@@ -109,7 +109,7 @@ router.post("/search", async (req, resp) => {
         tag = tag.charAt(0).toUpperCase() + tag.slice(1);
         console.log(search);
         const Musicdata = await Audio.find({
-            $or: [{ name: search }, { tags: { $in: tag } }, {singer : search}],
+            $or: [{ name: search }, { tags: { $in: search } }, {singer : search}],
         });
         const playlistdata = await Playlist.find({
             $or: [{ name: search }, { createdBy: search }],
@@ -171,8 +171,16 @@ router.post("/saveplaylist/:id", async (req, res) => {
     try {
         let doc = await User.findOne({ username: req.username });
         console.log(doc, req.username);
-        const playlist = await Playlist.findById(req.params.id);
-        doc.savedPlayList.push(playlist);
+        var playlist = await Playlist.findById(req.params.id);
+
+        var data = {
+            name : playlist.name,
+            createdBy : doc.name,
+            clip : playlist.clip ,
+            id : req.params.id
+        };
+
+        doc.savedPlayList.push(data);
         await User.findOneAndUpdate({ username: req.username }, doc);
         res.status(200).json({
             success: "Successfully added to saved playlists.",
@@ -213,12 +221,9 @@ router.post("/unsaveplaylist/:id", async (req, res) => {
     try {
         let doc = await User.findOne({ username: req.username });
         let arr = doc.savedPlayList;
-        let i = arr.indexOf(req.params.id);
-        if (i < 0) {
-            res.status(404).json({ error: "Not found." });
-            return;
-        }
-        arr.splice(i, 1);
+        
+        arr = arr.filter((elem)=> elem.id != req.params.id);
+        
         doc.savedPlayList = arr;
         await User.findOneAndUpdate({ username: req.username }, doc);
         res.status(200).json({

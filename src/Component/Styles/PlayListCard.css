@@ -68,3 +68,31 @@
 .playListCardCont:hover .playListcover{
     opacity: 1;
 } */
+
+
+@media screen and (max-width:400px) {
+    .playListCardCont{
+        position: relative;
+        width: 75px;
+        cursor: pointer;
+        height: 75px;
+        overflow: hidden;
+        font-size: 10px;
+        display: inline-block;
+        margin-right: 30px;
+        border-radius: 5px;
+    }
+
+    .details{
+        width: calc(100% - 20px);
+        box-shadow: 0px -3px 50px black;
+        opacity: 0;
+        line-height: 15px;
+    }
+
+    .playListCreator{
+        display: none;
+    }
+    
+
+}

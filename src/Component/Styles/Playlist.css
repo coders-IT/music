@@ -2,49 +2,74 @@
     height: calc(100vh - 100px);
 }
 
-.listHeader{
-    height: 200px;
-    background-color: aqua;
+.listconttop{
+    height: 50px;
+    background-color: black;
+    color: white;
+    font-size: 25px;
+    line-height: 50px;
+    padding: 0px 20px;
+}
+
+.listDetails{
+    width: 100vw;
+    margin: auto;
+    border: 1px solid black;
+    height: calc(100vh - 150px);
+    overflow: scroll;
+}
+
+.listDetails::-webkit-scrollbar{
+    display: none;
+}
+
+.playList{
+    width: 70vw;
+    padding: 20px 30px;
+    margin: auto;
     display: flex;
-    padding: 0px 90px;
     justify-content: space-between;
     align-items: center;
 }
-
-.playlistHeaderImg{
-    width: 180px;
-    height: 180px;
-    border-radius: 180px;
+.aboutlist{
+    display: flex;
+    align-items: center;
 }
 
-.playlistbtn{
-    width: 70px;
-    height: 70px;
-    border: 1px solid black;
-    line-height: 70px;
-    text-align: center;
-    border-radius: 70px;
+.listdata{
     margin-left: 30px;
 }
 
-.listheaderimg{
-    font-size: 40px;
-    display: flex;
-    height: fit-content;
-    align-items:end;
-}
-
-/* .listDetails{
-    margin-right: 80px;
-} */
 .listname{
-    font-size: 30px;
+    font-size: 23px;
+}
+.listcreator{
+    font-size: 15px;
 }
 
-.curlistSongs{
-    width: 100%;
-    height: calc(100% - 240px);
-    overflow-y: scroll;
-    background-color: antiquewhite;
-    padding: 20px 0px;
+.listFollowing{
+    background-color: darkgreen;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.listFollow{
+    background-color: rgb(79, 255, 9);
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.addtoqueue{
+    font-size: 40px;
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 100%;
 }

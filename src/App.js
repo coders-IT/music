@@ -24,22 +24,7 @@ function App() {
     const context = useContext(BaseContext);
 
     useEffect(()=>{
-        const fetchUser = async () => {
-            const token = localStorage.getItem("jwtTokken");
-            if (token) {
-                const data = {
-                    token: token,
-                };
-
-                const resp = await context.callApi(
-                    "/api/user/getUser",
-                    "POST",
-                    data
-                );
-                context.setuser(resp.data);
-            }
-        };
-        fetchUser();
+        context.fetchUser();
     },[]);
 
 

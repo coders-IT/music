@@ -21,35 +21,49 @@ const ContextState = (props) => {
     const [searchResultshow, setsearchResultshow] = useState(false);
     const [recentSong, setrecentSong] = useState([]);
 
-    useEffect(() => {
-        var ind = recentMusic.indexOf(curMusic);
-        var arr = recentMusic;
-        if(ind !== -1){
-            arr = arr.filter((elem) => {return elem !== curMusic});
+    // useEffect(() => {
+    //     var ind = recentMusic.indexOf(curMusic);
+    //     var arr = recentMusic;
+    //     if(ind !== -1){
+    //         arr = arr.filter((elem) => {return elem !== curMusic});
+    //     }
+    //     arr = [curMusic].concat(arr);
+    //     while(arr.length > 50) arr.pop();
+    //     setrecentMusic(arr);
+
+    //     const update = async ()=>{
+    //         console.log("recent update array arr", arr);
+    //         var data = {
+    //             "token" : localStorage.getItem("jwtTokken"),
+    //             "recent" : arr
+    //         }
+
+    //         const resp = await callApi("/api/user/update", "POST", data);
+    //         console.log(resp);
+    //     }
+    //     update();
+
+    // }, [curMusic]);
+
+    // useEffect(()=>{
+    //     console.log(recentMusic);
+    // }, [recentMusic]);
+
+    const fetchUser = async () => {
+        const token = localStorage.getItem("jwtTokken");
+        if (token) {
+            const data = {
+                token: token,
+            };
+
+            const resp = await callApi(
+                "/api/user/getUser",
+                "POST",
+                data
+            );
+            setuser(resp.data);
         }
-        arr = [curMusic].concat(arr);
-        while(arr.length > 50) arr.pop();
-        setrecentMusic(arr);
-        
-        const update = async ()=>{
-            console.log("recent update array arr", arr);
-            var data = {
-                "token" : localStorage.getItem("jwtTokken"),
-                "recent" : arr
-            }
-    
-            const resp = await callApi("/api/user/update", "POST", data);
-            console.log(resp);
-        }
-        update();
-
-    }, [curMusic]);
-
-    useEffect(()=>{
-        console.log(recentMusic);
-    }, [recentMusic]);
-
-    
+    };
 
     const callApi = async (endpoint, type, data) => {
         const url = `http://localhost:5000${endpoint}`;
@@ -116,7 +130,9 @@ const ContextState = (props) => {
                 setsearchResult,
                 searchResultshow,
                 setsearchResultshow,
-                recentSong, setrecentSong
+                recentSong,
+                setrecentSong,
+                fetchUser,
             }}
         >
             {props.children}

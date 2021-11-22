@@ -76,16 +76,20 @@ export default function Homepage(props) {
                 <div class="homenavleft">
                     <div class="title">Music - Connect to Your Soul</div>
                     <div class="nav">
-                        <span class="item" onClick={gotohome}>Home</span>
-                        <span class="add" onClick={gotoadd}>Add</span>
                     </div>
                 </div>
-                <form class="homenavright" onSubmit={searchSong}>
-                    <input
-                        type="text"
-                        id="homesearch"
-                        placeholder="Search Song/Playlist"
-                    />
+                <form class="homenavright flex" onSubmit={searchSong}>
+                    <div class="homerightleft flex">
+                        <input
+                            type="text"
+                            id="homesearch"
+                            placeholder="Search Song/Playlist"
+                        />
+                        
+                        <div class="headsearch" onClick={searchSong}><i class="fas fa-search"></i></div>
+                        <span class="headsearch headadd" onClick={gotoadd}><i class="fas fa-plus"></i></span>
+                    </div>
+                    
                     <img
                         src={`${
                             context.user ? context.user.profilePic : defaultPic

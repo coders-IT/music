@@ -32,7 +32,7 @@ export default function Player(props) {
         fullTimeShow = document.getElementById("fullTimeShow");
         volumeLogo = document.getElementById("volumeLogo");
         audio.ontimeupdate = timeUpdate;
-    }, 0);
+    }, 100);
 
     const shrink = (text) => {
         if (!text) return "";
@@ -204,6 +204,7 @@ export default function Player(props) {
                     alt=""
                     width="70px"
                     height="70px"
+                    className="coverimg"
                 />
                 <div className="playersongDetail">
                     <div className="playersongName">
@@ -221,6 +222,17 @@ export default function Player(props) {
                     onClick={likeHandle}
                 ></i>
             </div>
+                    
+            <div class="sepratePause flex">
+            <i
+                        className="fas fa-play"
+                        // id="playPause"
+                        onClick={playHandle}
+                    ></i>
+                    <i class="fas fa-angle-up" onClick={maxMusic}></i>
+
+            </div>
+
             <div className="sliderCont">
                 <div className="volumeCont flex">
                     <i class="fas fa-random"></i>
@@ -256,7 +268,7 @@ export default function Player(props) {
                     </div>
                 </div>
             </div>
-            <div className="flex">
+            <div className="flex volume">
                 <i
                     className="fas fa-volume-up"
                     id="volumeLogo"

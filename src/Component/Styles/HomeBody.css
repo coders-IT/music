@@ -15,7 +15,6 @@
 
 .playlist{
     width:calc(100vw - 40px);
-    width: 100vw;
     height: 150px;
     line-height: 150px;
     /* text-align: center; */
