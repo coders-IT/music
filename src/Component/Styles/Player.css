@@ -60,6 +60,12 @@
     margin: 10px;
 }
 
+#playPause2{
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+}
+
 #playPause{
     font-size: 30px;
     width: 30px;

@@ -72,6 +72,9 @@ export default function Playlist() {
         const playPause = document.getElementById("playPause");
         playPause.classList.remove("fa-play");
         playPause.classList.add("fa-pause");
+        const playPause2 = document.getElementById("playPause2");
+        playPause2.classList.remove("fa-play");
+        playPause2.classList.add("fa-pause");
     };
 
     const followed = async () => {

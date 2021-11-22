@@ -17,11 +17,15 @@ export default function Player(props) {
         volumeDot,
         curTimeShow,
         fullTimeShow,
+        playPause2,
+        nextsong,
+        pervioussong,
         volumeLogo;
     const context = useContext(BaseContext);
     const histroy = useHistory();
     setTimeout(() => {
         playPause = document.getElementById("playPause");
+        playPause2 = document.getElementById("playPause2");
         audio = document.querySelector("audio");
         timerDot = document.getElementById("timerDot");
         curTimeAudio = document.getElementById("curTimeAudio");
@@ -32,22 +36,23 @@ export default function Player(props) {
         curTimeShow = document.getElementById("curTimeShow");
         fullTimeShow = document.getElementById("fullTimeShow");
         volumeLogo = document.getElementById("volumeLogo");
+        pervioussong = document.getElementById("pervioussong");
+        nextsong = document.getElementById("nextsong");
         audio.ontimeupdate = timeUpdate;
     }, 100);
 
     const shrink = (text) => {
         if (!text) return "";
-        
+
         if (text.length < 15) return text;
         return text.substr(0, 15) + "..";
-        
     };
 
     const getTime = (x) => {
         var min = parseInt(x / 60);
-        if(!min) min = 0;
+        if (!min) min = 0;
         var sec = parseInt(x % 60);
-        if(!sec) sec = 0;
+        if (!sec) sec = 0;
         return `${min > 9 ? "" : "0"}${min}:${sec > 9 ? "" : "0"}${sec}`;
     };
 
@@ -82,13 +87,25 @@ export default function Player(props) {
                 return;
             }
             context.setcurMusic(context.curQueue[context.curMusic.index - 1]);
-            if(context.changeURL)histroy.push(`/audio?id=${context.curQueue[context.curMusic.index - 1]._id}`);
+            if (context.changeURL)
+                histroy.push(
+                    `/audio?id=${
+                        context.curQueue[context.curMusic.index - 1]._id
+                    }`
+                );
+            pervioussong.onClick=()=>{};
+            nextsong.onClick=()=>{};
             audio.currentTime = 0;
             await audio.load();
             audio.play();
+            pervioussong.onClick = lastSong;
+            nextsong.onClick = nextSong;
             const playPause = document.getElementById("playPause");
             playPause.classList.remove("fa-play");
             playPause.classList.add("fa-pause");
+            const playPause2 = document.getElementById("playPause2");
+            playPause2.classList.remove("fa-play");
+            playPause2.classList.add("fa-pause");
         }
     };
 
@@ -100,14 +117,25 @@ export default function Player(props) {
             }
             console.log(context.curQueue, context.curMusic.index + 1);
             context.setcurMusic(context.curQueue[context.curMusic.index + 1]);
-            if(context.changeURL)histroy.push(`/audio?id=${context.curQueue[context.curMusic.index + 1]._id}`);
-
+            if (context.changeURL)
+                histroy.push(
+                    `/audio?id=${
+                        context.curQueue[context.curMusic.index + 1]._id
+                    }`
+                );
+                pervioussong.onClick=()=>{};
+                nextsong.onClick=()=>{};
             audio.currentTime = 0;
             await audio.load();
             audio.play();
+            pervioussong.onClick = lastSong;
+            nextsong.onClick = nextSong;
             const playPause = document.getElementById("playPause");
             playPause.classList.remove("fa-play");
             playPause.classList.add("fa-pause");
+            const playPause2 = document.getElementById("playPause2");
+            playPause2.classList.remove("fa-play");
+            playPause2.classList.add("fa-pause");
         }
     };
     const timeUpdate = () => {
@@ -127,10 +155,14 @@ export default function Player(props) {
         if (playPause.classList.contains("fa-pause")) {
             playPause.classList.remove("fa-pause");
             playPause.classList.add("fa-play");
+            playPause2.classList.remove("fa-pause");
+            playPause2.classList.add("fa-play");
             audio.pause();
         } else {
             playPause.classList.remove("fa-play");
             playPause.classList.add("fa-pause");
+            playPause2.classList.remove("fa-play");
+            playPause2.classList.add("fa-pause");
             audio.play();
         }
     };
@@ -142,21 +174,19 @@ export default function Player(props) {
         audio.volume = 0;
     };
 
-    const maxMusic = ()=>{
+    const maxMusic = () => {
         console.log(Object.keys(context.curMusic).length);
-        if(Object.keys(context.curMusic).length === 0) return;
+        if (Object.keys(context.curMusic).length === 0) return;
 
         context.setchangeURL(true);
         histroy.push(`/audio?id=${context.curMusic._id}`);
-
-    }
+    };
 
     const likeHandle = async () => {
         if (context.user === null) {
             context.setloginShow(true);
             return;
-        }
-        else {
+        } else {
             if (context.curMusic.liked == false) {
                 console.log("liking the song");
                 var data = {
@@ -175,11 +205,10 @@ export default function Player(props) {
                 context.setcurQueue(tempQue);
                 context.setcurMusic(tempQue[context.curMusic.index]);
                 console.log(data);
-                
+
                 var curUser = context.user;
                 curUser.savedAudio.push(context.curMusic._id);
                 context.setuser(curUser);
-
             } else {
                 console.log("liking the song");
                 var data = {
@@ -203,13 +232,13 @@ export default function Player(props) {
         }
     };
 
-    const getLike = ()=>{
-        if(context.user == null){
+    const getLike = () => {
+        if (context.user == null) {
             setliked(false);
             return;
         }
         setliked(context.user.savedAudio.indexOf(context.curMusic._id) != -1);
-    }
+    };
 
     return (
         <div className="playerCont">
@@ -230,22 +259,19 @@ export default function Player(props) {
                     </div>
                 </div>
                 <i
-                    className={`${
-                       liked == false ? "far" : "fas"
-                    } fa-heart`}
+                    className={`${liked == false ? "far" : "fas"} fa-heart`}
                     id="playerliked"
                     onClick={likeHandle}
                 ></i>
             </div>
-                    
-            <div class="sepratePause flex">
-            <i
-                        className="fas fa-play"
-                        // id="playPause"
-                        onClick={playHandle}
-                    ></i>
-                    <i class="fas fa-angle-up" onClick={maxMusic}></i>
 
+            <div class="sepratePause flex">
+                <i
+                    className="fas fa-play"
+                    id="playPause2"
+                    onClick={playHandle}
+                ></i>
+                <i class="fas fa-angle-up" onClick={maxMusic}></i>
             </div>
 
             <div className="sliderCont">
@@ -254,6 +280,7 @@ export default function Player(props) {
                     <i
                         className="fas fa-step-backward action"
                         onClick={lastSong}
+                        id="pervioussong"
                     ></i>
                     <i
                         className="fas fa-play"
@@ -263,6 +290,7 @@ export default function Player(props) {
                     <i
                         className="fas fa-step-forward action"
                         onClick={nextSong}
+                        id="nextsong"
                     ></i>
                     <i class="fas fa-angle-up" onClick={maxMusic}></i>
                 </div>

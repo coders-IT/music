@@ -6,38 +6,56 @@ import "./Styles/MusicCard.css";
 export default function MusicCard(props) {
     const history = useHistory();
     const context = useContext(BaseContext);
-    const shrink = (text)=>{
-        if(window.innerWidth <= 400){
-            if(text.length < 15)return text;
-            return text.substr(0,15)+"..";
-        }else{
-            if(text.length < 20)return text;
-            return text.substr(0,20)+"...";
+    const shrink = (text) => {
+        if (window.innerWidth <= 400) {
+            if (text.length < 15) return text;
+            return text.substr(0, 15) + "..";
+        } else {
+            if (text.length < 20) return text;
+            return text.substr(0, 20) + "...";
         }
-    }
+    };
 
-    const playSong = async ()=>{
+    const playSong = async () => {
         context.setcurMusic(props.id);
         const audio = document.getElementById("audio");
-        
-        console.log(audio)
-        if(audio != null) audio.currentTime = 0;
+
+        console.log(audio);
+        if (audio != null) audio.currentTime = 0;
         await audio.load();
         const out = audio.play();
         const playPause = document.getElementById("playPause");
         playPause.classList.remove("fa-play");
         playPause.classList.add("fa-pause");
+        const playPause2 = document.getElementById("playPause2");
+        playPause2.classList.remove("fa-play");
+        playPause2.classList.add("fa-pause");
         context.setsearchResultshow(false);
-    }
-
+    };
 
     if (props.liked == false) {
         return (
-            <div class="musicCardCont" onClick={playSong}>
+            <div
+                class="musicCardCont"
+                onClick={playSong}
+                style={
+                    context.curMusic._id === props.id._id
+                        ? { backgroundColor: "#005180" }
+                        : {}
+                }
+            >
                 <div class="songDetail">
-                    {context.curMusic._id !== props.id._id?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
-                    <img src={props.src} class="songImg"/>
-                    <span>{shrink(props.name)}<br/><span class="singerName">{shrink(props.singer)}</span></span>
+                    {context.curMusic._id !== props.id._id ? (
+                        <i class="far fa-play-circle songStatus"></i>
+                    ) : (
+                        <i class="far fa-pause-circle songStatus"></i>
+                    )}
+                    <img src={props.src} class="songImg" />
+                    <span>
+                        {shrink(props.name)}
+                        <br />
+                        <span class="singerName">{shrink(props.singer)}</span>
+                    </span>
                 </div>
                 <div class="songLike">
                     {props.likes}
@@ -47,11 +65,27 @@ export default function MusicCard(props) {
         );
     } else {
         return (
-            <div class="musicCardCont"  onClick={playSong} style={context.curMusic._id === props.id._id?{color:"#005180"}:{}}>
+            <div
+                class="musicCardCont"
+                onClick={playSong}
+                style={
+                    context.curMusic._id === props.id._id
+                        ? { backgroundColor: "#005180" }
+                        : {}
+                }
+            >
                 <div class="songDetail">
-                    {context.curMusic._id !== props.id._id?(<i class="far fa-play-circle songStatus"></i>):(<i class="far fa-pause-circle songStatus"></i>)}
-                    <img src={props.src} class="songImg" align="middle"/>
-                    <span>{shrink(props.name)}<br/><span class="singerName">{shrink(props.singer)}</span></span>
+                    {context.curMusic._id !== props.id._id ? (
+                        <i class="far fa-play-circle songStatus"></i>
+                    ) : (
+                        <i class="far fa-pause-circle songStatus"></i>
+                    )}
+                    <img src={props.src} class="songImg" align="middle" />
+                    <span>
+                        {shrink(props.name)}
+                        <br />
+                        <span class="singerName">{shrink(props.singer)}</span>
+                    </span>
                 </div>
                 <div class="songLike">
                     {props.likes}

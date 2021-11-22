@@ -14,11 +14,13 @@
 
 .addtocontainer{
     width: 70vw;
-    height: 30vh;
+    height: 20vh;
+    border-radius: 5px;
     background-color: darkslategray;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     padding: 0px 20px;
     /* overflow-x: auto; */
     /* overflow-y: hidden; */
@@ -27,8 +29,8 @@
 
 
 .addnewplaylist{
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border: 2px solid black;
     display: flex;
     justify-content: space-evenly;
@@ -52,4 +54,15 @@
 #addlistscroll::-webkit-scrollbar{
     display: none;
 
+}
+
+@media screen and (max-width:500px) {
+    .addnewplaylist{
+        width: 75px;
+        height: 75px;
+    }
+    .addtocontainer{
+        width: 80vw;
+        height: 20vh;
+    }
 }

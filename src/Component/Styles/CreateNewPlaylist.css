@@ -1,11 +1,11 @@
 #listcreatorForm{
-    width: 60vw;
+    width: 70vw;
     height: 200px;
     display: flex;
     background-color: darkslategray;
     color: white;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 50px 20px;
     justify-content: space-evenly;
     align-items: center;
     position: relative;

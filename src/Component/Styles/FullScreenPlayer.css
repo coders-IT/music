@@ -7,13 +7,18 @@
     padding: 0px 30px;
 }
 
+.fullScreenCover{
+    width: 300px;
+    height: 300px;
+}
+
 .fullPlayerImg{
     width: 40px;
     height: 40px;
     border-radius: 40px;
 }
 .fullHeadRight{
-    height: 100%;
+    /* height: 100%; */
     display: flex;
     align-items: center;
 }
@@ -33,3 +38,82 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
+.fullScreenControl{
+    width: calc(100vw-40px);
+    display: flex;
+    padding: 10px 40px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fullScreenControl .fas{
+    font-size: 30px;
+    margin-right: 20px;
+}
+.fullScreenTimeControl{
+    height: 80px;
+    display: none;
+}
+
+
+.fullScreenTimeSlider{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sliderFull{
+    width: 80vw;
+    background-color: blue;
+    height: 5px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.fullScreenDot{
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: -2.5px;
+    left: -2.5px;
+    background-color: black;
+    border-radius: 10px;
+    display: none;
+    z-index: 2;
+}
+
+.fullScreenTimePassed{
+    width: 0px;
+    height: 5px;
+    position: absolute;
+    left: 0px;
+    border-radius: 5px;
+    top: 0px;
+    background-color: red;
+}
+
+.sliderFull:hover .fullScreenDot{
+    display: block;
+}
+
+
+@media screen and (max-width:600px) {
+    .fullScreenTimeControl{
+        display: block;
+    }
+    .middle{
+        height: calc(100vh - 250px);
+    }
+}
+
+@media screen and (max-width:400px) {
+    
+    .fullScreenCover{
+        width: 250px;
+        height: 250px;
+    }
+}
+
+
