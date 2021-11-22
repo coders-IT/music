@@ -67,7 +67,7 @@ export default function Signin() {
                         class="text"
                     />
                 </div>
-                <input type="submit" value="Log In" />
+                <input type="submit" value="Log In" class="loginbtn"/>
             </div>
 
             <div id="linkSignUp" onClick={toSignUp}>Don't have, Create One</div>

@@ -20,8 +20,13 @@
 
 .fullHeadRight .fas{
     margin-right: 30px;
-    font-size: 35px;
+    font-size: 40px;
 }
+
+.fullplayerhome{
+    font-size: 30px;
+}
+
 .middle{
     height: calc(100vh - 170px);
     display: flex;

@@ -13,11 +13,12 @@ export default function Alert(props) {
     if (context.alert === false) return <></>;
     return (
         <>
-            <div className="alertBox">
-                <div className="alertBody">{context.alertBody}</div>
-                <div className="alertOk" onClick={hideForm}>Ok</div>
+            <div className="cover" onClick={hideForm}>
+                <div className="alertBox">
+                    <div className="alertBody">{context.alertBody}</div>
+                    <div className="alertOk" onClick={hideForm}>Ok</div>
+                </div>
             </div>
-            <div className="cover" onClick={hideForm}></div>
         </>
     );
     

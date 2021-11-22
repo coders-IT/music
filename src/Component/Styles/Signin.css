@@ -1,4 +1,4 @@
-.divsigninCont{
+.divsigninCont {
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -11,13 +11,13 @@
     z-index: 1;
 }
 
-.signinCont{
+.signinCont {
     width: 40vw;
     height: 40vh;
-    background-color:darkslategrey;
-    position: absolute;
+    background-color: darkslategrey;
+    /* position: absolute;
     top: 30vh;
-    left: 30vw;
+    left: 30vw; */
     box-shadow: 5px 5px 10px black;
     display: flex;
     flex-direction: column;
@@ -26,7 +26,7 @@
     border-radius: 5px;
 }
 
-.signinclose{
+.signinclose {
     line-height: 30px;
     text-align: center;
     font-size: 40px;
@@ -37,16 +37,16 @@
     cursor: pointer;
 }
 
-.signintext{
+.signintext {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 70%;
+    width: 90%;
     flex-wrap: wrap;
     height: 50%;
 }
 
-.text{
+.text {
     width: 250px;
     height: 20px;
     padding: 10px;
@@ -58,12 +58,12 @@
     margin-bottom: 20px;
 }
 
-.text:focus{
+.text:focus {
     outline: none;
     border-bottom: 3px solid rgb(33, 56, 56);
 }
 
-input[type="submit"]{
+input[type="submit"] {
     width: 250px;
     height: 40px;
     font-size: 17px;
@@ -71,14 +71,70 @@ input[type="submit"]{
     color: white;
     border: none;
     cursor: pointer;
-    
 }
 
-.signintext .fas{
+.signintext .fas {
     margin-right: 20px;
 }
 
-#linkSignUp{
+#linkSignUp {
     color: white;
     cursor: pointer;
+}
+
+
+@media screen and (max-width: 1100px) {
+    .signinCont {
+        width: 50vw;
+        height: 40vh;
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    .signinCont {
+        width: 60vw;
+        height: 40vh;
+    }
+}
+
+
+
+@media screen and (max-width: 650px) {
+    .signinCont {
+        width: 80vw;
+        height: 35vh;
+    }
+    .loginbtn{
+        width: 300px;
+    }
+}
+
+
+
+@media screen and (max-width: 500px) {
+    .signinCont {
+        width: 90vw;
+        height: 30vh;
+    }
+    .text {
+        width: 230px;
+        margin-bottom: 10px;
+    }
+    .loginbtn{
+        width: 300px;
+    }
+}
+
+
+@media screen and (min-height : 1000px) {
+    .signinCont{
+        height: 30vh;
+    }
+}
+
+@media screen and (min-height : 1200px) {
+    .signinCont{
+        height: 25vh;
+    }
 }

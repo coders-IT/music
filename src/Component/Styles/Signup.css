@@ -12,12 +12,9 @@
 }
 
 .signupCont{
-    width: 70vw;
+    width: 75vw;
     height: 70vh;
     background-color:darkslategrey;
-    position: absolute;
-    top: 15vh;
-    left: 15vw;
     box-shadow: 5px 5px 10px black;
     display: flex;
     justify-content: space-evenly;
@@ -101,4 +98,124 @@
     text-align: center;
     color: white;
     cursor: pointer;
+}
+
+@media screen and (min-height : 1000px) {
+    .signupCont{
+        height: 60vh;
+    }
+}
+
+@media screen and (min-height : 1200px) {
+    .signupCont{
+        height: 45vh;
+    }
+}
+
+@media screen and (max-width : 1000px) {
+    .signupCont{
+        width: 85vw;
+    }
+}
+
+@media screen and (max-width : 800px) {
+    .signupCont{
+        width: 90vw;
+    }
+}
+
+@media screen and (max-width : 750px) {
+    .signupCont{
+        flex-direction: column;
+        height: 85vh;
+        width: 60vw;
+    }
+    .signuptext input{
+        width: 200px;
+        
+    }
+    .signuptext{
+        width: 80%;
+        height: 40%;
+    }
+    .signupphoto{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+@media screen and (max-width : 650px) {
+    .signupCont{
+        flex-direction: column;
+        height: 85vh;
+        width: 70vw;
+    }
+    .signuptext input{
+        width: 200px;
+        
+    }
+    .signuptext{
+        width: 80%;
+        height: 40%;
+    }
+    .signupphoto{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+@media screen and (max-width : 550px) {
+    .signupCont{
+        flex-direction: column;
+        height: 85vh;
+        width: 80vw;
+    }
+    .signuptext input{
+        width: 200px;
+        
+    }
+    .signuptext{
+        width: 80%;
+        height: 40%;
+    }
+    .signupphoto{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+@media screen and (max-width : 400px) {
+    .signupCont{
+        flex-direction: column;
+        height: 85vh;
+        width: 90vw;
+    }
+    .signuptext input{
+        width: 200px;
+        
+    }
+    .signuptext{
+        width: 80%;
+        height: 40%;
+    }
+    .signupphoto{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+    }
+
 }

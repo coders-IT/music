@@ -45,7 +45,7 @@ export default function FullScreenPlayer() {
         <div>
             <Addto/>
             <div class="fullPlayerHeader">
-                <i class="fas fa-home" onClick={minimizeFull}></i>
+                <i class="fas fa-home fullplayerhome" onClick={minimizeFull}></i>
 
                 <div class="fullHeadRight">
                     <i class="fas fa-plus-circle" onClick={showaddto}></i>

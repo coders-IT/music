@@ -1,11 +1,12 @@
 import "./Styles/Player.css";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BaseContext from "../Context/BaseContext";
 import { useHistory } from "react-router";
 
 export default function Player(props) {
     // const [playClass, setplayClass] = useState()
+    const [liked, setliked] = useState(false);
     var playPause,
         audio,
         timerDot,
@@ -174,6 +175,11 @@ export default function Player(props) {
                 context.setcurQueue(tempQue);
                 context.setcurMusic(tempQue[context.curMusic.index]);
                 console.log(data);
+                
+                var curUser = context.user;
+                curUser.savedAudio.push(context.curMusic._id);
+                context.setuser(curUser);
+
             } else {
                 console.log("liking the song");
                 var data = {
@@ -193,8 +199,17 @@ export default function Player(props) {
                 context.setcurMusic(tempQue[context.curMusic.index]);
                 context.setcurQueue(tempQue);
             }
+            getLike();
         }
     };
+
+    const getLike = ()=>{
+        if(context.user == null){
+            setliked(false);
+            return;
+        }
+        setliked(context.user.savedAudio.indexOf(context.curMusic._id) != -1);
+    }
 
     return (
         <div className="playerCont">
@@ -216,7 +231,7 @@ export default function Player(props) {
                 </div>
                 <i
                     className={`${
-                        context.curMusic.liked == false ? "far" : "fas"
+                       liked == false ? "far" : "fas"
                     } fa-heart`}
                     id="playerliked"
                     onClick={likeHandle}

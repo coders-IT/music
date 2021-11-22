@@ -216,6 +216,8 @@
     }
     .homenavright{
         padding: 0px 10px;
+        margin-right: 10px;
+
     }
     
 }
@@ -235,6 +237,7 @@
     }
     .homenavright{
         padding: 0px 10px;
+        margin-right: 10px;
     }
     
 }

@@ -6,17 +6,17 @@
 
 .recent{
     width: 100vw;
-    height: calc(100% - 230px);
+    height: calc(100% - 140px);
     background-color: dodgerblue;
-    padding: 20px 0px;
+    /* padding: 20px 0px; */
     overflow-y: auto;
     overflow-x: hidden;
 }
 
 .playlist{
     width:calc(100vw - 40px);
-    height: 150px;
-    line-height: 150px;
+    height: 100px;
+    line-height: 100px;
     /* text-align: center; */
     white-space: nowrap;
     padding: 20px;
@@ -27,4 +27,26 @@
 
 .playlist::-webkit-scrollbar, .recent::-webkit-scrollbar{
     display: none;
+}
+
+@media screen and (max-width:600px) {
+    .playlist{
+        height: 90px;
+        line-height: 90px;
+        font-size: 10px;
+    }
+    .recent{
+        height: calc(100% - 130px);
+    }
+}
+
+@media screen and (max-height:600px) {
+    .playlist{
+        height: 90px;
+        line-height: 90px;
+        font-size: 10px;
+    }
+    .recent{
+        height: calc(100% - 130px);
+    }
 }

@@ -1,18 +1,18 @@
 .playListCardCont{
     position: relative;
-    width: 150px;
+    width: 100px;
     cursor: pointer;
-    height: 150px;
+    height: 100px;
     overflow: hidden;
-    font-size: 13px;
+    font-size: 12px;
     display: inline-block;
     margin-right: 30px;
     border-radius: 5px;
 }
 
 .albumcover{
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -44,7 +44,7 @@
 }
 
 .playListCreator{
-    font-size: 10px;
+    font-size: 9px;
 }
 
 .playListCardCont:hover .details{
@@ -70,7 +70,7 @@
 } */
 
 
-@media screen and (max-width:400px) {
+@media screen and (max-width:500px) {
     .playListCardCont{
         position: relative;
         width: 75px;
@@ -93,6 +93,29 @@
     .playListCreator{
         display: none;
     }
-    
+}
 
+@media screen and (max-height:600px) {
+    .playListCardCont{
+        position: relative;
+        width: 75px;
+        cursor: pointer;
+        height: 75px;
+        overflow: hidden;
+        font-size: 10px;
+        display: inline-block;
+        margin-right: 30px;
+        border-radius: 5px;
+    }
+
+    .details{
+        width: calc(100% - 20px);
+        box-shadow: 0px -3px 50px black;
+        opacity: 0;
+        line-height: 15px;
+    }
+
+    .playListCreator{
+        display: none;
+    }
 }

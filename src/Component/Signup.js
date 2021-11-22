@@ -84,6 +84,7 @@ export default function Signup() {
                         type="text"
                         placeholder="Your Name"
                         required="true"
+                        class="signuptextfield"
                     />
                 </div>
                 <div>
@@ -93,6 +94,7 @@ export default function Signup() {
                         type="text"
                         placeholder="Your Username"
                         required="true"
+                        class="signuptextfield"
                     />
                 </div>
                 <div>
@@ -102,6 +104,7 @@ export default function Signup() {
                         type="password"
                         placeholder="Your Password"
                         required="true"
+                        class="signuptextfield"
                     />
                 </div>
                 <div>
@@ -111,6 +114,7 @@ export default function Signup() {
                         type="password"
                         placeholder="Confirm Password"
                         required="true"
+                        class="signuptextfield"
                     />
                 </div>
             </div>
