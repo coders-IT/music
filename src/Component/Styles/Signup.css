@@ -13,14 +13,16 @@
 
 .signupCont{
     width: 75vw;
-    height: 70vh;
+    height: 68vh;
     background-color:darkslategrey;
     box-shadow: 5px 5px 10px black;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    position: relative;
     flex-wrap: wrap;
     border-radius: 10px;
+    /* padding-bottom: 40px; */
 }
 
 .signUpclose{
@@ -96,6 +98,7 @@
 #linktoSignIn{
     width: 100%;
     text-align: center;
+    padding-bottom: 15px;
     color: white;
     cursor: pointer;
 }
@@ -129,6 +132,7 @@
         flex-direction: column;
         height: 85vh;
         width: 60vw;
+        padding-bottom: 30px;
     }
     .signuptext input{
         width: 200px;
@@ -194,6 +198,7 @@
         align-items: center;
     }
 
+
 }
 
 @media screen and (max-width : 400px) {
@@ -201,15 +206,18 @@
         flex-direction: column;
         height: 85vh;
         width: 90vw;
+        font-size: 13px;
     }
+
     .signuptext input{
         width: 200px;
-        
     }
+
     .signuptext{
         width: 80%;
         height: 40%;
     }
+
     .signupphoto{
         display: flex;
         width: 100%;

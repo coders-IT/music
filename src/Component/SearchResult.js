@@ -22,15 +22,29 @@ export default function SearchResult() {
         }
     };
 
-    const showMusic = ()=>{
-        document.getElementById("songResult").style.display="block";
-        document.getElementById("listResult").style.display="none";
-    }
+    const showMusic = (e) => {
+        const resultshowSong = document.getElementById("resultshowSong");
+        const resultshowlist = document.getElementById("resultshowlist");
+        const songResult = document.getElementById("songResult");
+        const listResult = document.getElementById("listResult");
 
-    const showList = ()=>{
-        document.getElementById("songResult").style.display="none";
-        document.getElementById("listResult").style.display="flex";
-    }
+        resultshowSong.style.display = "none";
+        resultshowlist.style.display = "block";
+        songResult.style.display = "block";
+        listResult.style.display = "none";
+    };
+
+    const showList = () => {
+        const resultshowSong = document.getElementById("resultshowSong");
+        const resultshowlist = document.getElementById("resultshowlist");
+        const songResult = document.getElementById("songResult");
+        const listResult = document.getElementById("listResult");
+
+        resultshowSong.style.display = "block";
+        resultshowlist.style.display = "none";
+        songResult.style.display = "none";
+        listResult.style.display = "flex";
+    };
 
     if (context.searchResultshow == false) return <></>;
     return (
@@ -38,29 +52,41 @@ export default function SearchResult() {
             <i class="fas fa-times signinclose" onClick={hideMe}></i>
             <div class="searchResultCont">
                 <div class="SearchtopBar">
-                    <div onClick={showMusic}>Songs</div>
-                    <div onClick={showList}>PlayLists</div>
+                    <div
+                        onClick={showMusic}
+                        id="resultshowSong"
+                        style={{ display: "none" }}
+                    >
+                        Songs
+                    </div>
+                    <div onClick={showList} id="resultshowlist">
+                        PlayLists
+                    </div>
                 </div>
                 <div className="result">
-                    <div id="songResult" style={{display:"block"}}>
-                        {context.searchResult.music.map((elem) => {
-                            elem["liked"] = isLiked(elem._id);
-                            return (
-                                <MusicCard
-                                    name={elem.name}
-                                    id={elem}
-                                    src={elem.clip}
-                                    likes={elem.plays}
-                                    liked={elem.liked}
-                                    playing={false}
-                                    singer={elem.singer}
-                                />
-                            );
-                        })}
+                    <div id="songResult" style={{ display: "block" }}>
+                        {context.searchResult.music.length > 0 ? (
+                            context.searchResult.music.map((elem) => {
+                                elem["liked"] = isLiked(elem._id);
+                                return (
+                                    <MusicCard
+                                        name={elem.name}
+                                        id={elem}
+                                        src={elem.clip}
+                                        likes={elem.plays}
+                                        liked={elem.liked}
+                                        playing={false}
+                                        singer={elem.singer}
+                                    />
+                                );
+                            })
+                        ) : (
+                            <div class="searchnotFound">No Song Found</div>
+                        )}
                     </div>
-                    <div id="listResult" style={{display:"none"}}>
-                        {
-                            context.searchResult.playlist.map((elem)=>{
+                    <div id="listResult" style={{ display: "none" }}>
+                        {context.searchResult.playlist.length > 0 ? (
+                            context.searchResult.playlist.map((elem) => {
                                 elem.id = elem._id;
                                 return (
                                     <PlayListCard
@@ -72,7 +98,9 @@ export default function SearchResult() {
                                     />
                                 );
                             })
-                        }
+                        ) : (
+                            <div class="searchnotFound"> No Playlist found </div>
+                        )}
                     </div>
                 </div>
             </div>

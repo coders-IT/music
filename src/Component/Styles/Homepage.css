@@ -242,3 +242,16 @@
     
 }
 
+@media screen and (max-width:340px) {
+    .nav{
+        display: none;
+    }
+    .title{
+        display: none;
+    }
+    .headadd{
+        display: none;
+    }
+    
+}
+

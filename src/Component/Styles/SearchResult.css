@@ -13,8 +13,9 @@
 
 .searchResultCont{
     width: 80vw;
-    height: 80vh;
+    height: 75vh;
     border-radius: 5px;
+    padding: 20px 0px;
     background-color: darkslategray;
 }
 
@@ -30,7 +31,7 @@
 }
 
 .SearchtopBar div{
-    width: 45%;
+    width: 80%;
     background-color: lightgrey;
     text-align: center;
     border-radius: 5px;
@@ -66,4 +67,18 @@
 
 #listResult .playListCardCont{
     margin: 10px;
+}
+.searchnotFound{
+    text-align: center;
+    padding: 40px 0px;
+    font-size: 25px;
+}
+
+@media screen and (max-width:600px) {
+    .searchResultCont{
+        width: 100vw;
+    }
+    #listResult{
+        width: 90%;
+    }
 }

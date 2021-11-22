@@ -161,7 +161,7 @@ export default function Playlist() {
             <div class="listDetails">
                 <div class="playList">
                     <div class="aboutlist">
-                        <img src={context.curPlaylist.clip} height="200px"/>
+                        <img src={context.curPlaylist.clip} height="175px"/>
                         <div class="listdata">
                             <div class="listname">{context.curPlaylist.name}</div>
                             <div class="listcreator">{context.curPlaylist.createdBy}</div>

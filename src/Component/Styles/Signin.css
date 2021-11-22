@@ -103,6 +103,8 @@ input[type="submit"] {
 @media screen and (max-width: 650px) {
     .signinCont {
         width: 80vw;
+        font-size: 15px;
+
         height: 35vh;
     }
     .loginbtn{
@@ -114,6 +116,7 @@ input[type="submit"] {
 
 @media screen and (max-width: 500px) {
     .signinCont {
+        font-size: 13px;
         width: 90vw;
         height: 30vh;
     }

@@ -14,9 +14,9 @@
 .listDetails{
     width: 100vw;
     margin: auto;
-    border: 1px solid black;
     height: calc(100vh - 150px);
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .listDetails::-webkit-scrollbar{
@@ -72,4 +72,50 @@
     border: 2px solid black;
     padding: 20px;
     border-radius: 100%;
+}
+
+@media screen and (max-width:1000px){
+    .playList img{
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media screen and (max-width:700px){
+    .playList{
+        width: 80vw;
+        padding: 20px 10px;
+        font-size: 13px;
+        /* justify-content: space-evenly; */
+    }
+    .playList img{
+        width: 120px;
+        height: 120px;
+    }
+    .listdata{
+        margin-left: 20px;
+    }
+}
+
+
+@media screen and (max-width:500px){
+    .playList{
+        width: 100vw;
+        padding: 20px 10px;
+        font-size: 13px;
+        justify-content: space-evenly;
+    }
+    .playList img{
+        width: 100px;
+        height: 100px;
+    }
+    .listdata{
+        margin-left: 20px;
+    }
+    .addtoqueue{
+        font-size: 30px;
+        border: 2px solid black;
+        padding: 15px;
+        border-radius: 100%;
+    }
 }

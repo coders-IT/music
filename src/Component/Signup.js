@@ -73,8 +73,8 @@ export default function Signup() {
         <div class="divsignupcont">
 
         <form className="signupCont" onSubmit={signUpMe}>
-            <div id="linktoSignIn"></div>
             <i class="fas fa-times signUpclose" onClick={hideMe}></i>
+            {/* <div id="linktoSignIn"></div> */}
 
             <div className="signuptext">
                 <div>
