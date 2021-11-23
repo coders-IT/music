@@ -36,60 +36,60 @@ export default function MusicCard(props) {
     if (props.liked == false) {
         return (
             <div
-                class="musicCardCont"
+                className="musicCardCont"
                 onClick={playSong}
                 style={
                     context.curMusic._id === props.id._id
-                        ? { backgroundColor: "#005180" }
+                        ? { backgroundColor: "#0b2266" }
                         : {}
                 }
             >
-                <div class="songDetail">
+                <div className="songDetail">
                     {context.curMusic._id !== props.id._id ? (
-                        <i class="far fa-play-circle songStatus"></i>
+                        <i className="far fa-play-circle songStatus"></i>
                     ) : (
-                        <i class="far fa-pause-circle songStatus"></i>
+                        <i className="far fa-pause-circle songStatus"></i>
                     )}
-                    <img src={props.src} class="songImg" />
+                    <img src={props.src} className="songImg" />
                     <span>
                         {shrink(props.name)}
                         <br />
-                        <span class="singerName">{shrink(props.singer)}</span>
+                        <span className="singerName">{shrink(props.singer)}</span>
                     </span>
                 </div>
-                <div class="songLike">
+                <div className="songLike">
                     {props.likes}
-                    <i class="far fa-heart"></i>
+                    <i className="far fa-heart"></i>
                 </div>
             </div>
         );
     } else {
         return (
             <div
-                class="musicCardCont"
+                className="musicCardCont"
                 onClick={playSong}
                 style={
                     context.curMusic._id === props.id._id
-                        ? { backgroundColor: "#005180" }
+                        ? { backgroundColor: "#0b2266" }
                         : {}
                 }
             >
-                <div class="songDetail">
+                <div className="songDetail">
                     {context.curMusic._id !== props.id._id ? (
-                        <i class="far fa-play-circle songStatus"></i>
+                        <i className="far fa-play-circle songStatus"></i>
                     ) : (
-                        <i class="far fa-pause-circle songStatus"></i>
+                        <i className="far fa-pause-circle songStatus"></i>
                     )}
-                    <img src={props.src} class="songImg" align="middle" />
+                    <img src={props.src} className="songImg" align="middle" />
                     <span>
                         {shrink(props.name)}
                         <br />
-                        <span class="singerName">{shrink(props.singer)}</span>
+                        <span className="singerName">{shrink(props.singer)}</span>
                     </span>
                 </div>
-                <div class="songLike">
+                <div className="songLike">
                     {props.likes}
-                    <i class="fas fa-heart"></i>
+                    <i className="fas fa-heart"></i>
                 </div>
             </div>
         );

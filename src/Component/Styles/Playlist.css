@@ -4,7 +4,8 @@
 
 .listconttop{
     height: 50px;
-    background-color: black;
+    background: rgb(142,67,231);
+    background: linear-gradient(90deg, #123456 0%, #15589b 100%);
     color: white;
     font-size: 25px;
     line-height: 50px;
@@ -14,6 +15,8 @@
 .listDetails{
     width: 100vw;
     margin: auto;
+    background-color: #4b7499;
+    color: white;
     height: calc(100vh - 150px);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -69,7 +72,7 @@
 
 .addtoqueue{
     font-size: 40px;
-    border: 2px solid black;
+    border: 2px solid white;
     padding: 20px;
     border-radius: 100%;
 }

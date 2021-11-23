@@ -70,10 +70,10 @@ export default function Signup() {
     if(context.signUpShow == false) return(<></>);
 
     return (
-        <div class="divsignupcont">
+        <div className="divsignupcont">
 
         <form className="signupCont" onSubmit={signUpMe}>
-            <i class="fas fa-times signUpclose" onClick={hideMe}></i>
+            <i className="fas fa-times signUpclose" onClick={hideMe}></i>
             {/* <div id="linktoSignIn"></div> */}
 
             <div className="signuptext">
@@ -84,7 +84,7 @@ export default function Signup() {
                         type="text"
                         placeholder="Your Name"
                         required="true"
-                        class="signuptextfield"
+                        className="signuptextfield"
                     />
                 </div>
                 <div>
@@ -94,7 +94,7 @@ export default function Signup() {
                         type="text"
                         placeholder="Your Username"
                         required="true"
-                        class="signuptextfield"
+                        className="signuptextfield"
                     />
                 </div>
                 <div>
@@ -104,7 +104,7 @@ export default function Signup() {
                         type="password"
                         placeholder="Your Password"
                         required="true"
-                        class="signuptextfield"
+                        className="signuptextfield"
                     />
                 </div>
                 <div>
@@ -114,7 +114,7 @@ export default function Signup() {
                         type="password"
                         placeholder="Confirm Password"
                         required="true"
-                        class="signuptextfield"
+                        className="signuptextfield"
                     />
                 </div>
             </div>

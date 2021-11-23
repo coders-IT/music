@@ -14,7 +14,7 @@
 .signinCont {
     width: 40vw;
     height: 40vh;
-    background-color: darkslategrey;
+    background-color: #4b7499;
     /* position: absolute;
     top: 30vh;
     left: 30vw; */
@@ -67,7 +67,7 @@ input[type="submit"] {
     width: 250px;
     height: 40px;
     font-size: 17px;
-    background-color: dodgerblue;
+    background-color: #003666;
     color: white;
     border: none;
     cursor: pointer;

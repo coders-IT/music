@@ -9,7 +9,9 @@
 
 .header{
     height : 80px;
-    background-color: black;
+    background: rgb(142,67,231);
+    background: linear-gradient(90deg, #123456 0%, #15589b 100%);
+color: white;
     display: flex;
     justify-content: space-between;
 }
@@ -73,6 +75,10 @@
     margin-right: 10px;
     border: none;
     height: 40px;
+    color: black !important;
+}
+#homesearch::placeholder{
+    color: black;
 }
 
 #homesearch:focus{

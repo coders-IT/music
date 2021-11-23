@@ -9,12 +9,13 @@
     justify-content: space-evenly;
     background-color: rgba(0, 0, 0, 0.377);
     z-index: 1;
+    color: white;
 }
 
 #musicUploadForm{
     width: 65vw;
     display: flex;
-    background-color: darkslategray;
+    background-color: #4b7499;
     color: white;
     flex-wrap: wrap;
     padding: 40px 20px;
@@ -61,6 +62,9 @@
     padding: 10px;
     font-size: 17px;
     border: 0px;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
 }
 
 .detail:focus{

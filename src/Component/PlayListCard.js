@@ -32,11 +32,11 @@ export default function PlayListCard(props) {
 
     
     return (
-        <div class="playListCardCont" style={{backgroundImage:`url(${props.src})`, backgroundSize:"cover", backgroundPosition:"center"}} onClick={props.action=="create"?addSong:open}>
-            <img src={props.src} class="albumcover" alt="album cover"/>
-            <div class="details">
-                <div class="playListName">{shrink(props.name)}</div>
-                <div class="playListCreator">{props.creator}</div>
+        <div className="playListCardCont" style={{backgroundImage:`url(${props.src})`, backgroundSize:"cover", backgroundPosition:"center"}} onClick={props.action=="create"?addSong:open}>
+            <img src={props.src} className="albumcover" alt="album cover"/>
+            <div className="details">
+                <div className="playListName">{shrink(props.name)}</div>
+                <div className="playListCreator">{props.creator}</div>
             </div>
         </div>
     )

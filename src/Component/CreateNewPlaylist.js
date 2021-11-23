@@ -14,7 +14,6 @@ export default function CreateNewPlaylist() {
         if (x.target.files.length === 0) return;
 
         console.log(x.target.files[0]);
-        const img = document.getElementById("listcover");
         const fileReader = new FileReader();
         fileReader.onload = (e) => {
             console.log("df");
@@ -85,17 +84,18 @@ export default function CreateNewPlaylist() {
     if (context.createListShow === false) return <></>;
 
     return (
-        <div class="uploadmusiccont createlist">
+        <div className="uploadmusiccont createlist">
             <form id="listcreatorForm">
-                <i class="fas fa-times signinclose" onClick={closeme}></i>
+                <i className="fas fa-times signinclose" onClick={closeme}></i>
                 <div className="musicCoverCont">
-                    <div class="musicCoverImage">
+                    <div className="musicCoverImage">
                         <label htmlFor="listUploadCover">
                             <img
                                 src={imgURL}
                                 width="100px"
                                 height="100px"
                                 id="listcover"
+                                alt=""
                             />
                         </label>
                     </div>
@@ -108,16 +108,15 @@ export default function CreateNewPlaylist() {
                     <input
                         type="text"
                         id="nameList"
-                        class="detail"
+                        className="detail"
                         placeholder="Enter Name"
                     />
                 </div>
                 <input
                     type="submit"
                     id="uploadbtn"
-                    className="createList"
+                    className="createList music-upload"
                     value="Create"
-                    className="music-upload"
                     onClick={createList}
                 />
             </form>

@@ -11,7 +11,7 @@
     border: 1px solid black;
     padding: 20px;
     border-radius: 5px;
-    background-color: #282828;
+    background-color: #4b7499;
     color: #000;
     display: flex;
     flex-wrap: wrap;
@@ -24,7 +24,7 @@
 }
 
 .alertBody {
-    background-color: white;
+    background: #003666;
     width: 80%;
     border-radius: 5px;
     padding: 10px;
@@ -37,7 +37,7 @@
 }
 
 .alertOk {
-    background-color: dodgerblue;
+    background-color: #003666;
     color: white;
     width: 50%;
     height: 40px;

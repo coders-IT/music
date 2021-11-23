@@ -22,8 +22,8 @@ export default function AddtoList() {
 
     }
     return (
-        <div class="addToplayList">
-            <i class="fas fa-times signinclose" onClick={hideMe}></i>
+        <div className="addToplayList">
+            <i className="fas fa-times signinclose" onClick={hideMe}></i>
             {
                 context.user?(
                     context.user.contribPlayList.map((elem, ind) => {
@@ -43,8 +43,8 @@ export default function AddtoList() {
                     <></>
                 )
             }
-            <div class="addList" onClick={createList}>
-                <i class="fas fa-plus"></i>
+            <div className="addList" onClick={createList}>
+                <i className="fas fa-plus"></i>
             </div>
         </div>
     );

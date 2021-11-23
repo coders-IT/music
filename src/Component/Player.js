@@ -177,7 +177,11 @@ export default function Player(props) {
     const maxMusic = () => {
         console.log(Object.keys(context.curMusic).length);
         if (Object.keys(context.curMusic).length === 0) return;
-
+        if(context.changeURL == true){
+            context.setchangeURL(false);
+            histroy.push("/");
+            return;
+        }
         context.setchangeURL(true);
         histroy.push(`/audio?id=${context.curMusic._id}`);
     };
@@ -265,18 +269,20 @@ export default function Player(props) {
                 ></i>
             </div>
 
-            <div class="sepratePause flex">
+            <div className="sepratePause flex">
+                <div className="sepratePlayer">
                 <i
                     className="fas fa-play"
                     id="playPause2"
                     onClick={playHandle}
                 ></i>
-                <i class="fas fa-angle-up" onClick={maxMusic}></i>
+                </div>
+                <i className={`fas ${context.changeURL == false ?"fa-angle-up":"fa-angle-down"}`} onClick={maxMusic}></i>
             </div>
 
             <div className="sliderCont">
                 <div className="volumeCont flex">
-                    <i class="fas fa-random"></i>
+                    <i className="fas fa-random"></i>
                     <i
                         className="fas fa-step-backward action"
                         onClick={lastSong}
@@ -292,7 +298,7 @@ export default function Player(props) {
                         onClick={nextSong}
                         id="nextsong"
                     ></i>
-                    <i class="fas fa-angle-up" onClick={maxMusic}></i>
+                    <i className={`fas ${context.changeURL == false ?"fa-angle-up":"fa-angle-down"}`} onClick={maxMusic}></i>
                 </div>
                 <div className="timerCont flex">
                     <div className="initTime" id="curTimeShow">

@@ -94,11 +94,11 @@ export default function UploadMusic() {
         context.setloginShow(true);
     }
     return (
-        <div class="uploadmusiccont">
+        <div className="uploadmusiccont">
             <form id="musicUploadForm" onSubmit={uploadMusic}>
-                <i class="fas fa-times signinclose" onClick={hideUpload}></i>
+                <i className="fas fa-times signinclose" onClick={hideUpload}></i>
                 <div className="musicCoverCont">
-                    <div class="musicCoverImage">
+                    <div className="musicCoverImage">
                         <label htmlFor="musicUploadCover">
                             <img
                                 src={imgURL}
@@ -130,14 +130,14 @@ export default function UploadMusic() {
                     <input
                         type="text"
                         id="singer"
-                        class="detail"
+                        className="detail"
                         placeholder="Enter Singer"
                         required={true}
                     />
                     <input
                         type="text"
                         id="tags"
-                        class="detail"
+                        className="detail"
                         placeholder="Enter Tags(Coma Seprated)"
                         required={true}
                     />

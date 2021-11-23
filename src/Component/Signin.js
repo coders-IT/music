@@ -42,9 +42,9 @@ export default function Signin() {
     if(context.loginShow === false) return(<></>);
 
     return (
-        <div class="divsigninCont">
+        <div className="divsigninCont">
         <form className="signinCont" onSubmit={signinme}>
-            <i class="fas fa-times signinclose" onClick={hideMe}></i>
+            <i className="fas fa-times signinclose" onClick={hideMe}></i>
 
             <div className="signintext">
                 <div>
@@ -54,7 +54,7 @@ export default function Signin() {
                         type="text"
                         placeholder="Your Username"
                         required="true"
-                        class="text"
+                        className="text"
                     />
                 </div>
                 <div>
@@ -64,10 +64,10 @@ export default function Signin() {
                         type="password"
                         placeholder="Your Password"
                         required="true"
-                        class="text"
+                        className="text"
                     />
                 </div>
-                <input type="submit" value="Log In" class="loginbtn"/>
+                <input type="submit" value="Log In" className="loginbtn"/>
             </div>
 
             <div id="linkSignUp" onClick={toSignUp}>Don't have, Create One</div>

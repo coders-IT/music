@@ -22,8 +22,8 @@ export default function HomeBody() {
     const src =
         "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/cover.jpg?alt=media&token=d4caef00-6f0c-4310-9949-59a2c1bd403a";
     return (
-        <div class="homebody">
-            <div class="playlist ">
+        <div className="homebody">
+            <div className="playlist ">
                 {!context.user ||
                 context.user.savedPlayList.length +
                     context.user.contribPlayList.length ===
@@ -68,7 +68,7 @@ export default function HomeBody() {
                 )}
             </div>
 
-            <div class="recent">
+            <div className="recent">
                 {context.curQueue.map((elem, ind) => {
                     elem["index"] = ind;
                     elem["liked"] = isLiked(elem._id);

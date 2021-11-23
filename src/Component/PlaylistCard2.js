@@ -21,11 +21,11 @@ export default function PlaylistCard2(props) {
     },[])
 
     return (
-        <div class="playListCardCont" style={{backgroundImage:`url(${props.src})`, backgroundSize:"cover", backgroundPosition:"center"}} onClick={addSong}>
-                        {/* <img src={props.src} class="albumcover" alt="album cover"/> */}
-            <div class="details">
-                <div class="playListName">{props.name}</div>
-                <div class="playListCreator">{props.creator}</div>
+        <div className="playListCardCont" style={{backgroundImage:`url(${props.src})`, backgroundSize:"cover", backgroundPosition:"center"}} onClick={addSong}>
+                        {/* <img src={props.src} className="albumcover" alt="album cover"/> */}
+            <div className="details">
+                <div className="playListName">{props.name}</div>
+                <div className="playListCreator">{props.creator}</div>
             </div>
         </div>
     )

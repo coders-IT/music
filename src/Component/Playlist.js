@@ -156,26 +156,26 @@ export default function Playlist() {
 
 
     return (
-        <div class="listcont">
-            <div class="listconttop">
-                <i class="fas fa-home" onClick={gotohome}></i>
+        <div className="listcont">
+            <div className="listconttop">
+                <i className="fas fa-home" onClick={gotohome}></i>
             </div>
 
-            <div class="listDetails">
-                <div class="playList">
-                    <div class="aboutlist">
+            <div className="listDetails">
+                <div className="playList">
+                    <div className="aboutlist">
                         <img src={context.curPlaylist.clip} height="175px"/>
-                        <div class="listdata">
-                            <div class="listname">{context.curPlaylist.name}</div>
-                            <div class="listcreator">{context.curPlaylist.createdBy}</div>
+                        <div className="listdata">
+                            <div className="listname">{context.curPlaylist.name}</div>
+                            <div className="listcreator">{context.curPlaylist.createdBy}</div>
                             {(isFollowed == true) ? (
-                                <div class="listFollowing" onClick={unfollow}>Following</div>
+                                <div className="listFollowing" onClick={unfollow}>Following</div>
                             ) : (
-                                <div class="listFollow" onClick={follow}>Follow</div>
+                                <div className="listFollow" onClick={follow}>Follow</div>
                             )}
                         </div>
                     </div>
-                    <i class="fas fa-play addtoqueue" onClick={addToQueue}></i>
+                    <i className="fas fa-play addtoqueue" onClick={addToQueue}></i>
                 </div>
                 {songElems}
             </div>

@@ -16,7 +16,8 @@
     height: 75vh;
     border-radius: 5px;
     padding: 20px 0px;
-    background-color: darkslategray;
+    background-color: #4b7499;
+    color: white;
 }
 
 .SearchtopBar{
@@ -32,7 +33,7 @@
 
 .SearchtopBar div{
     width: 80%;
-    background-color: lightgrey;
+    background-color: #003666;
     text-align: center;
     border-radius: 5px;
     border-left: 1px solid darkslategray;
@@ -40,7 +41,7 @@
 }
 
 .SearchtopBar div:hover{
-    background-color: aquamarine;
+    background-color: #050f2c;
 }
 
 #songResult{

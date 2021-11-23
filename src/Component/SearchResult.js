@@ -49,9 +49,9 @@ export default function SearchResult() {
     if (context.searchResultshow == false) return <></>;
     return (
         <div className="searchCont">
-            <i class="fas fa-times signinclose" onClick={hideMe}></i>
-            <div class="searchResultCont">
-                <div class="SearchtopBar">
+            <i className="fas fa-times signinclose" onClick={hideMe}></i>
+            <div className="searchResultCont">
+                <div className="SearchtopBar">
                     <div
                         onClick={showMusic}
                         id="resultshowSong"
@@ -81,7 +81,7 @@ export default function SearchResult() {
                                 );
                             })
                         ) : (
-                            <div class="searchnotFound">No Song Found</div>
+                            <div className="searchnotFound">No Song Found</div>
                         )}
                     </div>
                     <div id="listResult" style={{ display: "none" }}>
@@ -99,7 +99,7 @@ export default function SearchResult() {
                                 );
                             })
                         ) : (
-                            <div class="searchnotFound"> No Playlist found </div>
+                            <div className="searchnotFound"> No Playlist found </div>
                         )}
                     </div>
                 </div>

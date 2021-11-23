@@ -16,7 +16,7 @@
     width: 70vw;
     height: 20vh;
     border-radius: 5px;
-    background-color: darkslategray;
+    background-color: #4b7499;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,7 +25,9 @@
     /* overflow-x: auto; */
     /* overflow-y: hidden; */
     /* white-space: nowrap; */
+    box-shadow: 3px 3px 10px black;
 }
+
 
 
 .addnewplaylist{

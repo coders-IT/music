@@ -1,7 +1,7 @@
 .musicCardCont{
     width: 60vw;
     height: 70px;
-    background-color: black;
+    background-color: #050f2c;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -10,7 +10,13 @@
     border-bottom: 2px solid gray;
     cursor: pointer;
     margin: auto;
+    /* box-shadow: -5px 0px 10px white, 5px 0px 10px white; */
 }
+
+.musicCardCont:hover{
+    background-color: #0b2266;
+}
+
 .singerName{
     font-size: 13px;
 }

@@ -14,7 +14,8 @@
 .signupCont{
     width: 75vw;
     height: 68vh;
-    background-color:darkslategrey;
+    background-color:#4b7499;
+    color: white;
     box-shadow: 5px 5px 10px black;
     display: flex;
     justify-content: space-evenly;
@@ -89,7 +90,7 @@
     font-size: 17px;
     margin-top: 20px;
     cursor: pointer;
-    background-color: dodgerblue;
+    background-color: #003666;
     color: white;
     border-radius: 5px;
 

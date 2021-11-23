@@ -1,7 +1,8 @@
 .fullPlayerHeader{
     height: 70px;
-    background-color: antiquewhite;
+    background: linear-gradient(90deg, #123456 0%, #15589b 100%);
     display: flex;
+    color:white;
     justify-content: space-between;
     align-items: center;
     padding: 0px 30px;
@@ -10,6 +11,15 @@
 .fullScreenCover{
     width: 300px;
     height: 300px;
+    border-radius: 10px;
+}
+
+.backgroundcover{
+    width: 100%;
+    position: absolute;
+    opacity: 0.4;
+    z-index: -1;
+    filter: blur(10px);
 }
 
 .fullPlayerImg{
@@ -45,6 +55,8 @@
     padding: 10px 40px;
     justify-content: space-between;
     align-items: center;
+    color: white;
+    
 }
 
 .fullScreenControl .fas{
@@ -54,6 +66,7 @@
 .fullScreenTimeControl{
     height: 80px;
     display: none;
+    background: linear-gradient(90deg, #123456 0%, #15589b 100%);
 }
 
 
@@ -66,7 +79,7 @@
 
 .sliderFull{
     width: 80vw;
-    background-color: blue;
+    background-color: white;
     height: 5px;
     border-radius: 5px;
     position: relative;
@@ -91,7 +104,7 @@
     left: 0px;
     border-radius: 5px;
     top: 0px;
-    background-color: red;
+    background-color: #ff4f81;
 }
 
 .sliderFull:hover .fullScreenDot{
@@ -116,4 +129,14 @@
     }
 }
 
+@media screen and (width > height) {
 
+}
+
+
+@media screen and (orientation:landscape){
+    .backgroundcover{
+        height: 100%;
+        width: unset;
+    }   
+}

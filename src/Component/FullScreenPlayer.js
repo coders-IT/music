@@ -134,39 +134,46 @@ export default function FullScreenPlayer() {
     return (
         <div>
             <Addto/>
-            <div class="fullPlayerHeader">
-                <i class="fas fa-home fullplayerhome" onClick={minimizeFull}></i>
+            <div className="fullPlayerHeader">
+                <i className="fas fa-home fullplayerhome" onClick={minimizeFull}></i>
 
-                <div class="fullHeadRight">
-                    <i class="fas fa-plus-circle" onClick={showaddto}></i>
+                <div className="fullHeadRight">
+                    <i className="fas fa-plus-circle" onClick={showaddto}></i>
                     <img
                         src={`${
                             context.user ? context.user.profilePic : defaultPic
                         }`}
                         alt=""
-                        class="fullPlayerImg"
+                        className="fullPlayerImg"
                     />
                 </div>
             </div>
-            <div class="middle">
+            <div className="middle">
                 <img
                     src={context.curMusic.clip}
                     alt=""
                     className="fullScreenCover"
                 />
+
+<img
+                    src={context.curMusic.clip}
+                    alt=""
+                    className="backgroundcover"
+                />
+
             </div>
 
-            <div class="fullScreenTimeControl">
-                <div class="fullScreenTimeSlider">
-                    <div class="sliderFull" id="sliderFull">
-                        <div class="fullScreenDot" id="fullScreenDot"></div>
-                        <div class="fullScreenTimePassed" id="fullScreenTimePassed"></div>
+            <div className="fullScreenTimeControl">
+                <div className="fullScreenTimeSlider">
+                    <div className="sliderFull" id="sliderFull">
+                        <div className="fullScreenDot" id="fullScreenDot"></div>
+                        <div className="fullScreenTimePassed" id="fullScreenTimePassed"></div>
                     </div>
                 </div>
-                <div class="fullScreenControl">
-                    <div class="frontBack">
-                        <i class="fas fa-step-backward" onClick={lastSong}></i>
-                        <i class="fas fa-step-forward" onClick={nextSong}></i>
+                <div className="fullScreenControl">
+                    <div className="frontBack">
+                        <i className="fas fa-step-backward" onClick={lastSong}></i>
+                        <i className="fas fa-step-forward" onClick={nextSong}></i>
                     </div>
                     <div>
                         <span id="fullpassed">00:00</span>/<span id="fullfull">00:00</span>

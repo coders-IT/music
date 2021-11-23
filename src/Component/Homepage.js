@@ -1,9 +1,7 @@
 import "./Styles/Homepage.css";
 import React, { useContext, useEffect } from "react";
-import Player from "./Player";
 import BaseContext from "../Context/BaseContext";
 import { useHistory } from "react-router";
-import {BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import HomeBody from "./HomeBody";
 
 export default function Homepage(props) {
@@ -22,10 +20,6 @@ export default function Homepage(props) {
     const gotoadd=()=>{
         context.setuploadMusicShow(true);
     }
-    const gotohome = ()=>{
-        history.push("/");
-    }
-
 
     const searchSong = async (e)=>{
         e.preventDefault();
@@ -72,22 +66,22 @@ export default function Homepage(props) {
         "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/defaultUser.jpg?alt=media&token=b805932f-d9bd-432f-95c8-b1ff00de708a";
     return (
         <div>
-            <div class="header">
-                <div class="homenavleft">
-                    <div class="title">Music - Connect to Your Soul</div>
-                    <div class="nav">
+            <div className="header">
+                <div className="homenavleft">
+                    <div className="title">Music - Connect to Your Soul</div>
+                    <div className="nav">
                     </div>
                 </div>
-                <form class="homenavright flex" onSubmit={searchSong}>
-                    <div class="homerightleft flex">
+                <form className="homenavright flex" onSubmit={searchSong}>
+                    <div className="homerightleft flex">
                         <input
                             type="text"
                             id="homesearch"
                             placeholder="Search Song/Playlist"
                         />
                         
-                        <div class="headsearch" onClick={searchSong}><i class="fas fa-search"></i></div>
-                        <span class="headsearch headadd" onClick={gotoadd}><i class="fas fa-plus"></i></span>
+                        <div className="headsearch" onClick={searchSong}><i className="fas fa-search"></i></div>
+                        <span className="headsearch headadd" onClick={gotoadd}><i className="fas fa-plus"></i></span>
                     </div>
                     
                     <img
@@ -101,11 +95,11 @@ export default function Homepage(props) {
                 </form>
             </div>
 
-            <div class="body">
+            <div className="body">
                 <HomeBody/>
             </div>
 
-            {/* <div class="player">
+            {/* <div className="player">
                 <Player liked={false} />
             </div> */}
         </div>

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import BaseContext from "../Context/BaseContext";
 import PlayListCard from "./PlayListCard";
-import Playlistcard2 from "./PlaylistCard2";
 import "./Styles/Addto.css";
 
 export default function Addto() {
@@ -9,7 +8,7 @@ export default function Addto() {
     const hideMe = () => {
         context.setshowAddto(false);
     };
-    if (context.showAddto == false) return <></>;
+    if (context.showAddto === false) return <></>;
     if (context.user === null) {
         hideMe();
         context.setloginShow(true);
@@ -21,7 +20,7 @@ export default function Addto() {
 
     return (
         <div className="divaddtoCont">
-            <i class="fas fa-times signinclose" onClick={hideMe}></i>
+            <i className="fas fa-times signinclose" onClick={hideMe}></i>
             <div className="addtocontainer">
                 <div id="addlistscroll">
                     {context.user.contribPlayList.map((elem, index) => {
@@ -38,7 +37,7 @@ export default function Addto() {
                     })}
                 </div>
                 <div className="addnewplaylist" onClick={shownewListCreator}>
-                    <div class="fas fa-plus"></div>
+                    <div className="fas fa-plus"></div>
                 </div>
             </div>
         </div>
