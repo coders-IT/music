@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import BaseContext from "../Context/BaseContext";
 import "./Styles/Signin.css";
 
@@ -15,11 +15,11 @@ export default function Signin() {
             "password":password,
         }
 
-        console.log(data)
+        //console.log(data)
 
         const resp = await context.callApi("/api/user/login", "POST", data);
 
-        console.log(resp);
+        //console.log(resp);
         if(resp.error){
             context.setalertBody(resp.error);
             context.setAlert(true);

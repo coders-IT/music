@@ -1,14 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import BaseContext from "../Context/BaseContext";
-import Alert from "./Alert";
 import "./Styles/Signup.css";
 
 export default function Signup() {
     const context = useContext(BaseContext);
-    const [image, setimage] = useState(null);
 
     const uploadImg = async (x) => {
-        console.log(x.target.files[0]);
+        //console.log(x.target.files[0]);
         const img = document.getElementById("SignupprofilePic");
         const fileReader = new FileReader();
         fileReader.onload = (e) => {
@@ -40,7 +38,7 @@ export default function Signup() {
         if(file.files.length > 0){
             profilepic = await context.upload("image/jpg", "signupfile");
         }
-        console.log(profilepic);
+        //console.log(profilepic);
         const data = {
             "username":username,
             "name" : name,
@@ -48,11 +46,11 @@ export default function Signup() {
             "profilePic":profilepic
         }
 
-        console.log(data)
+        //console.log(data)
 
         const resp = await context.callApi("/api/user/signup", "POST", data);
 
-        console.log(resp);
+        //console.log(resp);
         if(resp.error){
             context.setalertBody(resp.error);
             context.setAlert(true);
@@ -67,7 +65,7 @@ export default function Signup() {
         context.setsignUpShow(false);
     }
 
-    if(context.signUpShow == false) return(<></>);
+    if(context.signUpShow === false) return(<></>);
 
     return (
         <div className="divsignupcont">

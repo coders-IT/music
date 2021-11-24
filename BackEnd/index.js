@@ -13,9 +13,9 @@ const uri = "mongodb+srv://dkj10nov2002:Deepak123@cluster0.xmo2p.mongodb.net/myF
 
 
 mongoose.connect(uri).then(() => {
-    console.log("Connected")
+    //console.log("Connected")
 }).catch((err) => {
-    console.log(err);
+    //console.log(err);
 });
 
 app.get("/",(req, resp)=>{
@@ -30,5 +30,5 @@ app.use("/api/playlist",require('./routes/playlist'));
 
 
 app.listen(5000, ()=>{
-    console.log("Listening to port 5000")
+    //console.log("Listening to port 5000")
 })

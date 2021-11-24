@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import "./App.css";
 import Alert from "./Component/Alert";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import FullScreenPlayer from "./Component/FullScreenPlayer";
 import Homepage from "./Component/Homepage";
 import Player from "./Component/Player";

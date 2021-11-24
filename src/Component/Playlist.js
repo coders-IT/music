@@ -14,7 +14,7 @@ export default function Playlist() {
         const fetchList = async () => {
             var listId = window.location.href.split("=");
             listId = listId[listId.length - 1];
-            console.log(listId);
+            //console.log(listId);
 
             var listDetail = await fetch(
                 "http://localhost:5000/api/playlist/" + listId
@@ -25,7 +25,7 @@ export default function Playlist() {
             );
             songs = await songs.json();
             context.setcurPlaylist(listDetail.data);
-            console.log(listDetail.data, "curPlaylist");
+            //console.log(listDetail.data, "curPlaylist");
             setsongArray(songs.data.songs);
             var arr = [];
             for (var i of songs.data.songs) {
@@ -56,7 +56,7 @@ export default function Playlist() {
         histroy.push("/");
     };
     const addToQueue = async () => {
-        if(parsedArray == context.curQueue) return;
+        if(parsedArray === context.curQueue) return;
         var arr = [];
         var n = songArray.length;
         for (var i = 0; i < n; i++) {
@@ -87,18 +87,18 @@ export default function Playlist() {
         var arr = context.user.contribPlayList;
         var n = arr.length;
         for (var i = 0; i < n; i++) {
-            if (arr[i].id == listId) {
-                console.log("id found at cont ", i);
+            if (arr[i].id === listId) {
+                //console.log("id found at cont ", i);
                 setisFollowed(true)
                 return true;
             }
         }
 
-        var arr = context.user.savedPlayList;
-        var n = arr.length;
-        for (var i = 0; i < n; i++) {
-            if (arr[i].id == listId){
-                console.log("id found at saved ", i);
+        arr = context.user.savedPlayList;
+        n = arr.length;
+        for (i = 0; i < n; i++) {
+            if (arr[i].id === listId){
+                //console.log("id found at saved ", i);
                 setisFollowed(true)
                 return true;
             } 
@@ -119,7 +119,7 @@ export default function Playlist() {
         var arr = context.user.contribPlayList;
         var n = arr.length;
         for (var i = 0; i < n; i++) {
-            if (arr[i].id == listId) {
+            if (arr[i].id === listId) {
                 context.setAlert(true);
                 context.setalertBody("Cann't Unfollow Playlist created By you");
                 return;
@@ -129,8 +129,8 @@ export default function Playlist() {
         var data = {
             "token":localStorage.getItem("jwtTokken")
         }
-        data = await context.callApi("/api/user/unsaveplaylist/"+listId, "POST", data);
-        console.log(data);
+        await context.callApi("/api/user/unsaveplaylist/"+listId, "POST", data);
+        //console.log(data);
         context.setAlert(true);
         context.setalertBody("PlayList removed");
     }
@@ -147,11 +147,11 @@ export default function Playlist() {
         var data = {
             "token":localStorage.getItem("jwtTokken")
         }
-        data = await context.callApi("/api/user/saveplaylist/"+listId, "POST", data);
-        console.log(data);
+        await context.callApi("/api/user/saveplaylist/"+listId, "POST", data);
+        //console.log(data);
         context.setAlert(true);
         context.setalertBody("PlayList Followed");
-        console.log(data);
+        //console.log(data);
     }
 
 
@@ -164,11 +164,11 @@ export default function Playlist() {
             <div className="listDetails">
                 <div className="playList">
                     <div className="aboutlist">
-                        <img src={context.curPlaylist.clip} height="175px"/>
+                        <img src={context.curPlaylist.clip} height="175px" alt=""/>
                         <div className="listdata">
                             <div className="listname">{context.curPlaylist.name}</div>
                             <div className="listcreator">{context.curPlaylist.createdBy}</div>
-                            {(isFollowed == true) ? (
+                            {(isFollowed === true) ? (
                                 <div className="listFollowing" onClick={unfollow}>Following</div>
                             ) : (
                                 <div className="listFollow" onClick={follow}>Follow</div>

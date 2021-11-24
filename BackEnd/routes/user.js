@@ -70,7 +70,7 @@ router.post("/signup", async (req, res) => {
             data: token,
         });
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         res.status(500).json({ error });
     }
 });
@@ -107,7 +107,7 @@ router.post("/search", async (req, resp) => {
         search = new RegExp(`[\w|\s|]*(${search})+[\w|\s]*`, "i");
         var tag = req.body.search;
         tag = tag.charAt(0).toUpperCase() + tag.slice(1);
-        console.log(search);
+        // //console.log(search);
         const Musicdata = await Audio.find({
             $or: [{ name: search }, { tags: { $in: search } }, {singer : search}],
         });
@@ -139,7 +139,7 @@ router.post("/getUser", async (req, res) => {
 router.post("/update", async (req, res) => {
     try {
         let doc = await User.findOne({ username: req.username });
-        console.log(req.body.recent);
+        // //console.log(req.body.recent);
         doc.recent = req.body.recent;
         await User.findOneAndUpdate({ username: req.username }, doc);
 
@@ -156,14 +156,14 @@ router.post("/savesong/:id", async (req, res) => {
         await User.findOneAndUpdate({ username: req.username }, doc);
 
         var song = await Audio.findById(req.params.id);
-        console.log(song);
+        // //console.log(song);
         data = await Audio.findByIdAndUpdate(req.params.id, {
             plays: song.plays + 1,
         });
 
         res.status(200).json({ success: "Successfully added to saved songs." });
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         res.status(500).json({ error: error });
     }
 });
@@ -171,7 +171,7 @@ router.post("/savesong/:id", async (req, res) => {
 router.post("/saveplaylist/:id", async (req, res) => {
     try {
         let doc = await User.findOne({ username: req.username });
-        console.log(doc, req.username);
+        // //console.log(doc, req.username);
         var playlist = await Playlist.findById(req.params.id);
 
         var data = {
@@ -187,7 +187,7 @@ router.post("/saveplaylist/:id", async (req, res) => {
             success: "Successfully added to saved playlists.",
         });
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         res.status(500).json({ error: error });
     }
 });
@@ -205,7 +205,7 @@ router.post("/unsavesong/:id", async (req, res) => {
         doc.savedAudio = arr;
         await User.findOneAndUpdate({ username: req.username }, doc);
         var song = await Audio.findById(req.params.id);
-        console.log(song);
+        // //console.log(song);
         data = await Audio.findByIdAndUpdate(req.params.id, {
             plays: song.plays - 1,
         });

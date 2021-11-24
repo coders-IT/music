@@ -39,14 +39,14 @@ router.put("/:id",async (req, resp)=>{
     try {
         
         var list = await PlayListAudio.findOne({"playlist" : req.params.id});
-        console.log(list,{"playlist" : req.params.id});
+        // //console.log(list,{"playlist" : req.params.id});
         list.songs = list.songs.concat([req.body.songs]);
-        console.log(list);
+        // //console.log(list);
         await PlayListAudio.findByIdAndUpdate(list._id, list);
         resp.send({"success" : "Song Added"});
 
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         resp.status(500).send({"error":"Server Error occured"});
         
     }
@@ -60,7 +60,7 @@ router.get("/song/:id", async(req,resp)=>{
         resp.send({"data":list});
 
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         resp.status(500).send({"error":"Server Error occured"});
         
     }
@@ -73,7 +73,7 @@ router.get("/:id", async(req,resp)=>{
         resp.send({"data":list});
 
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         resp.status(500).send({"error":"Server Error occured"});
         
     }

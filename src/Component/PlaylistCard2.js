@@ -11,13 +11,13 @@ export default function PlaylistCard2(props) {
             "token":localStorage.getItem("jwtTokken"),
             "songs":JSON.stringify(context.curMusic)
         }
-        console.log("/api/playlist/",props.id.id, context.curMusic);
+        //console.log("/api/playlist/",props.id.id, context.curMusic);
         data = await context.callApi("/api/playlist/"+props.id.id,"PUT", data);
-        console.log(data);
+        //console.log(data);
     }
 
     useEffect(()=>{
-        console.log(props.name, props.creator);
+        //console.log(props.name, props.creator);
     },[])
 
     return (

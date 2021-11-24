@@ -17,7 +17,7 @@ export default function AddtoList() {
                 "songs":[context.curMusic._id]
             }
             data = await context.callApi("/api/playlist/create","POST", data);
-            console.log(data);
+            // //console.log(data);
         }
 
     }

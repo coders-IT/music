@@ -11,11 +11,11 @@ export default function SearchResult() {
     };
 
     const isLiked = (x) => {
-        console.log(x);
+        //console.log(x);
         if (context.user === null) return false;
         else {
-            if (context.user.savedAudio.indexOf(x) != -1) {
-                console.log("liked song ", x);
+            if (context.user.savedAudio.indexOf(x) !== -1) {
+                //console.log("liked song ", x);
                 return true;
             }
             return false;
@@ -46,7 +46,7 @@ export default function SearchResult() {
         listResult.style.display = "flex";
     };
 
-    if (context.searchResultshow == false) return <></>;
+    if (context.searchResultshow === false) return <></>;
     return (
         <div className="searchCont">
             <i className="fas fa-times signinclose" onClick={hideMe}></i>

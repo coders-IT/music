@@ -18,9 +18,9 @@ export default function PlayListCard(props) {
             "token":localStorage.getItem("jwtTokken"),
             "songs":JSON.stringify(context.curMusic)
         }
-        console.log("/api/playlist/",props.id.id, context.curMusic);
-        data = await context.callApi("/api/playlist/"+props.id.id,"PUT", data);
-        console.log(data);
+        //console.log("/api/playlist/",props.id.id, context.curMusic);
+        await context.callApi("/api/playlist/"+props.id.id,"PUT", data);
+        //console.log(data);
         context.setshowAddto(false);
     }
     const histroy = useHistory();
@@ -32,7 +32,7 @@ export default function PlayListCard(props) {
 
     
     return (
-        <div className="playListCardCont" style={{backgroundImage:`url(${props.src})`, backgroundSize:"cover", backgroundPosition:"center"}} onClick={props.action=="create"?addSong:open}>
+        <div className="playListCardCont" style={{backgroundImage:`url(${props.src})`, backgroundSize:"cover", backgroundPosition:"center"}} onClick={props.action==="create"?addSong:open}>
             <img src={props.src} className="albumcover" alt="album cover"/>
             <div className="details">
                 <div className="playListName">{shrink(props.name)}</div>

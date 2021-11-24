@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import BaseContext from "../Context/BaseContext";
 import "./Styles/MusicCard.css";
 
 export default function MusicCard(props) {
-    const history = useHistory();
+    // const history = useHistory();
     const context = useContext(BaseContext);
     const shrink = (text) => {
         if (window.innerWidth <= 400) {
@@ -20,10 +20,10 @@ export default function MusicCard(props) {
         context.setcurMusic(props.id);
         const audio = document.getElementById("audio");
 
-        console.log(audio);
+        //console.log(audio);
         if (audio != null) audio.currentTime = 0;
         await audio.load();
-        const out = audio.play();
+        audio.play();
         const playPause = document.getElementById("playPause");
         playPause.classList.remove("fa-play");
         playPause.classList.add("fa-pause");
@@ -33,7 +33,7 @@ export default function MusicCard(props) {
         context.setsearchResultshow(false);
     };
 
-    if (props.liked == false) {
+    if (props.liked === false) {
         return (
             <div
                 className="musicCardCont"
@@ -50,7 +50,7 @@ export default function MusicCard(props) {
                     ) : (
                         <i className="far fa-pause-circle songStatus"></i>
                     )}
-                    <img src={props.src} className="songImg" />
+                    <img src={props.src} className="songImg" alt=""/>
                     <span>
                         {shrink(props.name)}
                         <br />
@@ -80,7 +80,7 @@ export default function MusicCard(props) {
                     ) : (
                         <i className="far fa-pause-circle songStatus"></i>
                     )}
-                    <img src={props.src} className="songImg" align="middle" />
+                    <img src={props.src} className="songImg" align="middle" alt=""/>
                     <span>
                         {shrink(props.name)}
                         <br />

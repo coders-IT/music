@@ -1,6 +1,5 @@
 import "./Styles/FullScreenPlayer.css";
 import React, { useContext, useEffect } from "react";
-import Player from "./Player";
 import BaseContext from "../Context/BaseContext";
 import { useHistory } from "react-router";
 import Addto from "./Addto";
@@ -18,7 +17,7 @@ export default function FullScreenPlayer() {
     const histroy = useHistory();
 
     const lastSong = async () => {
-        if (context.curMusic.index == 0) return;
+        if (context.curMusic.index === 0) return;
         else {
             if (!context.curMusic.index) {
                 return;
@@ -43,12 +42,12 @@ export default function FullScreenPlayer() {
     };
 
     const nextSong = async () => {
-        if (context.curMusic.index == context.curQueue.length - 1) return;
+        if (context.curMusic.index === context.curQueue.length - 1) return;
         else {
-            if (context.curMusic.index != 0 && !context.curMusic.index) {
+            if (context.curMusic.index !== 0 && !context.curMusic.index) {
                 return;
             }
-            console.log(context.curQueue, context.curMusic.index + 1);
+            // //console.log(context.curQueue, context.curMusic.index + 1);
             context.setcurMusic(context.curQueue[context.curMusic.index + 1]);
             if (context.changeURL)
                 histroy.push(
@@ -105,7 +104,7 @@ export default function FullScreenPlayer() {
             if (context.curMusic._id !== parsed) {
                 const data = await fetch(`http://localhost:5000/api/song/${parsed}`);
                 const resp = await data.json();
-                console.log("dhfadsjkfhadsjkfhadsjkfhkdsjfhdkjh",resp);
+                // //console.log("dhfadsjkfhadsjkfhadsjkfhkdsjfhdkjh",resp);
                 if(resp.data)context.setcurMusic(resp.data);
                 else context.setcurMusic({});
             }

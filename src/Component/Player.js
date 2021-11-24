@@ -1,6 +1,6 @@
 import "./Styles/Player.css";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import BaseContext from "../Context/BaseContext";
 import { useHistory } from "react-router";
 
@@ -70,8 +70,8 @@ export default function Player(props) {
         volumeDot.style.left = pos - 5 + "px";
         curVolume.style.width = pos + "px";
         audio.volume = pos / 100;
-        console.log(audio.volume);
-        if (audio.volume == 0) {
+        //console.log(audio.volume);
+        if (audio.volume === 0) {
             volumeLogo.setAttribute("class", "fas fa-volume-mute");
         } else if (audio.volume < 0.5) {
             volumeLogo.setAttribute("class", "fas fa-volume-down");
@@ -81,7 +81,7 @@ export default function Player(props) {
     };
 
     const lastSong = async () => {
-        if (context.curMusic.index == 0) return;
+        if (context.curMusic.index === 0) return;
         else {
             if (!context.curMusic.index) {
                 return;
@@ -110,12 +110,12 @@ export default function Player(props) {
     };
 
     const nextSong = async () => {
-        if (context.curMusic.index == context.curQueue.length - 1) return;
+        if (context.curMusic.index === context.curQueue.length - 1) return;
         else {
-            if (context.curMusic.index != 0 && !context.curMusic.index) {
+            if (context.curMusic.index !== 0 && !context.curMusic.index) {
                 return;
             }
-            console.log(context.curQueue, context.curMusic.index + 1);
+            //console.log(context.curQueue, context.curMusic.index + 1);
             context.setcurMusic(context.curQueue[context.curMusic.index + 1]);
             if (context.changeURL)
                 histroy.push(
@@ -175,9 +175,9 @@ export default function Player(props) {
     };
 
     const maxMusic = () => {
-        console.log(Object.keys(context.curMusic).length);
+        //console.log(Object.keys(context.curMusic).length);
         if (Object.keys(context.curMusic).length === 0) return;
-        if(context.changeURL == true){
+        if(context.changeURL === true){
             context.setchangeURL(false);
             histroy.push("/");
             return;
@@ -191,8 +191,8 @@ export default function Player(props) {
             context.setloginShow(true);
             return;
         } else {
-            if (context.curMusic.liked == false) {
-                console.log("liking the song");
+            if (context.curMusic.liked === false) {
+                //console.log("liking the song");
                 var data = {
                     token: localStorage.getItem("jwtTokken"),
                 };
@@ -208,25 +208,25 @@ export default function Player(props) {
                 tempQue[context.curMusic.index].liked = true;
                 context.setcurQueue(tempQue);
                 context.setcurMusic(tempQue[context.curMusic.index]);
-                console.log(data);
+                //console.log(data);
 
                 var curUser = context.user;
                 curUser.savedAudio.push(context.curMusic._id);
                 context.setuser(curUser);
             } else {
-                console.log("liking the song");
-                var data = {
+                //console.log("liking the song");
+                data = {
                     token: localStorage.getItem("jwtTokken"),
                 };
 
-                data = await context.callApi(
+                await context.callApi(
                     "/api/user/unsavesong/" + context.curMusic._id,
                     "POST",
                     data
                 );
-                console.log(data);
-                console.log(context.curMusic.index);
-                var tempQue = context.curQueue;
+                //console.log(data);
+                //console.log(context.curMusic.index);
+                tempQue = context.curQueue;
                 tempQue[context.curMusic.index].plays -= 1;
                 tempQue[context.curMusic.index].liked = false;
                 context.setcurMusic(tempQue[context.curMusic.index]);
@@ -237,11 +237,11 @@ export default function Player(props) {
     };
 
     const getLike = () => {
-        if (context.user == null) {
+        if (context.user === null) {
             setliked(false);
             return;
         }
-        setliked(context.user.savedAudio.indexOf(context.curMusic._id) != -1);
+        setliked(context.user.savedAudio.indexOf(context.curMusic._id) !== -1);
     };
 
     return (
@@ -263,7 +263,7 @@ export default function Player(props) {
                     </div>
                 </div>
                 <i
-                    className={`${liked == false ? "far" : "fas"} fa-heart`}
+                    className={`${liked === false ? "far" : "fas"} fa-heart`}
                     id="playerliked"
                     onClick={likeHandle}
                 ></i>
@@ -277,7 +277,7 @@ export default function Player(props) {
                     onClick={playHandle}
                 ></i>
                 </div>
-                <i className={`fas ${context.changeURL == false ?"fa-angle-up":"fa-angle-down"}`} onClick={maxMusic}></i>
+                <i className={`fas ${context.changeURL === false ?"fa-angle-up":"fa-angle-down"}`} onClick={maxMusic}></i>
             </div>
 
             <div className="sliderCont">
@@ -298,7 +298,7 @@ export default function Player(props) {
                         onClick={nextSong}
                         id="nextsong"
                     ></i>
-                    <i className={`fas ${context.changeURL == false ?"fa-angle-up":"fa-angle-down"}`} onClick={maxMusic}></i>
+                    <i className={`fas ${context.changeURL === false ?"fa-angle-up":"fa-angle-down"}`} onClick={maxMusic}></i>
                 </div>
                 <div className="timerCont flex">
                     <div className="initTime" id="curTimeShow">

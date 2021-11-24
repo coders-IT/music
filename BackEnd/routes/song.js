@@ -47,7 +47,7 @@ router.post('/',async (req,res)=>{
 
         res.status(200).json({"success":"Successfully added new song.",data:song._id});
     }catch(error){
-        console.log({error})
+        //console.log({error})
         res.status(500).json({error});
     }
 })

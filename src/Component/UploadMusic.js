@@ -12,11 +12,11 @@ export default function UploadMusic() {
 
     const musicCoverChg = (x) => {
         if(x.target.files.length === 0)return;
-        console.log(x.target.files[0]);
-        const img = document.getElementById("musicCover");
+        //console.log(x.target.files[0]);
+        // const img = document.getElementById("musicCover");
         const fileReader = new FileReader();
         fileReader.onload = (e) => {
-            console.log("df");
+            //console.log("df");
             setimgURL(e.target.result);
         };
         fileReader.readAsDataURL(x.target.files[0]);
@@ -31,8 +31,6 @@ export default function UploadMusic() {
         e.preventDefault();
         const uploadbtn = document.getElementById("uploadbtn");
 
-        var img =
-            "https://firebasestorage.googleapis.com/v0/b/sampleproject-321915.appspot.com/o/blankCover.png?alt=media&token=5e8ade58-8ce6-4d50-a69e-9eb27634d636";
         var fileInput = document.getElementById("musicUploadCover");
         var musicInput = document.getElementById("musicFile");
 
@@ -56,15 +54,15 @@ export default function UploadMusic() {
                 return;
             }
             uploadbtn.setAttribute("disabled",true);
-            console.log("Uploading image");
+            //console.log("Uploading image");
             uploadbtn.value = "Uploading...";
-            img = await context.upload("image/jpg", "musicUploadCover");
+            var img = await context.upload("image/jpg", "musicUploadCover");
         }
 
-        console.log("Uploading Music", img);
+        //console.log("Uploading Music", img);
 
         const musicUrl = await context.upload("audio/mp3", "musicFile");
-        console.log("Uploaded", music);
+        //console.log("Uploaded", music);
         uploadbtn.value = "Uploaded";
         let data = {
             name: music,
@@ -74,7 +72,7 @@ export default function UploadMusic() {
             singer: document.getElementById("singer").value,
             tags: document.getElementById("tags").value.split(","),
         };
-        console.log(data);
+        //console.log(data);
         const resp = await context.callApi("/api/song", "POST", data);
         context.setAlert(true);
         context.setalertBody(resp.success);
@@ -88,7 +86,7 @@ export default function UploadMusic() {
         context.setuploadMusicShow(false);
     };
 
-    if (context.uploadMusicShow == false) return <></>;
+    if (context.uploadMusicShow === false) return <></>;
     if (context.user === null) {
         hideUpload();
         context.setloginShow(true);
@@ -101,6 +99,7 @@ export default function UploadMusic() {
                     <div className="musicCoverImage">
                         <label htmlFor="musicUploadCover">
                             <img
+                                alt=""
                                 src={imgURL}
                                 width="100px"
                                 height="100px"

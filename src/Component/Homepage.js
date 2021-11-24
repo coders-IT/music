@@ -1,14 +1,14 @@
 import "./Styles/Homepage.css";
 import React, { useContext, useEffect } from "react";
 import BaseContext from "../Context/BaseContext";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import HomeBody from "./HomeBody";
 
 export default function Homepage(props) {
     const context = useContext(BaseContext);
-    var history = useHistory();
+    // var history = useHistory();
 
-    console.log("dfasfdsF",history);
+    //console.log("dfasfdsF",history);
     const loginHandle = () => {
         if (context.user) {
             localStorage.removeItem("jwtTokken");
@@ -35,12 +35,27 @@ export default function Homepage(props) {
         }
 
         data = await context.callApi("/api/user/search", "POST", data);
-        console.log(data);
+        //console.log(data);
         context.setsearchResult(data);
         context.setsearchResultshow(true);
         
     }
 
+
+    function shuffleArray(array) {
+        let curId = array.length;
+        // There remain elements to shuffle
+        while (0 !== curId) {
+          // Pick a remaining element
+          let randId = Math.floor(Math.random() * curId);
+          curId -= 1;
+          // Swap it with the current element.
+          let tmp = array[curId];
+          array[curId] = array[randId];
+          array[randId] = tmp;
+        }
+        return array;
+    }
 
 
     useEffect(() => {
@@ -49,8 +64,11 @@ export default function Homepage(props) {
         const fetchSong = async () => {
             const url = "http://localhost:5000/api/song/songs";
             const data = await fetch(url);
-            const resp = await data.json();
-            console.log(resp.data[0], resp.data, "dfasdjfdskl");
+            var resp = await data.json();
+            //console.log(resp.data[0], resp.data, "dfasdjfdskl");
+
+            resp.data = shuffleArray(resp.data);
+
 
             context.setrecentMusic(resp.data);
             context.setcurQueue(resp.data);

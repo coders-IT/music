@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BaseContext from "./BaseContext";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "./FirebaseInit";
@@ -32,21 +32,21 @@ const ContextState = (props) => {
     //     setrecentMusic(arr);
 
     //     const update = async ()=>{
-    //         console.log("recent update array arr", arr);
+    //         //console.log("recent update array arr", arr);
     //         var data = {
     //             "token" : localStorage.getItem("jwtTokken"),
     //             "recent" : arr
     //         }
 
     //         const resp = await callApi("/api/user/update", "POST", data);
-    //         console.log(resp);
+    //         //console.log(resp);
     //     }
     //     update();
 
     // }, [curMusic]);
 
     // useEffect(()=>{
-    //     console.log(recentMusic);
+    //     //console.log(recentMusic);
     // }, [recentMusic]);
 
     const fetchUser = async () => {
@@ -67,7 +67,7 @@ const ContextState = (props) => {
 
     const callApi = async (endpoint, type, data) => {
         const url = `http://localhost:5000${endpoint}`;
-        console.log(data);
+        //console.log(data);
         const resp = await fetch(url, {
             method: type,
             headers: {
