@@ -1,0 +1,150 @@
+.fullPlayerHeader{
+    height: 70px;
+    background: linear-gradient(90deg, #123456 0%, #15589b 100%);
+    display: flex;
+    color:white;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+}
+
+.fullScreenCover{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+}
+.fullscreencont{
+    overflow: hidden;
+}
+
+.backgroundcover{
+    width: 100%;
+    position: absolute;
+    opacity: 0.4;
+    z-index: -1;
+    filter: blur(10px);
+}
+
+.fullPlayerImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+.fullHeadRight{
+    /* height: 100%; */
+    display: flex;
+    align-items: center;
+}
+
+.fullHeadRight .fas{
+    margin-right: 30px;
+    font-size: 40px;
+}
+
+.fullplayerhome{
+    font-size: 30px;
+}
+
+.middle{
+    height: calc(100vh - 170px);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.fullScreenControl{
+    width: calc(100vw-40px);
+    display: flex;
+    padding: 10px 40px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    
+}
+
+.fullScreenControl .fas{
+    font-size: 30px;
+}
+
+.fasfirst{
+    margin-right: 20px;
+
+}
+
+.fullScreenTimeControl{
+    height: 80px;
+    display: none;
+    background: linear-gradient(90deg, #123456 0%, #15589b 100%);
+}
+
+
+.fullScreenTimeSlider{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sliderFull{
+    width: 80vw;
+    background-color: white;
+    height: 5px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.fullScreenDot{
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: -2.5px;
+    left: -2.5px;
+    background-color: black;
+    border-radius: 10px;
+    display: none;
+    z-index: 2;
+}
+
+.fullScreenTimePassed{
+    width: 0px;
+    height: 5px;
+    position: absolute;
+    left: 0px;
+    border-radius: 5px;
+    top: 0px;
+    background-color: #ff4f81;
+}
+
+.sliderFull:hover .fullScreenDot{
+    display: block;
+}
+
+
+@media screen and (max-width:600px) {
+    .fullScreenTimeControl{
+        display: block;
+    }
+    .middle{
+        height: calc(100vh - 250px);
+    }
+}
+
+@media screen and (max-width:400px) {
+    
+    .fullScreenCover{
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media screen and (width > height) {
+
+}
+
+
+@media screen and (orientation:landscape){
+    .backgroundcover{
+        height: 100%;
+        width: unset;
+    }   
+}

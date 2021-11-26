@@ -1,0 +1,21 @@
+#listcreatorForm{
+    width: 70vw;
+    height: 200px;
+    display: flex;
+    background-color: darkslategray;
+    color: white;
+    flex-wrap: wrap;
+    padding: 50px 20px;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    box-shadow: 5px 5px 10px black;
+    border-radius: 5px;
+}
+.createList{
+    margin: 40px;
+}
+
+.createlist{
+    z-index: 3;
+}
