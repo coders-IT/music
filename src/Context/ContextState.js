@@ -66,7 +66,7 @@ const ContextState = (props) => {
     };
 
     const callApi = async (endpoint, type, data) => {
-        const url = `http://localhost:5000${endpoint}`;
+        const url = `${endpoint}`;
         //console.log(data);
         const resp = await fetch(url, {
             method: type,

@@ -62,7 +62,7 @@ export default function Homepage(props) {
 
 
         const fetchSong = async () => {
-            const url = "http://localhost:5000/api/song/songs";
+            const url = "/api/song/songs";
             const data = await fetch(url);
             var resp = await data.json();
             //console.log(resp.data[0], resp.data, "dfasdjfdskl");

@@ -102,7 +102,7 @@ export default function FullScreenPlayer() {
             var arr = window.location.href.split("=");
             var parsed = arr[arr.length - 1];
             if (context.curMusic._id !== parsed) {
-                const data = await fetch(`http://localhost:5000/api/song/${parsed}`);
+                const data = await fetch(`/api/song/${parsed}`);
                 const resp = await data.json();
                 // //console.log("dhfadsjkfhadsjkfhadsjkfhkdsjfhdkjh",resp);
                 if(resp.data)context.setcurMusic(resp.data);

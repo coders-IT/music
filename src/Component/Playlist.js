@@ -17,11 +17,11 @@ export default function Playlist() {
             //console.log(listId);
 
             var listDetail = await fetch(
-                "http://localhost:5000/api/playlist/" + listId
+                "/api/playlist/" + listId
             );
             listDetail = await listDetail.json();
             var songs = await fetch(
-                "http://localhost:5000/api/playlist/song/" + listId
+                "/api/playlist/song/" + listId
             );
             songs = await songs.json();
             context.setcurPlaylist(listDetail.data);
