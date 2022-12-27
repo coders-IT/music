@@ -9,7 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 
-const uri = "mongodb+srv://dkj10nov2002:Deepak123@cluster0.xmo2p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+// const uri = "mongodb+srv://dkj10nov2002:Deepak123@cluster0.xmo2p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = "mongodb+srv://musicweb:musicweb@cluster0.xmo2p.mongodb.net/?retryWrites=true&w=majority";
 // const uri = "mongodb+srv://bhannasa:MU%23TzgFh%247pvj8q@cluster0.b1ntj.mongodb.net/test";
 // const uri = "mongodb+srv://bhannasa:MU%23TzgFh%247pvj8q@cluster0.b1ntj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
